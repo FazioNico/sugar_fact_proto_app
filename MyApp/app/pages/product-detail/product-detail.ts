@@ -8,7 +8,7 @@ import { ProductFocus } from '../../components/product-focus/product-focus';
 import { ProductNutriment } from '../../components/product-nutriment/product-nutriment';
 import { ProductIngredient } from '../../components/product-ingredient/product-ingredient';
 import { ProductAdditive } from '../../components/product-additive/product-additive';
-//import { ProductRelatedComponent } from './product-related/product-related.component';
+import { ProductRelated } from '../../components/product-related/product-related';
 
 /*
   Generated class for the ProductDetailPage page.
@@ -23,7 +23,8 @@ import { ProductAdditive } from '../../components/product-additive/product-addit
     ProductFocus,
     ProductNutriment,
     ProductIngredient,
-    ProductAdditive
+    ProductAdditive,
+    ProductRelated
   ],
   providers: [ApiService]
 })

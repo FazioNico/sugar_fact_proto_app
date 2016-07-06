@@ -1,0 +1,19 @@
+<!--
+  Generated template for the ProductRelated component.
+
+  See https://angular.io/docs/ts/latest/api/core/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+-->
+<p>Related Product:</p>
+<ul>
+  <li *ngFor="let productData of relatedProduct">
+    <p>
+      <a href="#">
+        {{ productData.product_name }}
+        <span *ngIf="productData.brands != productData.product_name">
+          - {{ productData.brands }}
+        </span>
+      </a>
+    </p>
+  </li>
+</ul>

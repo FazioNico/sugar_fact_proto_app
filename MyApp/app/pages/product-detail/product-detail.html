@@ -22,6 +22,7 @@
       <product-ingredient *ngIf="ingredients" [ingredientsInput]="ingredients"></product-ingredient>
       <product-additive *ngIf="additives_tags" [additiveInput]="additives_tags"></product-additive>
     </div>
+    <product-related *ngIf="categories_hierarchy" [categoriesInput]="categories_hierarchy"></product-related>
   </div>
   <div *ngIf="result === 0">
     <p>Produit non trouvé</p>
