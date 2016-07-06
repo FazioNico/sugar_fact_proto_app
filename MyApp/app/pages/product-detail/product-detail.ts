@@ -5,7 +5,7 @@ import {Observable} from "../../../node_modules/rxjs/Observable.d";
 import { ApiService } from '../../providers/api-service/api-service';
 import { ProductHeader } from '../../components/product-header/product-header';
 import { ProductFocus } from '../../components/product-focus/product-focus';
-//import { ProductNutrimentComponent } from './product-nutriment/product-nutriment.component';
+import { ProductNutriment } from '../../components/product-nutriment/product-nutriment';
 //import { ProductIngredientComponent } from './product-ingredient/product-ingredient.component';
 import { ProductAdditive } from '../../components/product-additive/product-additive';
 //import { ProductRelatedComponent } from './product-related/product-related.component';
@@ -20,8 +20,9 @@ import { ProductAdditive } from '../../components/product-additive/product-addit
   templateUrl: 'build/pages/product-detail/product-detail.html',
   directives: [
     ProductHeader,
-    ProductAdditive,
-    ProductFocus
+    ProductFocus,
+    ProductNutriment,
+    ProductAdditive
   ],
   providers: [ApiService]
 })
