@@ -14,11 +14,14 @@ import { Sugar } from '../sugar/sugar';
 })
 export class ProductFocus {
   sugar_100g:number;
+  focusTab: string;
 
   @Input() productFocusInput: any[];
 
   constructor(
-  ) {}
+  ) {
+    this.focusTab = "sugar";
+  }
 
   ngOnInit() {
     if(!this.productFocusInput[0].sugars_100){
