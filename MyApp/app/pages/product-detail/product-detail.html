@@ -16,6 +16,8 @@
   <div *ngIf="result === 1">
     <product-header *ngIf="productData" [productDataHeaderInput]="productData"></product-header>
     <hr>
+    <product-focus *ngIf="focusData" [productFocusInput]="focusData"></product-focus>
+    <hr>
     <product-additive *ngIf="additives_tags" [additiveInput]="additives_tags"></product-additive>
 
   </div>

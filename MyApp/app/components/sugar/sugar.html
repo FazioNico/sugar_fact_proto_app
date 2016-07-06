@@ -1,0 +1,28 @@
+<!--
+  Generated template for the Sugar component.
+
+  See https://angular.io/docs/ts/latest/api/core/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+-->
+<style>
+  .sugarZone {
+    height: 100%;
+    margin: auto;
+    text-align: center;
+    transform: rotate(180deg);
+    transform: rotateX(180deg);
+  }
+  .sugar {
+      display: inline-block;
+      vertical-align: top;
+      height: 5rem;
+      background: #e0a55d;
+      border-radius:2px;
+      display: inline-block;
+      margin-right: 10px;
+      margin-top: 10px;
+  }
+</style>
+<div class="sugarZone">
+  <div *ngFor="let sugarData of data100gInput | sugar100g " class="sugar" [ngStyle]="{'width': getWidth(sugarData)}"></div>
+</div>

@@ -1,0 +1,23 @@
+<!--
+  Generated template for the ProductFocus component.
+
+  See https://angular.io/docs/ts/latest/api/core/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+-->
+
+<div *ngIf="productFocusInput">
+  <sugar *ngIf="!productFocusInput[0].sugars_100" [data100gInput]="productFocusInput[0].carbohydrates_100">{{ productFocusInput[0].carbohydrates_100 }}gr / 100gr</sugar>
+  <sugar *ngIf="productFocusInput[0].sugars_100" [data100gInput]="productFocusInput[0].sugars_100">{{ productFocusInput[0].sugars_100 }}gr / 100gr</sugar>
+
+  <hr/>
+  <p>
+    Sucres:
+    <span>
+      <span *ngIf="sugar_100g">{{ sugar_100g }}gr / 100gr</span>
+    </span>
+  </p>
+  <p>
+    Lipides:
+    <span *ngIf="productFocusInput[0].fat_100">{{ productFocusInput[0].fat_100 }}gr / 100g</span>
+  </p>
+</div>
