@@ -1,0 +1,22 @@
+<!--
+  Generated template for the ProductDetailPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar blanc>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf="result === 1">
+    <product-header *ngIf="productData" [productDataHeaderInput]="productData"></product-header>
+  </div>
+  <div *ngIf="result === 0">
+    <p>Produit non trouvé</p>
+  </div>
+</ion-content>

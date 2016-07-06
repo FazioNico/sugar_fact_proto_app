@@ -1,0 +1,33 @@
+<!--
+  Generated template for the ProductHeader component.
+
+  See https://angular.io/docs/ts/latest/api/core/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+-->
+<style>
+.product-header h1{
+  text-align:center;
+}
+.product-img {
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  border-radius: 100%;
+  margin-bottom:20px;
+  position: relative;
+  background-position: center center;
+}
+</style>
+<div class="product-header">
+  <div class="product-img" [style.background-image]="'url(' + productDataHeaderInput.image_url + ')'">
+  </div>
+  <div *ngIf="productDataHeaderInput.product_name || productDataHeaderInput.quantity ">
+    <h1 primary>
+      {{ productDataHeaderInput.product_name  }} ({{ productDataHeaderInput.quantity }})
+      <span *ngIf="productDataHeaderInput.brands">- {{ productDataHeaderInput.brands }}</span>
+    </h1>
+
+  </div>
+
+</div>

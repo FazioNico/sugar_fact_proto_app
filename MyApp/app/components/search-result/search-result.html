@@ -1,0 +1,16 @@
+<!--
+  Generated template for the SearchResult component.
+
+  See https://angular.io/docs/ts/latest/api/core/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+-->
+<li *ngFor="let productData of dataInput">
+  <div (click)="goProduct(productData.id)">
+    <p>
+      {{ productData.product_name }}
+      <span *ngIf="productData.brands != productData.product_name">
+        - {{ productData.brands }}
+      </span>
+    </p>
+  </div>
+</li>

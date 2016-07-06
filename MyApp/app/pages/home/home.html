@@ -1,17 +1,17 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
-</ion-header>
 
-<ion-content padding class="home">
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
+<ion-content padding class="home text-center">
+  <h1 blanc>My App</h1>
+  <p blanc>
+    Lorem ipsum dolor sit amet, consectetur adipiscing .
+    <br />
+    Elit integer sollicitudin elementum euismod.
   </p>
-  <p>
-    Take a look at the <code>app/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <div>
+    <p>
+      <button large blanc class="btn-block-50 text-secondary">Scan</button>
+    </p>
+    <p>
+      <button (click)="goSearch()" large blanc class="btn-block-50 text-secondary">Recherche</button>
+    </p>    
+  </div>
 </ion-content>

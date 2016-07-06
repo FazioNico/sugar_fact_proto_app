@@ -1,18 +1,25 @@
-import {Component} from '@angular/core';
+import {Component, PLATFORM_DIRECTIVES, provide} from '@angular/core';
 import {Platform, ionicBootstrap} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
-import {TabsPage} from './pages/tabs/tabs';
+
+import {HeaderContent} from './components/header-content/header-content';
+import {Routes} from './providers/routes/routes'
+
+import {HomePage} from './pages/home/home';
+
+import {AuthHttp, AuthConfig} from 'angular2-jwt';
+import {Http} from '@angular/http';
+import { ApiService } from './providers/api-service/api-service';
 
 
 @Component({
-  template: '<ion-nav [root]="rootPage"></ion-nav>'
+  templateUrl: 'build/app.html',
+  providers: [Routes, ApiService]
 })
 export class MyApp {
+  rootPage: any;
 
-  private rootPage:any;
-
-  constructor(private platform:Platform) {
-    this.rootPage = TabsPage;
+  constructor(platform: Platform, private routes:Routes) {
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -20,6 +27,17 @@ export class MyApp {
       StatusBar.styleDefault();
     });
   }
+
+  ngOnInit() {
+    this.rootPage = this.routes.getRootPage()
+  }
 }
 
-ionicBootstrap(MyApp)
+ionicBootstrap(MyApp, [],{
+    mode: 'md',
+    platforms: {
+     ios: {
+       tabbarPlacement: 'top',
+     }
+   }
+});
