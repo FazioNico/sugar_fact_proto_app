@@ -6,7 +6,7 @@ import { ApiService } from '../../providers/api-service/api-service';
 import { ProductHeader } from '../../components/product-header/product-header';
 import { ProductFocus } from '../../components/product-focus/product-focus';
 import { ProductNutriment } from '../../components/product-nutriment/product-nutriment';
-//import { ProductIngredientComponent } from './product-ingredient/product-ingredient.component';
+import { ProductIngredient } from '../../components/product-ingredient/product-ingredient';
 import { ProductAdditive } from '../../components/product-additive/product-additive';
 //import { ProductRelatedComponent } from './product-related/product-related.component';
 
@@ -22,6 +22,7 @@ import { ProductAdditive } from '../../components/product-additive/product-addit
     ProductHeader,
     ProductFocus,
     ProductNutriment,
+    ProductIngredient,
     ProductAdditive
   ],
   providers: [ApiService]

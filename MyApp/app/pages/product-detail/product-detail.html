@@ -17,10 +17,11 @@
     <product-header *ngIf="productData" [productDataHeaderInput]="productData"></product-header>
     <product-focus *ngIf="focusData" [productFocusInput]="focusData"></product-focus>
     <hr>
-    <product-nutriment *ngIf="nutriments" [nutrimentsInput]="nutriments"></product-nutriment>
-
-    <product-additive *ngIf="additives_tags" [additiveInput]="additives_tags"></product-additive>
-
+    <div padding>
+      <product-nutriment *ngIf="nutriments" [nutrimentsInput]="nutriments"></product-nutriment>
+      <product-ingredient *ngIf="ingredients" [ingredientsInput]="ingredients"></product-ingredient>
+      <product-additive *ngIf="additives_tags" [additiveInput]="additives_tags"></product-additive>
+    </div>
   </div>
   <div *ngIf="result === 0">
     <p>Produit non trouvé</p>
