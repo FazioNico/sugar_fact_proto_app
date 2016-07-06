@@ -9,13 +9,7 @@
   <ion-navbar blanc>
     <ion-title>Recherche</ion-title>
   </ion-navbar>
-    <ion-list class="input-search">
-
-      <ion-item>
-        <ion-input #searchDataInput (keyup)="getKeyUp(searchDataInput)" type="text" placeholder="nom du produit; code barre"></ion-input>
-      </ion-item>
-
-    </ion-list>
+    <ion-searchbar #searchDataInput (keyup)="getKeyUp(searchDataInput)" placeholder="nom du produit; code barre"></ion-searchbar>
 
 </ion-header>
 

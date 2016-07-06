@@ -2,11 +2,10 @@
   background-color: #cecece;
 }
 
-.input-search {
-  background-color: #ffffff;
-  padding:30px 0px 5px;
-}
-
-  ion-list > .item:first-child, ion-list > .item-wrapper:first-child .item {
-      border-top: 0px solid #dedede;
+  ion-searchbar{
+    background-color: #ffffff;
+  }
+  input.searchbar-input {
+      box-shadow: none;
+      border-bottom: solid 1px #387ef5;
   }

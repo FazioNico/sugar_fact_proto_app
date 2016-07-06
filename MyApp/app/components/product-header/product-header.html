@@ -20,12 +20,15 @@
 }
 </style>
 <div class="product-header">
-  <div class="product-img" [style.background-image]="'url(' + productDataHeaderInput.image_url + ')'">
+  <div class="product-img" [style.background-image]="'url(' + productDataHeaderInput.image_thumb_url + ')'">
   </div>
-  <div *ngIf="productDataHeaderInput.product_name || productDataHeaderInput.quantity ">
+  <div *ngIf="productDataHeaderInput.product_name ">
     <h1 primary>
-      {{ productDataHeaderInput.product_name  }} ({{ productDataHeaderInput.quantity }})
-      <span *ngIf="productDataHeaderInput.brands">- {{ productDataHeaderInput.brands }}</span>
+      {{ productDataHeaderInput.product_name  }}
+      <br />
+      <small *ngIf="productDataHeaderInput.quantity ">
+        {{ productDataHeaderInput.quantity }}
+      </small>
     </h1>
 
   </div>
