@@ -7,7 +7,7 @@ import { ProductHeader } from '../../components/product-header/product-header';
 //import { ProductFocusComponent } from './product-focus/product-focus.component';
 //import { ProductNutrimentComponent } from './product-nutriment/product-nutriment.component';
 //import { ProductIngredientComponent } from './product-ingredient/product-ingredient.component';
-//import { ProductAdditiveComponent } from './product-additive/product-additive.component';
+import { ProductAdditive } from '../../components/product-additive/product-additive';
 //import { ProductRelatedComponent } from './product-related/product-related.component';
 
 /*
@@ -19,7 +19,8 @@ import { ProductHeader } from '../../components/product-header/product-header';
 @Component({
   templateUrl: 'build/pages/product-detail/product-detail.html',
   directives: [
-    ProductHeader
+    ProductHeader,
+    ProductAdditive
   ],
   providers: [ApiService]
 })

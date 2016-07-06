@@ -15,6 +15,9 @@
 <ion-content padding>
   <div *ngIf="result === 1">
     <product-header *ngIf="productData" [productDataHeaderInput]="productData"></product-header>
+    <hr>
+    <product-additive *ngIf="additives_tags" [additiveInput]="additives_tags"></product-additive>
+
   </div>
   <div *ngIf="result === 0">
     <p>Produit non trouvé</p>
