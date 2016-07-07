@@ -1,12 +1,17 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {Routes} from '../../providers/routes/routes'
+import { ScanPage } from '../scan/scan';
 
 
 @Component({
   templateUrl: 'build/pages/home/home.html',
+  directives: [ScanPage]
 })
 export class HomePage {
+
+  @ViewChild(ScanPage)
+  private scanPlugin: ScanPage;
 
   /** Not normally mandatory but create bugs if ommited. **/
   static get parameters() {
@@ -20,6 +25,7 @@ export class HomePage {
   }
 
   goScan(){
-    this.nav.push(this.routes.getPage(this.routes.SCAN))
+    this.scanPlugin.scan()
+    //this.nav.push(this.routes.getPage(this.routes.SCAN))
   }
 }
