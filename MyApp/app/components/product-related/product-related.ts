@@ -16,6 +16,7 @@ export class ProductRelated  implements OnInit {
 
   catName:string;
   relatedProduct: any[];
+  total:any = '0';
 
   @Input() categoriesInput: string;
   //@Output() eventName: EventEmitter<string>;
@@ -37,7 +38,10 @@ export class ProductRelated  implements OnInit {
           }
         },
         (error) => this.relatedProduct = [],
-        () => console.log(this.relatedProduct)
+        () => {
+          this.total = this.relatedProduct.length
+          console.log(this.relatedProduct)
+        }
       )
 
   }

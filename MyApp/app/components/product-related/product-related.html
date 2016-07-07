@@ -4,16 +4,16 @@
   See https://angular.io/docs/ts/latest/api/core/ComponentMetadata-class.html
   for more info on Angular 2 Components.
 -->
-<p>Related Product:</p>
-<ul>
-  <li *ngFor="let productData of relatedProduct">
-    <p>
-      <a href="#">
-        {{ productData.product_name }}
-        <span *ngIf="productData.brands != productData.product_name">
-          - {{ productData.brands }}
-        </span>
-      </a>
-    </p>
-  </li>
-</ul>
+<div padding>
+  <p>Related Product: ({{ total }})</p>
+</div>
+<ion-list>
+  <ion-item *ngFor="let productData of relatedProduct">
+    <ion-thumbnail item-left>
+      <img [src]="productData.image_thumb_url">
+    </ion-thumbnail>
+    <h2>{{ productData.product_name }}</h2>
+    <p *ngIf="productData.brands != productData.product_name">{{ productData.brands }}</p>
+    <button clear item-right>View</button>
+  </ion-item>
+</ion-list>

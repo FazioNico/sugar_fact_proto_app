@@ -1,14 +1,13 @@
 import {Component, PLATFORM_DIRECTIVES, provide} from '@angular/core';
 import {Platform, ionicBootstrap} from 'ionic-angular';
-import {StatusBar} from 'ionic-native';
-
-import {HeaderContent} from './components/header-content/header-content';
-import {Routes} from './providers/routes/routes'
-
-import {HomePage} from './pages/home/home';
-
 import {AuthHttp, AuthConfig} from 'angular2-jwt';
 import {Http} from '@angular/http';
+import {StatusBar} from 'ionic-native';
+
+import {Routes} from './providers/routes/routes'
+import {HeaderContent} from './components/header-content/header-content';
+import {HomePage} from './pages/home/home';
+
 import { ApiService } from './providers/api-service/api-service';
 
 
