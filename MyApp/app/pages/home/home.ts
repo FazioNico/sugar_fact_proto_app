@@ -18,4 +18,8 @@ export class HomePage {
   goSearch(){
     this.nav.push(this.routes.getPage(this.routes.SEARCH))
   }
+
+  goScan(){
+    this.nav.push(this.routes.getPage(this.routes.SCAN))
+  }
 }
