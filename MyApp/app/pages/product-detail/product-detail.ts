@@ -70,7 +70,12 @@ export class ProductDetailPage {
         this.nutriments = this.productData.nutriments
         this.ingredients = this.productData.ingredients
         this.additives_tags = this.productData.additives_tags
-        this.categories_hierarchy  = this.productData.categories_hierarchy.reverse()[0].split(':')[1]
+        if(this.productData.categories_hierarchy[0].length >1){
+          this.categories_hierarchy  = this.productData.categories_hierarchy.reverse()[0].split(':')[1]
+        }
+        else {
+          this.categories_hierarchy  = []
+        }
         this.focusData = [];
         this.focusData.push({
           sugars_100: this.productData.nutriments.sugars_100g,
