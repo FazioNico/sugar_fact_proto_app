@@ -5,7 +5,7 @@ product-focus {
 .line-badge {
   background: none;
   border: solid 1px color($colors, secondarytext);
-  color: color($colors, secondarytext);
+  color: #2d2d2d;
   margin: 3px;
 }
 .focusTab {
@@ -29,4 +29,13 @@ product-focus {
     display: inline-block;
     margin-right: 10px;
     margin-top: 10px;
+}
+.swiper-wrapper {
+  margin-bottom: 40px;
+}
+.swiper-pagination-bullet {
+  background: #fff;
+}
+.slide-zoom h3 {
+  margin-top: 0rem;
 }
