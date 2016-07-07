@@ -8,3 +8,25 @@ product-focus {
   color: color($colors, secondarytext);
   margin: 3px;
 }
+.focusTab {
+  padding: 45px 0px 10px;
+  background-color: color($colors, primary)
+}
+.sugarZone {
+  height: 100%;
+  margin: auto;
+  text-align: center;
+  transform: rotate(180deg);
+  transform: rotateX(180deg);
+}
+.sugar {
+    display: inline-block;
+    vertical-align: top;
+    height: 5rem;
+    background: #fff;
+    border: solid 1px color($colors, primary);
+    border-radius:2px;
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 10px;
+}

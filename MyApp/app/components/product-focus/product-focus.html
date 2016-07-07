@@ -4,20 +4,20 @@
   See https://angular.io/docs/ts/latest/api/core/ComponentMetadata-class.html
   for more info on Angular 2 Components.
 -->
-<style>
-  .focusTab {
-    padding: 45px 0px 10px;
-  }
-</style>
+
 <div *ngIf="productFocusInput">
 
   <div>
-    <ion-segment [(ngModel)]="focusTab">
+    <ion-segment [(ngModel)]="focusTab" secondary>
       <ion-segment-button value="sugar">
-        Sucres
+        <span primary>
+          Sucres
+        </span>
       </ion-segment-button>
       <ion-segment-button value="fat">
-        Lipides
+        <span primary>
+          Lipides
+        </span>
       </ion-segment-button>
     </ion-segment>
   </div>
@@ -28,7 +28,7 @@
         <ion-slide>
           <sugar *ngIf="!productFocusInput[0].sugars_100" [data100gInput]="productFocusInput[0].carbohydrates_100">{{ productFocusInput[0].carbohydrates_100 }}gr / 100gr</sugar>
           <sugar *ngIf="productFocusInput[0].sugars_100" [data100gInput]="productFocusInput[0].sugars_100">{{ productFocusInput[0].sugars_100 }}gr / 100gr</sugar>
-          <h3 primary text-center>
+          <h3 blanc text-center>
               <span *ngIf="sugar_100g">
                 {{ sugar_100g }}gr  <br/>
                 <small>pour 100gr</small>
@@ -36,7 +36,7 @@
           </h3>
         </ion-slide>
         <ion-slide>
-          <h3 primary text-center>
+          <h3 blanc text-center>
               <span >
                 ...gr  <br/>
                 <small>total</small>
@@ -48,7 +48,7 @@
     <div *ngSwitchCase="'fat'">
       <ion-slides pager>
         <ion-slide>
-          <h3 primary text-center>
+          <h3 blanc text-center>
             <span *ngIf="productFocusInput[0].fat_100">
               {{ productFocusInput[0].fat_100 }}gr
               <br/>
@@ -57,7 +57,7 @@
           </h3>
         </ion-slide>
         <ion-slide>
-          <h3 primary text-center>
+          <h3 blanc text-center>
               <span >
                 ...gr <br/>
                 <small>total</small>

@@ -7,5 +7,11 @@
   }
   input.searchbar-input {
       box-shadow: none;
-      border-bottom: solid 1px #387ef5;
+      border-bottom: solid 1px color($colors, primary);
   }
+.ion-md-arrow-back {
+  color: color($colors, primary);
+}
+.searchbar-search-icon {
+  color: color($colors, secondary);
+}
