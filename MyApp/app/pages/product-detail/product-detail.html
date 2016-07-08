@@ -16,7 +16,7 @@
   <div *ngIf="result === 1">
     <product-header *ngIf="productData" [productDataHeaderInput]="productData"></product-header>
     <product-focus *ngIf="focusData" [productFocusInput]="focusData"></product-focus>
-    <div padding>
+    <div>
       <product-nutriment *ngIf="nutriments" [nutrimentsInput]="nutriments"></product-nutriment>
       <product-ingredient *ngIf="ingredients" [ingredientsInput]="ingredients"></product-ingredient>
       <product-additive *ngIf="additives_tags" [additiveInput]="additives_tags"></product-additive>

@@ -39,3 +39,28 @@ product-focus {
 .slide-zoom h3 {
   margin-top: 0rem;
 }
+
+.acc-wrapper {
+  position:relative;
+  width: 100%;
+  height: 100%;
+}
+.acc-title {
+  margin: 0px;
+  color: color($colors, primary);
+}
+.acc-title > span {
+  position: absolute;
+  right: 16px;
+}
+.acc-content {
+  position: absolute;
+  height: 0%;
+  overflow: hidden;
+  min-height:1px;
+  border-bottom: solid 1px color($colors, primary);
+  transition: .3s all;
+}
+.acc-content.open {
+  height:100%;
+}
