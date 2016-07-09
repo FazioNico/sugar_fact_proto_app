@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 
 /*
   Generated class for the ProductIngredient component.
@@ -13,9 +13,15 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ProductIngredient implements OnInit{
 
   total:any;
+
   @Input() ingredientsInput: any[];
+  @Output() onToggle: EventEmitter<any> = new EventEmitter();
 
   constructor() {
+  }
+
+  onClickToggle(e){
+     this.onToggle.emit(e)
   }
 
   ngOnInit(){

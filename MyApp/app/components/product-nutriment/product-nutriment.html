@@ -5,17 +5,26 @@
   for more info on Angular 2 Components.
 -->
 
-<p>Nutriments: </p>
-<ul>
-  <li >Proteins: {{ nutrimentsInput.proteins_100g }}gr</li>
-  <li >Lipides: {{ nutrimentsInput.fat_100g }}gr</li>
-  <li >Sucres:
-    <span>
-      <span *ngIf="nutrimentsInput.sugars_100g">{{ nutrimentsInput.sugars_100g }}</span>
-      <span *ngIf="!nutrimentsInput.sugars_100g">{{ nutrimentsInput.carbohydrates_100g }}</span>
-    </span>
-    gr
-  </li>
-  <li >Fibres: {{ nutrimentsInput.fiber_100g }}gr</li>
-  <li >Sel: {{ nutrimentsInput.salt_100g }}gr</li>
-</ul>
+<div class="acc-item">
+  <h3 (click)="onClickToggle($event)" padding class="acc-title">
+    Nutriments
+    <span><ion-icon name="ios-arrow-forward-outline"></ion-icon></span>
+  </h3>
+  <div class="acc-content">
+    <div padding>
+      <ul>
+        <li >Proteins: {{ nutrimentsInput.proteins_100g }}gr</li>
+        <li >Lipides: {{ nutrimentsInput.fat_100g }}gr</li>
+        <li >Sucres:
+          <span>
+            <span *ngIf="nutrimentsInput.sugars_100g">{{ nutrimentsInput.sugars_100g }}</span>
+            <span *ngIf="!nutrimentsInput.sugars_100g">{{ nutrimentsInput.carbohydrates_100g }}</span>
+          </span>
+          gr
+        </li>
+        <li >Fibres: {{ nutrimentsInput.fiber_100g }}gr</li>
+        <li >Sel: {{ nutrimentsInput.salt_100g }}gr</li>
+      </ul>
+    </div>
+  </div>
+</div>

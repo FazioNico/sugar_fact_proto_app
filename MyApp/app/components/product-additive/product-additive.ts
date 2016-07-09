@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 
 /*
   Generated class for the ProductAdditive component.
@@ -15,9 +15,14 @@ export class ProductAdditive implements OnInit{
   total:any= '0';
 
   @Input() additiveInput: any[];
+  @Output() onToggle: EventEmitter<any> = new EventEmitter();
 
   constructor() {
     this.additiveData = [];
+  }
+
+  onClickToggle(e){
+     this.onToggle.emit(e)
   }
 
   ngOnInit(){

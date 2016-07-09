@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output  } from '@angular/core';
 import { ApiService } from '../../providers/api-service/api-service';
 
 /*
@@ -19,7 +19,7 @@ export class ProductRelated  implements OnInit {
   total:any = '0';
 
   @Input() categoriesInput: string;
-  //@Output() eventName: EventEmitter<string>;
+  @Output() onToggle: EventEmitter<any> = new EventEmitter();
 
   constructor( public apiService: ApiService ) {
     this.relatedProduct = [];
@@ -44,6 +44,10 @@ export class ProductRelated  implements OnInit {
         }
       )
 
+  }
+
+  onClickToggle(e){
+     this.onToggle.emit(e)
   }
 
   ngOnInit() {

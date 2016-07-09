@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 
 /*
   Generated class for the ProductNutriment component.
@@ -15,8 +15,12 @@ export class ProductNutriment {
   arrayOfKeys:any[];
 
   @Input() nutrimentsInput:any[];
+  @Output() onToggle: EventEmitter<any> = new EventEmitter();
 
   constructor() {
   }
 
+  onClickToggle(e){
+     this.onToggle.emit(e)
+  }
 }

@@ -85,4 +85,10 @@ export class ProductDetailPage {
       }
       console.log(this.productData)
     }
+
+    onClickToggle(e){
+      //console.log(e)
+      e.target.nextElementSibling.classList.toggle("open");
+      e.target.children[0].classList.toggle("rotate")
+    }
 }

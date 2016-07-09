@@ -5,9 +5,18 @@
   for more info on Angular 2 Components.
 -->
 
-<p>Adidifs: ({{total}})</p>
-<p>
-  <ion-badge primary class="line-badge" *ngFor="let additive of additiveData">
-    {{ additive }}
-  </ion-badge>
-</p>
+<div class="acc-item">
+  <h3 (click)="onClickToggle($event)" padding class="acc-title">
+    Adidifs ({{total}})
+    <span><ion-icon name="ios-arrow-forward-outline"></ion-icon></span>
+  </h3>
+  <div class="acc-content">
+    <div padding>
+      <p>
+        <ion-badge primary class="line-badge" *ngFor="let additive of additiveData">
+          {{ additive }}
+        </ion-badge>
+      </p>
+    </div>
+  </div>
+</div>
