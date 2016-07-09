@@ -19,18 +19,15 @@
     <product-focus *ngIf="focusData" [productFocusInput]="focusData"></product-focus>
 
     <div class="acc-wrapper">
-      <div class="acc-item">
+
         <product-nutriment *ngIf="nutriments" [nutrimentsInput]="nutriments" (onToggle)="onClickToggle($event)"></product-nutriment>
-      </div>
-      <div class="acc-item">
+
         <product-ingredient *ngIf="ingredients" [ingredientsInput]="ingredients"  (onToggle)="onClickToggle($event)"></product-ingredient>
-      </div>
-      <div class="acc-item">
+
         <product-additive *ngIf="additives_tags" [additiveInput]="additives_tags" (onToggle)="onClickToggle($event)"></product-additive>
-      </div>
-      <div class="acc-item">
+
         <product-related *ngIf="categories_hierarchy" [categoriesInput]="categories_hierarchy" (onToggle)="onClickToggle($event)"></product-related>
-      </div>
+
     </div>
 
   </div>

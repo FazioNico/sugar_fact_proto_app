@@ -88,7 +88,8 @@ export class ProductDetailPage {
 
     onClickToggle(e){
       //console.log(e)
-      e.target.nextElementSibling.classList.toggle("open");
-      e.target.children[0].classList.toggle("rotate")
+      let el = e.target.closest(".acc-item > h3")
+      el.nextElementSibling.classList.toggle("open");
+      el.children[0].classList.toggle("rotate")
     }
 }

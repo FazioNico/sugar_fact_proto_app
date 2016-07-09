@@ -4,13 +4,14 @@
   See https://angular.io/docs/ts/latest/api/core/ComponentMetadata-class.html
   for more info on Angular 2 Components.
 -->
-
-<h3 (click)="onClickToggle($event)" padding class="acc-title">
-  Ingredients ({{ total }})
-  <span><ion-icon name="ios-arrow-forward-outline"></ion-icon></span>
-</h3>
-<div class="acc-content">
-  <div padding>
-    <ion-badge class="line-badge" *ngFor="let ingredient of ingredientsInput"> {{ ingredient.text}} </ion-badge>
+<div class="acc-item">
+  <h3 (click)="onClickToggle($event)" padding class="acc-title">
+    Ingredients ({{ total }})
+    <span><ion-icon name="ios-arrow-forward-outline"></ion-icon></span>
+  </h3>
+  <div class="acc-content">
+    <div padding>
+      <ion-badge class="line-badge" *ngFor="let ingredient of ingredientsInput"> {{ ingredient.text}} </ion-badge>
+    </div>
   </div>
 </div>
