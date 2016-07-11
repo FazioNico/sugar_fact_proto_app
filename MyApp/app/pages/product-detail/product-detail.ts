@@ -42,8 +42,6 @@ export class ProductDetailPage {
     additives_tags:any;
     categories_hierarchy:any;
 
-    /** Not normally mandatory but create bugs if ommited. **/
-
     @ViewChild(Content) content: Content;
 
     constructor(
@@ -51,7 +49,7 @@ export class ProductDetailPage {
       private nav: NavController,
       private params: NavParams
     ) {
-      console.log(this.params.get('id'))
+      //console.log(this.params.get('id'))
       this.getData(this.params.get('id'))
     }
 
@@ -104,6 +102,7 @@ export class ProductDetailPage {
     onClickRelated(e){
       console.log(e.target.offsetParent.id)
       let param = e.target.offsetParent.id
+      this.productID = param;
       this.getData(param)
       this.content.scrollToTop();
 
