@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import {Observable} from "../../../node_modules/rxjs/Observable.d";
 
 import { ApiService } from '../../providers/api-service/api-service';
+import { HeaderContent } from '../../components/header-content/header-content';
 import { ProductHeader } from '../../components/product-header/product-header';
 import { ProductFocus } from '../../components/product-focus/product-focus';
 import { ProductNutriment } from '../../components/product-nutriment/product-nutriment';
@@ -19,6 +20,7 @@ import { ProductRelated } from '../../components/product-related/product-related
 @Component({
   templateUrl: 'build/pages/product-detail/product-detail.html',
   directives: [
+    HeaderContent,
     ProductHeader,
     ProductFocus,
     ProductNutriment,

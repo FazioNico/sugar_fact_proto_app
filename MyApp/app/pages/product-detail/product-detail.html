@@ -5,14 +5,11 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar blanc>
-  </ion-navbar>
-
+    <header-content></header-content>
 </ion-header>
 
 
-<ion-content>
+<ion-content fullscreen>
   <div *ngIf="result === 1">
 
     <product-header *ngIf="productData" [productDataHeaderInput]="productData"></product-header>

@@ -7,23 +7,86 @@
 
 <div class="acc-item">
   <h3 (click)="onClickToggle($event)" padding class="acc-title">
-    Nutriments
+    Informations nutritionnelles
     <span><ion-icon name="ios-arrow-forward-outline"></ion-icon></span>
   </h3>
   <div class="acc-content">
     <div padding>
-      <ul>
-        <li >Proteins: {{ nutrimentsInput.proteins_100g }}gr</li>
-        <li >Lipides: {{ nutrimentsInput.fat_100g }}gr</li>
-        <li >Sucres:
-          <span>
+      <p text-center>Valeurs énérgetique pour 100gr.</p>
+      <h3 text-center primary>{{ energy_100g }}kcal</h3>
+      <ul class="tb-wrapper">
+        <li class="tb-item" >
+          <div class="tb-fullBG">
+            <div class="tb-resultBG" [ngStyle]="{'width': getWidth(nutrimentsInput.proteins_100g),'background': '#ef9a9a'}"></div>
+          </div>
+          <div class="tb-item-title">
+            Proteins:
+          </div>
+          <div class="tb-item-value">
+             {{ nutrimentsInput.proteins_100g }}
+             <span class="tb-unit">gr</span>
+          </div>
+        </li>
+
+        <li class="tb-item" >
+          <div class="tb-fullBG">
+            <div class="tb-resultBG" [ngStyle]="{'width': getWidth(nutrimentsInput.fat_100g),'background': '#ffe082'}"></div>
+          </div>
+          <div class="tb-item-title">
+            Lipides:
+          </div>
+          <div class="tb-item-value">
+            {{ nutrimentsInput.fat_100g }}
+            <span class="tb-unit">gr</span>
+          </div>
+        </li>
+
+        <li class="tb-item" >
+          <div class="tb-fullBG">
+            <span *ngIf="nutrimentsInput.sugars_100g">
+              <div class="tb-resultBG" [ngStyle]="{'width': getWidth(nutrimentsInput.sugars_100g),'background': '#c5e1a5'}"></div>
+            </span>
+            <span *ngIf="!nutrimentsInput.sugars_100g">
+              <div class="tb-resultBG" [ngStyle]="{'width': getWidth(nutrimentsInput.carbohydrates_100g),'background': '#c5e1a5'}"></div>
+            </span>
+
+            <div class="tb-resultBG"></div>
+          </div>
+          <div class="tb-item-title">
+            Sucres:
+          </div>
+          <div class="tb-item-value">
             <span *ngIf="nutrimentsInput.sugars_100g">{{ nutrimentsInput.sugars_100g }}</span>
             <span *ngIf="!nutrimentsInput.sugars_100g">{{ nutrimentsInput.carbohydrates_100g }}</span>
-          </span>
-          gr
+            <span class="tb-unit">gr</span>
+          </div>
         </li>
-        <li >Fibres: {{ nutrimentsInput.fiber_100g }}gr</li>
-        <li >Sel: {{ nutrimentsInput.salt_100g }}gr</li>
+
+        <li class="tb-item" >
+          <div class="tb-fullBG">
+            <div class="tb-resultBG" [ngStyle]="{'width': getWidth(nutrimentsInput.fiber_100g),'background': '#bcaaa4'}"></div>
+          </div>
+          <div class="tb-item-title">
+            Fibres:
+          </div>
+          <div class="tb-item-value">
+            {{ nutrimentsInput.fiber_100g }}
+            <span class="tb-unit">gr</span>
+          </div>
+        </li>
+
+        <li class="tb-item" >
+          <div class="tb-fullBG">
+            <div class="tb-resultBG" [ngStyle]="{'width': getWidth(nutrimentsInput.salt_100g),'background': '#81d4fa'}"></div>
+          </div>
+          <div class="tb-item-title">
+            Sel:
+          </div>
+          <div class="tb-item-value">
+            {{ nutrimentsInput.salt_100g }}
+            <span class="tb-unit">gr</span>
+          </div>
+        </li>
       </ul>
     </div>
   </div>

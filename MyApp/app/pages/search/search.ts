@@ -12,7 +12,9 @@ import { SearchResult } from '../../components/search-result/search-result';
 */
 @Component({
   templateUrl: 'build/pages/search/search.html',
-  directives: [SearchResult]
+  directives: [
+    SearchResult
+  ]
 })
 export class SearchPage {
   searchResultData: any;

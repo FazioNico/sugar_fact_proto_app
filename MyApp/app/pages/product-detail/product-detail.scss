@@ -39,7 +39,7 @@ product-focus {
 .slide-zoom h3 {
   margin-top: 0rem;
 }
-
+/**** accordeon product detail ****/
 .acc-wrapper .acc-item,
 .acc-wrapper .acc-title,
 .acc-wrapper .acc-content {
@@ -59,7 +59,8 @@ product-focus {
 .acc-title {
   padding: 16px;
   margin: 0px;
-  color: color($colors, primary)
+  color: color($colors, primary);
+  font-size: 1.8rem;
 }
 .acc-title > span {
   float:right;
@@ -82,4 +83,56 @@ product-focus {
 .acc-content > div {
   padding-top:16px;
   padding-bottom:32px;
+}
+
+/**** Product nutriment tab ****/
+.tb-wrapper,.tb-item,.tb-fullBG,.tb-resultBG  {
+  display:block;
+  width: 100%;
+}
+
+.tb-wrapper {
+  height: 100%;
+  margin: 0;
+  padding: 8px 16px 16px;
+}
+.tb-item {
+  height: 32px;
+  margin: 10px 0px;
+  position: relative;
+}
+.tb-fullBG {
+  height: 32px;
+  background: #e4e4e4;
+
+  position: absolute;
+  top:0;
+  left: 0;
+}
+.tb-resultBG {
+  width: auto;
+  height: 32px;
+  background: red;
+
+  position: absolute;
+  top:0;
+  left: 0;
+
+}
+.tb-item-title {
+  position: absolute;
+  top:0;
+  left: 0;
+  padding: 8px;
+
+}
+.tb-item-value {
+  position: absolute;
+  top:0;
+  right: 0;
+  padding: 8px;
+
+}
+.tb-unit {
+
 }

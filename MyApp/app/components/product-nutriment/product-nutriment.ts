@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
 
 /*
   Generated class for the ProductNutriment component.
@@ -10,17 +10,25 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
   selector: 'product-nutriment',
   templateUrl: 'build/components/product-nutriment/product-nutriment.html'
 })
-export class ProductNutriment {
+export class ProductNutriment implements OnInit{
 
-  arrayOfKeys:any[];
+  energy_100g:number;
 
-  @Input() nutrimentsInput:any[];
+  @Input() nutrimentsInput:any;
   @Output() onToggle: EventEmitter<any> = new EventEmitter();
 
   constructor() {
   }
 
+  getWidth(data){
+    return Math.round((data)).toString() + '%'
+  }
+
   onClickToggle(e){
      this.onToggle.emit(e)
+  }
+
+  ngOnInit(){
+    this.energy_100g = Math.round((this.nutrimentsInput.energy_100g * 0.2388))
   }
 }
