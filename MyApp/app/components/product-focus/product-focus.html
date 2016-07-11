@@ -25,9 +25,18 @@
   <div class="focusTab" [ngSwitch]="focusTab">
     <div *ngSwitchCase="'sugar'">
       <ion-slides pager>
-        <ion-slide>
-          <sugar *ngIf="!productFocusInput[0].sugars_100" [data100gInput]="productFocusInput[0].carbohydrates_100">{{ productFocusInput[0].carbohydrates_100 }}gr / 100gr</sugar>
-          <sugar *ngIf="productFocusInput[0].sugars_100" [data100gInput]="productFocusInput[0].sugars_100">{{ productFocusInput[0].sugars_100 }}gr / 100gr</sugar>
+        <ion-slide *ngIf="productFocusInput[0].sugar_portion > 0">
+          <sugar [dataInput]="productFocusInput[0].sugar_portion">{{ productFocusInput[0].sugar_portion }}gr / portion</sugar>
+          <h3 blanc text-center>
+              <span >
+                {{ productFocusInput[0].sugar_portion }}gr  <br/>
+                <small>par portion</small>
+              </span>
+          </h3>
+        </ion-slide>
+        <ion-slide *ngIf="sugar_100g > 0">
+          <sugar *ngIf="!productFocusInput[0].sugars_100" [dataInput]="productFocusInput[0].carbohydrates_100">{{ productFocusInput[0].carbohydrates_100 }}gr / 100gr</sugar>
+          <sugar *ngIf="productFocusInput[0].sugars_100" [dataInput]="productFocusInput[0].sugars_100">{{ productFocusInput[0].sugars_100 }}gr / 100gr</sugar>
           <h3 blanc text-center>
               <span *ngIf="sugar_100g">
                 {{ sugar_100g }}gr  <br/>
@@ -35,18 +44,18 @@
               </span>
           </h3>
         </ion-slide>
-        <ion-slide>
-          <h3 blanc text-center>
-              <span >
-                ...gr  <br/>
-                <small>total</small>
-              </span>
-          </h3>
-        </ion-slide>
       </ion-slides>
     </div>
     <div *ngSwitchCase="'fat'">
       <ion-slides pager>
+        <ion-slide *ngIf="productFocusInput[0].fat_portion">
+          <h3 blanc text-center>
+              <span >
+                {{ productFocusInput[0].fat_portion }}gr <br/>
+                <small>par portion</small>
+              </span>
+          </h3>
+        </ion-slide>
         <ion-slide>
           <h3 blanc text-center>
             <span *ngIf="productFocusInput[0].fat_100">
@@ -54,14 +63,6 @@
               <br/>
               <small>pour 100gr</small>
             </span>
-          </h3>
-        </ion-slide>
-        <ion-slide>
-          <h3 blanc text-center>
-              <span >
-                ...gr <br/>
-                <small>total</small>
-              </span>
           </h3>
         </ion-slide>
       </ion-slides>

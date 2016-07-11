@@ -13,6 +13,7 @@ import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
 export class ProductNutriment implements OnInit{
 
   energy_100g:number;
+  energy_serving: number;
 
   @Input() nutrimentsInput:any;
   @Output() onToggle: EventEmitter<any> = new EventEmitter();
@@ -35,5 +36,6 @@ export class ProductNutriment implements OnInit{
 
   ngOnInit(){
     this.energy_100g = Math.round((this.nutrimentsInput.energy_100g * 0.2388))
+    this.energy_serving = Math.round((this.nutrimentsInput.energy_serving * 0.2388))
   }
 }

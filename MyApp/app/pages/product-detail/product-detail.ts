@@ -43,6 +43,7 @@ export class ProductDetailPage {
     categories_hierarchy:any;
 
     @ViewChild(Content) content: Content;
+    @ViewChild(ProductFocus) productFocus: ProductFocus;
 
     constructor(
       public apiService: ApiService,
@@ -71,7 +72,7 @@ export class ProductDetailPage {
         )
     }
 
-    setData(){
+    setData(){console.log(this.productData)
       if(this.productData != false){
         this.nutriments = this.productData.nutriments
         this.ingredients = this.productData.ingredients
@@ -86,10 +87,13 @@ export class ProductDetailPage {
         this.focusData.push({
           sugars_100: this.productData.nutriments.sugars_100g,
           carbohydrates_100: this.productData.nutriments.carbohydrates_100g,
-          fat_100: this.productData.nutriments.fat_100g
+          fat_100: this.productData.nutriments.fat_100g,
+          sugar_portion: this.productData.nutriments.sugars_serving,
+          fat_portion: this.productData.nutriments.fat_serving
         })
       }
       console.log(this.productData)
+      //this.productFocus.calculeSugar()
     }
 
     onClickToggle(e){
@@ -105,6 +109,7 @@ export class ProductDetailPage {
       this.productID = param;
       this.getData(param)
       this.content.scrollToTop();
+      this.productFocus.calculeSugar()
 
       // close all accordeon
       let acc = document.getElementsByClassName('open')

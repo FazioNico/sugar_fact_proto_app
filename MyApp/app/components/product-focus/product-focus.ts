@@ -23,14 +23,20 @@ export class ProductFocus {
     this.focusTab = "sugar";
   }
 
-  ngOnInit() {
+  calculeSugar(){
     if(!this.productFocusInput[0].sugars_100){
       this.sugar_100g = this.productFocusInput[0].carbohydrates_100
     }
     else {
       this.sugar_100g = this.productFocusInput[0].sugars_100
     }
+    console.log(this.sugar_100g)
+    console.log('calcule')
+  }
+
+  ngOnInit() {
     console.log('init')
+    this.calculeSugar()
   }
 
 }

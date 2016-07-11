@@ -16,7 +16,7 @@ export class Sugar {
 
   sugarWidth:number;
 
-  @Input() data100gInput: number;
+  @Input() dataInput: number;
 
   constructor(
   ) {
