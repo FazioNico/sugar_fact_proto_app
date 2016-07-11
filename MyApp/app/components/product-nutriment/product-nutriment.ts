@@ -24,6 +24,11 @@ export class ProductNutriment implements OnInit{
     return Math.round((data)).toString() + '%'
   }
 
+
+  getOMSvalue(data,max){
+    return Math.round(((data * 100) / (max * 2))).toString() + '%'
+  }
+
   onClickToggle(e){
      this.onToggle.emit(e)
   }

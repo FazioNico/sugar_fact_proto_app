@@ -17,7 +17,7 @@
       <ul class="tb-wrapper">
         <li class="tb-item" >
           <div class="tb-fullBG">
-            <div class="tb-resultBG" [ngStyle]="{'width': getWidth(nutrimentsInput.proteins_100g),'background': '#ef9a9a'}"></div>
+            <div class="tb-resultBG" [ngStyle]="{'width': getOMSvalue(nutrimentsInput.proteins_100g,50),'background': '#ef9a9a'}"></div>
           </div>
           <div class="tb-item-title">
             Proteins:
@@ -30,7 +30,7 @@
 
         <li class="tb-item" >
           <div class="tb-fullBG">
-            <div class="tb-resultBG" [ngStyle]="{'width': getWidth(nutrimentsInput.fat_100g),'background': '#ffe082'}"></div>
+            <div class="tb-resultBG" [ngStyle]="{'width': getOMSvalue(nutrimentsInput.fat_100g, 70),'background': '#ffe082'}"></div>
           </div>
           <div class="tb-item-title">
             Lipides:
@@ -44,10 +44,10 @@
         <li class="tb-item" >
           <div class="tb-fullBG">
             <span *ngIf="nutrimentsInput.sugars_100g">
-              <div class="tb-resultBG" [ngStyle]="{'width': getWidth(nutrimentsInput.sugars_100g),'background': '#c5e1a5'}"></div>
+              <div class="tb-resultBG" [ngStyle]="{'width': getOMSvalue(nutrimentsInput.sugars_100g,90),'background': '#c5e1a5'}"></div>
             </span>
             <span *ngIf="!nutrimentsInput.sugars_100g">
-              <div class="tb-resultBG" [ngStyle]="{'width': getWidth(nutrimentsInput.carbohydrates_100g),'background': '#c5e1a5'}"></div>
+              <div class="tb-resultBG" [ngStyle]="{'width': getOMSvalue(nutrimentsInput.carbohydrates_100g,90),'background': '#c5e1a5'}"></div>
             </span>
 
             <div class="tb-resultBG"></div>
@@ -64,7 +64,7 @@
 
         <li class="tb-item" >
           <div class="tb-fullBG">
-            <div class="tb-resultBG" [ngStyle]="{'width': getWidth(nutrimentsInput.fiber_100g),'background': '#bcaaa4'}"></div>
+            <div class="tb-resultBG" [ngStyle]="{'width': getOMSvalue(nutrimentsInput.fiber_100g,25),'background': '#bcaaa4'}"></div>
           </div>
           <div class="tb-item-title">
             Fibres:
@@ -77,7 +77,7 @@
 
         <li class="tb-item" >
           <div class="tb-fullBG">
-            <div class="tb-resultBG" [ngStyle]="{'width': getWidth(nutrimentsInput.salt_100g),'background': '#81d4fa'}"></div>
+            <div class="tb-resultBG" [ngStyle]="{'width': getOMSvalue(nutrimentsInput.salt_100g,2.4),'background': '#81d4fa'}"></div>
           </div>
           <div class="tb-item-title">
             Sel:
@@ -87,7 +87,9 @@
             <span class="tb-unit">gr</span>
           </div>
         </li>
+        <li class="tb-oms"></li>
       </ul>
+      <p class="tb-oms-text"><small>Recommandations nutritionnelles OMS</small></p>
     </div>
   </div>
 </div>

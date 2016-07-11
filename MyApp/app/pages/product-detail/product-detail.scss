@@ -94,7 +94,9 @@ product-focus {
 .tb-wrapper {
   height: 100%;
   margin: 0;
-  padding: 8px 16px 16px;
+  padding: 8px 16px;
+  margin-bottom: 8px;
+  overflow: hidden;
 }
 .tb-item {
   height: 32px;
@@ -118,6 +120,24 @@ product-focus {
   top:0;
   left: 0;
 
+}
+.tb-oms{
+  width: 100%;
+  height: 2px;
+  background: #727272;
+
+  position: relative;
+  top:-100px;
+  left: 0;
+  display: inherit;
+  transform: rotate(90deg);
+}
+.tb-oms-text{
+  background: #727272;
+  color: #fff;
+  padding: 4px 6px 6px;
+  margin: -10px auto 0;
+  display: table;
 }
 .tb-item-title {
   position: absolute;
