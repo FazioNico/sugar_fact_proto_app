@@ -19,7 +19,7 @@
           </ion-thumbnail>
           <h2>{{ productData.product_name }}</h2>
           <p *ngIf="productData.brands != productData.product_name">{{ productData.brands }}</p>
-          <button clear item-right secondary>View</button>
+          <button data-id="{{productData.id}}" (click)="onClickRelated($event)"clear item-right secondary>View</button>
         </ion-item>
       </ion-list>
     </div>

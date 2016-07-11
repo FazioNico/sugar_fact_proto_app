@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, Content } from 'ionic-angular';
 import {Observable} from "../../../node_modules/rxjs/Observable.d";
 
 import { ApiService } from '../../providers/api-service/api-service';
@@ -42,14 +42,21 @@ export class ProductDetailPage {
     additives_tags:any;
     categories_hierarchy:any;
 
+    /** Not normally mandatory but create bugs if ommited. **/
+
+    @ViewChild(Content) content: Content;
+
     constructor(
       public apiService: ApiService,
       private nav: NavController,
       private params: NavParams
     ) {
       console.log(this.params.get('id'))
+      this.getData(this.params.get('id'))
+    }
 
-      this.productID = this.params.get('id');
+    getData(barcode){
+      this.productID = barcode;
       this.apiService.getProductData(this.productID)
         .subscribe(
           (data) => {
@@ -64,7 +71,6 @@ export class ProductDetailPage {
           (error) => this.productData = false,
           () => this.setData()
         )
-
     }
 
     setData(){
@@ -93,5 +99,21 @@ export class ProductDetailPage {
       let el = e.target.closest(".acc-item > h3")
       el.nextElementSibling.classList.toggle("open");
       el.children[0].classList.toggle("rotate")
+    }
+
+    onClickRelated(e){
+      console.log(e.target.offsetParent.id)
+      let param = e.target.offsetParent.id
+      this.getData(param)
+      this.content.scrollToTop();
+
+      // close all accordeon
+      let acc = document.getElementsByClassName('open')
+      let btn = document.getElementsByClassName('rotate')
+      console.log(acc)
+      for (let i = 0; i < acc.length; i++) {
+          acc[i].classList.toggle("open");
+          btn[i].classList.toggle("rotate");
+      }
     }
 }

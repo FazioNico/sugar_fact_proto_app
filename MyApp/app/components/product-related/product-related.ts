@@ -20,6 +20,7 @@ export class ProductRelated  implements OnInit {
 
   @Input() categoriesInput: string;
   @Output() onToggle: EventEmitter<any> = new EventEmitter();
+  @Output() onRelated: EventEmitter<any> = new EventEmitter();
 
   constructor( public apiService: ApiService ) {
     this.relatedProduct = [];
@@ -44,6 +45,10 @@ export class ProductRelated  implements OnInit {
         }
       )
 
+  }
+
+  onClickRelated(e){
+     this.onRelated.emit(e)
   }
 
   onClickToggle(e){
