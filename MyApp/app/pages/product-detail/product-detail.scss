@@ -1,5 +1,5 @@
 
-product-focus {
+product-focus, .product-notfound-header {
   background : color($colors, primary);
 }
 .line-badge {
@@ -168,4 +168,14 @@ ion-slide.swiper-slide {
     left: 0;
     right: 0;
     margin: auto;
+}
+
+/*** .product-notfound ***/
+.product-notfound-header{
+  padding-top:40px;
+  padding-bottom:50px;
+  margin-bottom:30px;
+}
+.product-notfound-header, .product-notfound-header *{
+  color: #fff;
 }

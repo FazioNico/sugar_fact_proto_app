@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ApiService } from '../../providers/api-service/api-service';
 
+import { HeaderContent } from '../../components/header-content/header-content';
 import { SearchResult } from '../../components/search-result/search-result';
 
 /*
@@ -13,6 +14,7 @@ import { SearchResult } from '../../components/search-result/search-result';
 @Component({
   templateUrl: 'build/pages/search/search.html',
   directives: [
+    HeaderContent,
     SearchResult
   ]
 })

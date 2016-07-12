@@ -3,6 +3,7 @@ import { NavController, NavParams, Content } from 'ionic-angular';
 import {Observable} from "../../../node_modules/rxjs/Observable.d";
 
 import { ApiService } from '../../providers/api-service/api-service';
+
 import { HeaderContent } from '../../components/header-content/header-content';
 import { ProductHeader } from '../../components/product-header/product-header';
 import { ProductFocus } from '../../components/product-focus/product-focus';
@@ -10,7 +11,9 @@ import { ProductNutriment } from '../../components/product-nutriment/product-nut
 import { ProductIngredient } from '../../components/product-ingredient/product-ingredient';
 import { ProductAdditive } from '../../components/product-additive/product-additive';
 import { ProductRelated } from '../../components/product-related/product-related';
+import { ProductNotfound } from '../../components/product-notfound/product-notfound';
 
+import { AddPage } from '../add/add';
 /*
   Generated class for the ProductDetailPage page.
 
@@ -26,7 +29,8 @@ import { ProductRelated } from '../../components/product-related/product-related
     ProductNutriment,
     ProductIngredient,
     ProductAdditive,
-    ProductRelated
+    ProductRelated,
+    ProductNotfound
   ],
   providers: [ApiService]
 })
@@ -44,6 +48,7 @@ export class ProductDetailPage {
 
     @ViewChild(Content) content: Content;
     @ViewChild(ProductFocus) productFocus: ProductFocus;
+
 
     constructor(
       public apiService: ApiService,
@@ -94,6 +99,15 @@ export class ProductDetailPage {
       }
       console.log(this.productData)
       //this.productFocus.calculeSugar()
+    }
+
+    onClickAdd(){
+      console.log('go add page... ')
+      this.nav.push(AddPage)
+    }
+
+    onClickBack(){
+      this.nav.pop()
     }
 
     onClickToggle(e){

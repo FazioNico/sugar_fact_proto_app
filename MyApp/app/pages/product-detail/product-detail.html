@@ -5,9 +5,8 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <header-content></header-content>
+    <header-content title=""></header-content>
 </ion-header>
-
 
 <ion-content fullscreen>
   <div *ngIf="result === 1">
@@ -29,6 +28,6 @@
 
   </div>
   <div *ngIf="result === 0">
-    <p>Produit non trouvé</p>
+    <product-notfound (clickBack)="onClickBack()" (clickAdd)="onClickAdd()" [productBarCodeInput]="productID"></product-notfound>
   </div>
 </ion-content>
