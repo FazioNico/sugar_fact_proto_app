@@ -48,7 +48,7 @@ product-focus, .product-notfound-header {
 .acc-wrapper {
   position:relative;
   width: 100%;
-  height: 100%;
+  /** height: 100%; **/
 }
 .acc-item {
   overflow: hidden;
@@ -178,4 +178,9 @@ ion-slide.swiper-slide {
 }
 .product-notfound-header, .product-notfound-header *{
   color: #fff;
+}
+
+/** btn FAB **/
+.button-fab {
+  z-index: 100;
 }

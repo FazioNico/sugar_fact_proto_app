@@ -5,6 +5,8 @@ import {ScanPage} from '../../pages/scan/scan';
 import {SearchPage} from '../../pages/search/search';
 import {ProductDetailPage} from '../../pages/product-detail/product-detail';
 
+import { AddPage } from '../../pages/add/add';
+
 @Injectable()
 export class Routes {
   routes:Object = {};
@@ -13,12 +15,14 @@ export class Routes {
   SCAN:string="scan";
   SEARCH: string="search";
   PRODUCT_DETAIL: string="product_detail";
+  ADD: string= "add";
 
   constructor(){
     this.routes[this.HOME]=HomePage;
     this.routes[this.SCAN]=ScanPage;
     this.routes[this.SEARCH]=SearchPage;
     this.routes[this.PRODUCT_DETAIL]=ProductDetailPage;
+    this.routes[this.ADD]=AddPage;
   }
 
   getPage(id){

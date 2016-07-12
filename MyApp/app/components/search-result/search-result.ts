@@ -26,6 +26,6 @@ export class SearchResult {
 
   goProduct(productID) {
     let param = productID
-    this.nav.push(this.routes.getPage(this.routes.PRODUCT_DETAIL), { id: param+222 });
+    this.nav.push(this.routes.getPage(this.routes.PRODUCT_DETAIL), { id: param });
   }
 }

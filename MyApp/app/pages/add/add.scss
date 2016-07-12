@@ -1,3 +1,16 @@
 .add {
 
 }
+.add-header {
+  padding: 25px 0px 25px;
+  background-color: color($colors, primary)
+}
+.add-page ion-list > .item:first-child, ion-list > .item-wrapper:first-child .item {
+    border-top: 0px solid #dedede;
+}
+.add-page .item {
+  padding:0px 16px;
+}
+.add-page .nutriment .text-input {
+    text-align: right;
+}

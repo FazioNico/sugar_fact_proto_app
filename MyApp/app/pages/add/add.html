@@ -4,15 +4,142 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Add</ion-title>
-  </ion-navbar>
-
+    <header-content title="Nouveau produit"></header-content>
 </ion-header>
 
 
-<ion-content padding>
+  <button fab fab-bottom fab-center secondary>
+    <ion-icon name="add"></ion-icon>
+  </button>
+<ion-content>
+
+  <div class="add-header" padding text-center>
+    <h2 blanc>Photo du produit</h2>
+    <div *ngIf="base64Image != null">
+      <img [src]="base64Image" />
+    </div>
+    <div *ngIf="base64Image == null">
+      <p blanc>Pas de photo actuelement</p>
+    </div>
+    <p>
+      <button blanc outline (click)="getPicture()" > <ion-icon name="camera"></ion-icon> Prendre une photo</button>
+    </p>
+  </div>
+  <div class="acc-wrapper">
+
+    <div class="acc-item">
+      <h3 (click)="onClickToggle($event)" padding class="acc-title">
+        Caractéristiques du produit
+        <span class="rotate"><ion-icon name="ios-arrow-forward-outline"></ion-icon></span>
+      </h3>
+      <div class="acc-content open">
+        <div padding>
+          <ion-list>
+
+            <ion-item>
+              <ion-label stacked>Barcode</ion-label>
+              <ion-input type="text" placeholder="Exemples : 2000000033399"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Nom du produit</ion-label>
+              <ion-input type="text" placeholder="Exemple : Kinder Bueno White"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Dénomination générique</ion-label>
+              <ion-input type="text" placeholder="Exemple : Barre chocolatée au lait et aux noisettes"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Quantité</ion-label>
+              <ion-input type="text" placeholder="Exemples : 2 l, 250 g, 1 kg, 25 cl"></ion-input>
+            </ion-item>
+
+          </ion-list>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <h3 (click)="onClickToggle($event)" padding class="acc-title">
+        Ingrédients
+        <span><ion-icon name="ios-arrow-forward-outline"></ion-icon></span>
+      </h3>
+      <div class="acc-content">
+        <div padding>
+          <ion-list>
+
+            <ion-item>
+              <ion-label stacked>Liste des ingrédients</ion-label>
+              <ion-textarea type="text" placeholder="Céréales, extrait de malt, cacao 4,8%, vitamine C"></ion-textarea>
+            </ion-item>
+
+          </ion-list>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <h3 (click)="onClickToggle($event)" padding class="acc-title">
+        Informations nutritionnelles
+        <span><ion-icon name="ios-arrow-forward-outline"></ion-icon></span>
+      </h3>
+      <div class="acc-content">
+        <div padding>
+          <p text-center>
+            Données  en gr. pour 100gr.
+          </p>
+          <ion-list class="nutriment">
+
+            <ion-item>
+              <ion-label fixed>Énergie:</ion-label>
+              <ion-input type="text" placeholder="569"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label fixed>Lipides:</ion-label>
+              <ion-input type="text" placeholder="35.9"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label fixed><small>- acides gras saturés:</small></ion-label>
+              <ion-input type="text"  placeholder="16.8"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label fixed>Glicides:</ion-label>
+              <ion-input type="text"  placeholder="52.6"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label fixed><small>- dont sucres:</small></ion-label>
+              <ion-input type="text" placeholder="42.6"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label fixed>Fibres:</ion-label>
+              <ion-input type="text" placeholder="1"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label fixed>Protéines:</ion-label>
+              <ion-input type="text" placeholder="8.8"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label fixed>Sel:</ion-label>
+              <ion-input type="text" placeholder="0.3302"></ion-input>
+            </ion-item>
+
+          </ion-list>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 
 </ion-content>
