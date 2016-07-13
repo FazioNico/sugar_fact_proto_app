@@ -1,7 +1,7 @@
 import {Component, PLATFORM_DIRECTIVES, provide} from '@angular/core';
 import {Platform, ionicBootstrap} from 'ionic-angular';
 import {AuthHttp, AuthConfig} from 'angular2-jwt';
-import {Http} from '@angular/http';
+import {Http, HTTP_PROVIDERS} from '@angular/http';
 import {StatusBar} from 'ionic-native';
 
 import {Routes} from './providers/routes/routes'
@@ -39,7 +39,7 @@ export class MyApp {
   }
 }
 
-ionicBootstrap(MyApp, [],{
+ionicBootstrap(MyApp, [ HTTP_PROVIDERS ],{
     mode: 'md',
     platforms: {
      ios: {
