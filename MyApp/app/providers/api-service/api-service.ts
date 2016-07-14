@@ -12,22 +12,24 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class ApiService {
 
-    urlProtocole:string = 'http://';
-    ndd:string = 'openfoodfacts.org'
-    country:string = 'world.';
-    ch:string = 'ch-fr.';
-    cgiUrl:string = '/cgi/search.pl?search_terms=';
-    apiUrl: string= '/api/v0'
-    product: string= '/product/'
-    categorie: string= '/category/'
+    urlProtocole:string   = 'http://';
+    ndd:string            = 'openfoodfacts.org'
+    country:string        = 'world.';
+    ch:string             = 'ch-fr.';
+    cgiUrl:string         = '/cgi/search.pl?search_terms=';
+    apiUrl: string        = '/api/v0'
+    product: string       = '/product/'
+    categorie: string     = '/category/'
+    format:string         = '&search_simple=1&json=1';
     parmUrl:string;
-    format:string = '&search_simple=1&json=1';
 
-    postUrlProduct:string= 'http://world.openfoodfacts.org/cgi/product_jqm2.pl';
-    user:string= 'off';
-    password:string= 'off';
+    postUrlProduct:string = 'http://world.openfoodfacts.org/cgi/product_jqm2.pl';
+    user:string           = 'off';
+    password:string       = 'off';
 
-    constructor(public http: Http) {
+    constructor(
+      public http   : Http
+    ) {
     }
 
     getData(value){
@@ -35,8 +37,8 @@ export class ApiService {
       let queryUrl = this.urlProtocole + this.country+ this.ndd  + this.cgiUrl + this.parmUrl + this.format;
       return this.http.get(queryUrl)
         .map(res => res.json())
-
     }
+
     getProductData(value){
       this.parmUrl = value.toLowerCase();
       let queryUrl = this.urlProtocole + this.country+ this.ndd  + this.apiUrl + this.product + this.parmUrl + '.json';
@@ -51,12 +53,12 @@ export class ApiService {
         .map(res => res.json())
     }
 
-
     // add new product
     save(product): Promise<any>  {
       console.log('save befor server')
       return this.post(product);
     }
+
     private post(product: any): Promise<any> {
       /**
       let fd = new FormData();
@@ -91,7 +93,6 @@ export class ApiService {
                   .then(res => res.json().data)
                   .catch(this.handleError);
     }
-
 
     private handleError(error: any) {
       console.error('An error occurred', error);

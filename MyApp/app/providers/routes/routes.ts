@@ -32,7 +32,7 @@ export class Routes {
 
   getRootPage(){
     //let root = (this.auth.authenticated()) ? this.getPage(this.TABS) : this.getPage(this.HOME)
-    let root = this.getPage(this.ADD)
+    let root = this.getPage(this.HOME)
     return root;
   }
 

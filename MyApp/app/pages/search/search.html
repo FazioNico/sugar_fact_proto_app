@@ -7,7 +7,7 @@
 
 <ion-header>
     <header-content title="Recherche"></header-content>
-    <ion-searchbar #searchDataInput (keyup)="getKeyUp(searchDataInput)" placeholder="nom du produit; code barre"></ion-searchbar>
+    <ion-searchbar #searchDataInput (change)="onInutChange(searchDataInput)" placeholder="nom du produit; code barre"></ion-searchbar>
 </ion-header>
 
 <ion-content class="search" >
