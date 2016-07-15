@@ -6,12 +6,19 @@
 -->
 
 <ion-list>
-  <ion-item *ngFor="let productData of dataInput" (click)="goProduct(productData.id)">
+
+  <ion-item *ngFor="let productData of dataInput" (click)="onGoProduct($event,productData.id)">
+
     <ion-thumbnail item-left>
       <img [src]="productData.image_thumb_url">
     </ion-thumbnail>
+
     <h2>{{ productData.product_name }}</h2>
+
     <p *ngIf="productData.brands != productData.product_name">{{ productData.brands }}</p>
+
     <button clear item-right secondary>View</button>
+
   </ion-item>
+
 </ion-list>

@@ -1,5 +1,4 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import {Observable} from 'rxjs/Observable';
@@ -16,10 +15,8 @@ import { LocalStorageService } from '../local-storage/local-storage';
 @Injectable()
 export class Store implements OnInit{
   data:     any;
-  stream:   any;
 
   constructor(
-    private _http   : Http,
     private _api    : ApiService,
     private _ls     : LocalStorageService
   ){

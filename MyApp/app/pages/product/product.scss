@@ -1,4 +1,6 @@
+.product {
 
+}
 product-focus, .product-notfound-header {
   background : color($colors, primary);
 }
@@ -24,11 +26,19 @@ product-focus, .product-notfound-header {
     vertical-align: top;
     height: 5rem;
     background: #fff;
-    border: solid 1px color($colors, primary);
-    border-radius:2px;
+    border: solid 2px #727272;
+    border-radius:3px;
+    box-shadow: 2px -4px 0px #727272;
     display: inline-block;
     margin-right: 10px;
     margin-top: 10px;
+}
+.sugar:nth-child(odd) {
+    transform:rotate(1deg);
+}
+
+.sugar:nth-child(even) {
+    transform:rotate(-1deg);
 }
 .swiper-wrapper {
   margin-bottom: 40px;

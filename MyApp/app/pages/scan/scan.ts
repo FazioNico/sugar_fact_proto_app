@@ -16,7 +16,7 @@ import {Routes} from '../../providers/routes/routes'
 export class ScanPage {
 
   barcodeData: BarcodeData;
-  //scanDetails:any;
+  scanDetails:any;
 
   /** Not normally mandatory but create bugs if ommited. **/
 
@@ -49,7 +49,7 @@ export class ScanPage {
 
   goScanDetails(datacode){
       let param = datacode.text
-      this.nav.push(this.routes.getPage(this.routes.PRODUCT_DETAIL), { id: param });
+      this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: param });
   }
 }
 

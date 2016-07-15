@@ -1,0 +1,32 @@
+<!--
+  Generated template for the ProductPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <header-content title=""></header-content>
+</ion-header>
+
+<ion-content fullscreen>
+  <div *ngIf="result === 1">
+
+      <product-header *ngIf="productData" [productDataHeaderInput]="productData"></product-header>
+      <product-focus *ngIf="focusData" [productFocusInput]="focusData"></product-focus>
+
+      <div class="acc-wrapper">
+
+          <product-nutriment *ngIf="nutriments" [nutrimentsInput]="nutriments" (onToggle)="onClickToggle($event)"></product-nutriment>
+
+          <product-ingredient *ngIf="ingredients" [ingredientsInput]="ingredients"  (onToggle)="onClickToggle($event)"></product-ingredient>
+
+          <product-additive *ngIf="additives_tags" [additiveInput]="additives_tags" (onToggle)="onClickToggle($event)"></product-additive>
+
+          <product-related *ngIf="categories_hierarchy" [categoriesInput]="categories_hierarchy" (onRelated)="onClickRelated($event)" (onToggle)="onClickToggle($event)"></product-related>
+
+      </div>
+  </div>
+  <div *ngIf="result === 0">
+    <product-notfound (clickBack)="onClickBack()" (clickAdd)="onClickAdd()" [productBarCodeInput]="productID"></product-notfound>
+  </div>
+</ion-content>
