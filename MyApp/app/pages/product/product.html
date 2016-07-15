@@ -22,7 +22,7 @@
 
           <product-additive *ngIf="additives_tags" [additiveInput]="additives_tags" (onToggle)="onClickToggle($event)"></product-additive>
 
-          <product-related *ngIf="categories_hierarchy" [categoriesInput]="categories_hierarchy" (onRelated)="onClickRelated($event)" (onToggle)="onClickToggle($event)"></product-related>
+          <product-related *ngIf="categories_hierarchy" [categoriesInput]="categories_hierarchy" (onRelated)="onClickRelated($event,id)" (onToggle)="onClickToggle($event)"></product-related>
 
       </div>
   </div>

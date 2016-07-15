@@ -18,9 +18,9 @@ export class ProductRelated  implements OnInit {
   relatedProduct: any[];
   total:any = '0';
 
-  @Input() categoriesInput: string;
-  @Output() onToggle: EventEmitter<any> = new EventEmitter();
-  @Output() onRelated: EventEmitter<any> = new EventEmitter();
+  @Input()  categoriesInput:  string;
+  @Output() onToggle:         EventEmitter<any>   = new EventEmitter();
+  @Output() onRelated:        EventEmitter<any>   = new EventEmitter();
 
   constructor( public apiService: ApiService ) {
     this.relatedProduct = [];
@@ -41,14 +41,14 @@ export class ProductRelated  implements OnInit {
         (error) => this.relatedProduct = [],
         () => {
           this.total = this.relatedProduct.length
-          console.log(this.relatedProduct)
+          //console.log(this.relatedProduct)
         }
       )
 
   }
 
-  onClickRelated(e){
-     this.onRelated.emit(e)
+  onClickRelated(event,id){
+     this.onRelated.emit({ event:event, id: id })
   }
 
   onClickToggle(e){

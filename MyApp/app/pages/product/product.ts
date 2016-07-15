@@ -87,13 +87,18 @@ export class ProductPage {
       this.ingredients      = this.productData.ingredients
       this.additives_tags   = this.productData.additives_tags
 
-      if(this.productData.categories_hierarchy[0].length >1){
+      if(this.productData.categories_hierarchy || this.productData.categories_hierarchy[0].length >1){
         this.categories_hierarchy = this.productData.categories_hierarchy.reverse()[0].split(':')[1]
       }
       else {
         this.categories_hierarchy  = []
       }
-
+      if(!this.productData.serving_size){
+        this.productData.serving_size = 0
+      }
+      if(!this.productData.serving_quantity){
+        this.productData.serving_quantity = 0
+      }
       this.focusData    = [];
       this.focusData.push({
 
@@ -101,9 +106,13 @@ export class ProductPage {
         carbohydrates_100:  this.productData.nutriments.carbohydrates_100g,
         fat_100:            this.productData.nutriments.fat_100g,
         sugar_portion:      this.productData.nutriments.sugars_serving,
-        fat_portion:        this.productData.nutriments.fat_serving
+        fat_portion:        this.productData.nutriments.fat_serving,
+        serving_quantity:   this.productData.serving_quantity,
+        serving_size:       this.productData.serving_size
 
       })
+      console.log(this.productData)
+      console.log(this.focusData)
     }
     //this.productFocus.calculeSugar()
   }
@@ -115,9 +124,8 @@ export class ProductPage {
     el.children[0].classList.toggle("rotate")
   }
 
-  onClickRelated(e){
-    //console.log(e.target.offsetParent.id)
-    let param       = e.target.offsetParent.id
+  onClickRelated(event,id){
+    let param       = event.id
     this.productID  = param;
 
     this.getData(param)
