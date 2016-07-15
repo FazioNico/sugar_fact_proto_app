@@ -1,24 +1,26 @@
-import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, Content } from 'ionic-angular';
+import { Component, ViewChild }               from '@angular/core';
+import { NavController, NavParams, Content }  from 'ionic-angular';
 
-import { ApiService } from '../../providers/api-service/api-service';
+import { ApiService }                         from '../../providers/api-service/api-service';
 
-import { HeaderContent } from '../../components/header-content/header-content';
-import { ProductHeader } from '../../components/product-header/product-header';
-import { ProductFocus } from '../../components/product-focus/product-focus';
-import { ProductNutriment } from '../../components/product-nutriment/product-nutriment';
-import { ProductIngredient } from '../../components/product-ingredient/product-ingredient';
-import { ProductAdditive } from '../../components/product-additive/product-additive';
-import { ProductRelated } from '../../components/product-related/product-related';
-import { ProductNotfound } from '../../components/product-notfound/product-notfound';
+import { HeaderContent }                      from '../../components/header-content/header-content';
+import { ProductHeader }                      from '../../components/product-header/product-header';
+import { ProductFocus }                       from '../../components/product-focus/product-focus';
+import { ProductNutriment }                   from '../../components/product-nutriment/product-nutriment';
+import { ProductIngredient }                  from '../../components/product-ingredient/product-ingredient';
+import { ProductAdditive }                    from '../../components/product-additive/product-additive';
+import { ProductRelated }                     from '../../components/product-related/product-related';
+import { ProductNotfound }                    from '../../components/product-notfound/product-notfound';
 
-import { AddPage } from '../add/add';
+import { AddPage }                            from '../add/add';
+
 /*
   Generated class for the ProductPage page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+
 @Component({
   templateUrl: 'build/pages/product/product.html',
   directives: [
@@ -49,13 +51,13 @@ export class ProductPage {
 
 
   constructor(
-    public apiService   : ApiService,
-    private nav         : NavController,
-    private params      : NavParams
+    public apiService       : ApiService,
+    private nav             : NavController,
+    private params          : NavParams
   ) {
 
       this.getData(this.params.get('id'))
-      console.log(this.params.get('id'))
+      //console.log(this.params.get('id'))
   }
 
   /** Core Methode **/
@@ -78,7 +80,7 @@ export class ProductPage {
   }
 
   setData(){
-    console.log(this.productData)
+    //console.log(this.productData)
     if(this.productData != false){
 
       this.nutriments       = this.productData.nutriments
@@ -114,16 +116,18 @@ export class ProductPage {
   }
 
   onClickRelated(e){
-    console.log(e.target.offsetParent.id)
-    let param = e.target.offsetParent.id
-    this.productID = param;
+    //console.log(e.target.offsetParent.id)
+    let param       = e.target.offsetParent.id
+    this.productID  = param;
+
     this.getData(param)
     this.content.scrollToTop();
     this.productFocus.calculeSugar()
+
     // close all accordeon
     let acc = document.getElementsByClassName('open')
     let btn = document.getElementsByClassName('rotate')
-    console.log(acc)
+    //console.log(acc)
     for (let i = 0; i < acc.length; i++) {
         acc[i].classList.toggle("open");
         btn[i].classList.toggle("rotate");
