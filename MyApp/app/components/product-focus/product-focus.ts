@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { Sugar } from '../sugar/sugar';
+import { Component, Input }   from '@angular/core';
+
+import { Sugar }              from '../sugar/sugar';
 
 /*
   Generated class for the ProductFocus component.
@@ -7,12 +8,14 @@ import { Sugar } from '../sugar/sugar';
   See https://angular.io/docs/ts/latest/api/core/ComponentMetadata-class.html
   for more info on Angular 2 Components.
 */
+
 @Component({
   selector: 'product-focus',
   templateUrl: 'build/components/product-focus/product-focus.html',
   directives: [Sugar]
 })
 export class ProductFocus {
+
   sugar_100g:number;
   focusTab: string;
 
@@ -30,12 +33,12 @@ export class ProductFocus {
     else {
       this.sugar_100g = this.productFocusInput[0].sugars_100
     }
-    console.log(this.sugar_100g)
-    console.log('calcule')
+    //console.log(this.sugar_100g)
+    //console.log('calcule')
   }
 
   ngOnInit() {
-    console.log('init')
+    //console.log('init')
     this.calculeSugar()
   }
 

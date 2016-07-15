@@ -80,7 +80,7 @@ export class ProductPage {
   }
 
   setData(){
-    //console.log(this.productData)
+    console.log(this.productData)
     if(this.productData != false){
 
       this.nutriments       = this.productData.nutriments
