@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component }            from '@angular/core';
+import { NavController }        from 'ionic-angular';
 
-import {Routes} from '../../providers/routes/routes'
-import { LocalStorageService } from '../../providers/local-storage/local-storage';
-import { Store } from '../../providers/store/store';
+import { Routes }               from '../../providers/routes/routes'
+import { LocalStorageService }  from '../../providers/local-storage/local-storage';
+import { Store }                from '../../providers/store/store';
 
-import { HeaderContent } from '../../components/header-content/header-content';
-import { SearchResult } from '../../components/search-result/search-result';
+import { HeaderContent }        from '../../components/header-content/header-content';
+import { SearchResult }         from '../../components/search-result/search-result';
 
 /*
   Generated class for the SearchPage page.
@@ -22,7 +22,7 @@ import { SearchResult } from '../../components/search-result/search-result';
     SearchResult
   ],
   providers: [
-    [Store],,
+    [Store],
     [LocalStorageService]
   ]
 })
@@ -85,20 +85,22 @@ export class SearchPage {
   }
 
   onGoProduct(event,id){
-    console.log('event emited')
-    console.log(event.id)
-    //this.nav.pop()
+    //console.log('event emited')
+    //console.log(event.id)
     this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: event.id })
     .then(
       response => {
-        console.log('Response ' + response);
+        //console.log('Response ' + response);
       },
       error => {
-        console.log('Error: ' + error);
+        //console.log('Error: ' + error);
       }
-    ).catch(exception => {
-      console.log('Exception ' + exception);
-    });
+    )
+    .catch(
+      exception => {
+      //console.log('Exception ' + exception);
+      }
+    );
   }
 
 }
