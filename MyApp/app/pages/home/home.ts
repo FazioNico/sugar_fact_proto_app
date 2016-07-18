@@ -30,6 +30,7 @@ export class HomePage {
   }
 
   goScan(){
+    
     this.scanPlugin.scan()
   }
 }

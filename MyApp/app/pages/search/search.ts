@@ -1,12 +1,12 @@
-import { Component }            from '@angular/core';
-import { NavController }        from 'ionic-angular';
+import { Component }              from '@angular/core';
+import { NavController, Loading } from 'ionic-angular';
 
-import { Routes }               from '../../providers/routes/routes'
-import { LocalStorageService }  from '../../providers/local-storage/local-storage';
-import { Store }                from '../../providers/store/store';
+import { Routes }                 from '../../providers/routes/routes'
+import { LocalStorageService }    from '../../providers/local-storage/local-storage';
+import { Store }                  from '../../providers/store/store';
 
-import { HeaderContent }        from '../../components/header-content/header-content';
-import { SearchResult }         from '../../components/search-result/search-result';
+import { HeaderContent }          from '../../components/header-content/header-content';
+import { SearchResult }           from '../../components/search-result/search-result';
 
 /*
   Generated class for the SearchPage page.
@@ -29,7 +29,7 @@ import { SearchResult }         from '../../components/search-result/search-resu
 export class SearchPage {
 
   searchResultData: any;
-
+  loading:Loading;
   /** Not normally mandatory but create bugs if ommited. **/
   static get parameters() {
         return [[NavController], [Routes], [Store], [LocalStorageService]];
@@ -41,6 +41,10 @@ export class SearchPage {
     private _st     : Store,
     private _ls     : LocalStorageService
   ){
+    this.loading = Loading.create({
+      content: "Chargement...",
+      duration: 3000
+    });
   }
   /** Core Methode **/
 
@@ -87,20 +91,19 @@ export class SearchPage {
   onGoProduct(event,id){
     //console.log('event emited')
     //console.log(event.id)
-    this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: event.id })
-    .then(
-      response => {
-        //console.log('Response ' + response);
-      },
-      error => {
-        //console.log('Error: ' + error);
-      }
-    )
-    .catch(
-      exception => {
-      //console.log('Exception ' + exception);
-      }
-    );
+    //this.nav.present(this.loading);
+    this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: event.id });
   }
 
+  ionViewWillLeave() {
+    console.log("Looks like I'm about to leave :(");
+    //this.nav.present(this.loading);
+  }
+  ionViewDidLeave(){
+    //this.loading = null;
+    console.log('leaved')
+  }
+  private hideLoading(){
+    this.loading.dismiss();
+  }
 }

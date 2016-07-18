@@ -46,6 +46,9 @@ export class ProductPage {
   additives_tags:any;
   categories_hierarchy:any;
 
+  scrollTopValue:any ='0px';
+  scrollTopContentValue:any = '268px'
+
   @ViewChild(Content)       content       : Content;
   @ViewChild(ProductFocus)  productFocus  : ProductFocus;
 
@@ -149,5 +152,37 @@ export class ProductPage {
   onClickBack(){
     this.nav.pop()
   }
+  onPageScroll(event) {
+      //event.target.parentElement.previousElementSibling.style.offsetTop = -event.target.scrollTop
+      //console.log(event);
+      //console.log(event.target.children[0].firstElementChild);
+      //console.log(event.target.scrollTop);
+      const ionNavBarToolbar = event.target.offsetParent.previousElementSibling.firstElementChild.firstElementChild;
+      if(event.target.scrollTop >= 5){
+          ionNavBarToolbar.classList.add('scroll')
+      }
+      else {
+        if (ionNavBarToolbar.classList.contains('scroll') == true ){
+          ionNavBarToolbar.classList.remove('scroll')
+        }
 
+      }
+      /*
+      if(event.target.scrollTop <= 56){
+        this.scrollTopValue = '-' + event.target.scrollTop + 'px'
+        event.target.parentElement.firstChild.style.marginTop = (268 - event.target.scrollTop) + 'px'
+      }
+      if(event.target.scrollTop > 56){
+        this.scrollTopValue = '-56px'
+      }
+      */
+  }
+
+  ngAfterViewInit() {
+
+    this.content.addScrollListener((event) =>  {
+        this.onPageScroll(event);
+    });
+
+  }
 }

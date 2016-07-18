@@ -36,10 +36,10 @@ export class ScanPage {
     .then((result) => {
       if (!result.cancelled) {
         const barcodeData = new BarcodeData(result.text, result.format);
-        this.goScanDetails(barcodeData);
+        //this.goScanDetails(barcodeData);
 
         /** to check in template: **/
-        //this.scanDetails = barcodeData;
+        this.scanDetails = barcodeData;
       }
     })
     .catch((err) => {

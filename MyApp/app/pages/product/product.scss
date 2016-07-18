@@ -1,6 +1,21 @@
+ion-header, .toolbar{
+  transition: 0.3s all ease;
+}
+.product-header.fixed{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  background: #fff;
+  z-index: 2;
+}
+.toolbar.scroll {
+  box-shadow: 0px 1px 8px #b6b6b6;
+}
+
 .product {
 
 }
+
 product-focus, .product-notfound-header {
   background : color($colors, primary);
 }
