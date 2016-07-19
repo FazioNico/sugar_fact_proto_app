@@ -14,9 +14,9 @@ export class HeaderContent {
   @Input() title: string;
 
   constructor() {
+
   }
 
   ngOnInit() {
-    //console.log('Init',this.title);
  }
 }

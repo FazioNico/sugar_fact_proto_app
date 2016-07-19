@@ -23,17 +23,22 @@ export class AddPage {
   base64Image: any = null;
   product:any = null;
   myForm: ControlGroup;
-  myData: any;
   barcode:string;
+  /*
+  myData: any;
   name: string;
   denomination:string;
   quantity:string;
   ingredients: string;
+  */
+
+  userLog:string= 'fazio';
+  userPass:string= 'OFF2663000?_';
 
   constructor(private nav: NavController,public apiService: ApiService, private fb: FormBuilder) {
 
 
-    this.myData = null;
+    //this.myData = null;
     this.myForm = fb.group({
       barcode: ["", Validators.required],
       name: ["", Validators.required],
@@ -82,19 +87,27 @@ export class AddPage {
       let dataReady:any = {}
       dataReady.code = this.product.barcode
       dataReady.product_name = this.product.name
+      //dataReady.product_denomination = this.product.denomination
       dataReady.quantity = this.product.quantity
+
       dataReady.nutriment_energy = this.product.nutriments.energy
+      dataReady.nutriment_fat = this.product.nutriments.fat
+      dataReady.nutriment_fat_sat = this.product.nutriments.fat_sat
+      dataReady.nutriment_sugar = this.product.nutriments.sugar
+      dataReady.nutriment_sugar_sat = this.product.nutriments.sugar_sat
+      dataReady.nutriment_fiber = this.product.nutriments.fiber
+      dataReady.nutriment_proteins = this.product.nutriments.proteins
+      dataReady.nutriment_salt = this.product.nutriments.salt
       dataReady.ingredients_text = this.product.ingredients
 
-      //console.log(dataReady)
-      this.apiService.save(dataReady)
+      //dataReady.user_id = this.userLog
+      //dataReady.password = this.userPass
+
+      console.log(this.SerializeParams(dataReady))
+      let resultPost = this.apiService.save(this.SerializeParams(dataReady));
+      console.log(resultPost)
     }
-
-    //console.log(this.product)
-    //console.log(JSON.stringify(this.product, null, 2))
-    //console.log('Form submitted is ', this.myForm.controls);
   }
-
   onClickToggle(e){
     //console.log(e)
     let el = e.target.closest(".acc-item > h3")
@@ -102,4 +115,18 @@ export class AddPage {
     el.children[0].classList.toggle("rotate")
   }
 
+  SerializeParams<T>(Datas: T): string|number {
+     let keys:any = Object.keys(Datas);
+     let stringParams: string = "?";
+     for (let i in keys) {
+         let name = keys[i];
+         if(Datas[name].length >= 1){
+           if (i == '0')
+               stringParams += name + "=" + Datas[name];
+           else
+               stringParams += "&" + name + "=" + Datas[name]
+         }
+     }
+     return stringParams;
+  };
 }

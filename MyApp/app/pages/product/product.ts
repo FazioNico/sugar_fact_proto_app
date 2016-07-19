@@ -13,6 +13,7 @@ import { ProductRelated }                     from '../../components/product-rel
 import { ProductNotfound }                    from '../../components/product-notfound/product-notfound';
 
 import { AddPage }                            from '../add/add';
+import { ProductModel }                       from './product.model';
 
 /*
   Generated class for the ProductPage page.
@@ -39,7 +40,8 @@ export class ProductPage {
 
   result: any;
   productID:string;
-  productData:any;
+  productName:string;
+  productData:ProductModel;
   focusData:any[];
   nutriments:any;
   ingredients:any;
@@ -47,7 +49,7 @@ export class ProductPage {
   categories_hierarchy:any;
 
   scrollTopValue:any ='0px';
-  scrollTopContentValue:any = '268px'
+  scrollTopContentValue:any = '268px';
 
   @ViewChild(Content)       content       : Content;
   @ViewChild(ProductFocus)  productFocus  : ProductFocus;
@@ -74,34 +76,37 @@ export class ProductPage {
             this.productData = data.product
           }
           else {
-            this.productData = false;
+            this.productData = null;
           }
         },
-        (error) => this.productData = false,
+        (error) => this.productData = null,
         () => this.setData()
       )
   }
 
   setData(){
-    console.log(this.productData)
-    if(this.productData != false){
-
+    //console.log(this.productData)
+    if(this.productData != null){
+      this.productName      = this.productData.product_name
       this.nutriments       = this.productData.nutriments
       this.ingredients      = this.productData.ingredients
-      this.additives_tags   = this.productData.additives_tags
+      this.additives_tags   = this.productData.additives_tags;
 
-      if(this.productData.categories_hierarchy || this.productData.categories_hierarchy[0].length >1){
+      if(this.productData.categories_hierarchy.length > 0){
         this.categories_hierarchy = this.productData.categories_hierarchy.reverse()[0].split(':')[1]
       }
       else {
         this.categories_hierarchy  = []
       }
+
       if(!this.productData.serving_size){
         this.productData.serving_size = 0
       }
+
       if(!this.productData.serving_quantity){
         this.productData.serving_quantity = 0
       }
+
       this.focusData    = [];
       this.focusData.push({
 
@@ -152,18 +157,27 @@ export class ProductPage {
   onClickBack(){
     this.nav.pop()
   }
+
   onPageScroll(event) {
       //event.target.parentElement.previousElementSibling.style.offsetTop = -event.target.scrollTop
       //console.log(event);
-      //console.log(event.target.children[0].firstElementChild);
+      //console.log(event.target.offsetParent.previousElementSibling.firstElementChild.firstElementChild.children[2])
+      //console.log(event.target.offsetParent.previousElementSibling);
       //console.log(event.target.scrollTop);
+      const ionNavBarTitle = event.target.offsetParent.previousElementSibling.firstElementChild.firstElementChild.children[2];
       const ionNavBarToolbar = event.target.offsetParent.previousElementSibling.firstElementChild.firstElementChild;
+      const ionContentTitle = document.getElementsByTagName('h1');
+      //console.log(ionContentTitle)
       if(event.target.scrollTop >= 5){
           ionNavBarToolbar.classList.add('scroll')
+          ionNavBarTitle.classList.remove('hide')
+          ionContentTitle[1].classList.add('opacity')
       }
       else {
         if (ionNavBarToolbar.classList.contains('scroll') == true ){
           ionNavBarToolbar.classList.remove('scroll')
+          ionNavBarTitle.classList.add('hide')
+          ionContentTitle[1].classList.remove('opacity')
         }
 
       }
@@ -179,7 +193,8 @@ export class ProductPage {
   }
 
   ngAfterViewInit() {
-
+    const ionNavBarTitle = document.getElementsByClassName('toolbar-content');
+    ionNavBarTitle[1].classList.add('hide')
     this.content.addScrollListener((event) =>  {
         this.onPageScroll(event);
     });

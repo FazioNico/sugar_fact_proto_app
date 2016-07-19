@@ -1,4 +1,4 @@
-ion-header, .toolbar{
+ion-header, .toolbar, h1{
   transition: 0.3s all ease;
 }
 .product-header.fixed{
@@ -15,7 +15,9 @@ ion-header, .toolbar{
 .product {
 
 }
-
+.opacity {
+  opacity: 0;
+}
 product-focus, .product-notfound-header {
   background : color($colors, primary);
 }
@@ -142,7 +144,7 @@ product-focus, .product-notfound-header {
 .tb-resultBG {
   width: auto;
   height: 32px;
-  background: red;
+  max-width: 100%;
 
   position: absolute;
   top:0;

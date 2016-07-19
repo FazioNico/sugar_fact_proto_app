@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
+import {Observable} from 'rxjs/Observable';
 
 /*
   Generated class for the ApiService provider.
@@ -24,8 +25,9 @@ export class ApiService {
     parmUrl:string;
 
     postUrlProduct:string = 'http://world.openfoodfacts.org/cgi/product_jqm2.pl';
-    user:string           = 'off';
-    password:string       = 'off';
+    postUrlProductTest:string = 'http://world.openfoodfacts.net/cgi/product_jqm2.pl';
+    user:string           = 'fazio';
+    password:string       = 'OFF2663000?_';
 
     constructor(
       public http   : Http
@@ -54,12 +56,16 @@ export class ApiService {
     }
 
     // add new product
-    save(product): Promise<any>  {
+    save(product)   {
       console.log('save befor server')
-      return this.post(product);
+      return this.post(product)
+      .subscribe((data)=> {
+        console.log(data)
+      });
     }
 
-    private post(product: any): Promise<any> {
+    private post(productDataURI: string): Observable<any> {
+      productDataURI += '&user_id=' + this.user + '&password=' + this.password
       /**
       let fd = new FormData();
       let headers = new Headers({
@@ -68,33 +74,30 @@ export class ApiService {
       });
       fd.append('data', JSON.stringify(product));
       return this.http
-                 .post(this.postUrl, fd, {headers: headers})
+                 .post(this.postUrlProductTest, fd, {headers: headers})
                  .toPromise()
                  .then(res => res.json().data)
                  .catch(this.handleError);
-      §**/
-       product.user_id = 'off';
-       product.password = 'off';
-       console.log(product)
+      **/
+       //product.user_id = 'off';
+       //product.password = 'off';
+       //console.log(product)
        // Parameters obj-
-       let params: URLSearchParams = new URLSearchParams();
+       //let params: URLSearchParams = new URLSearchParams();
        //params.set('code', product.code);
-       params.set('code', '3073780969000');
-       //params.set('user_id', product.user_id);
-       //params.set('password', product.password);
-       params.set('product_name', product.product_name);
-       params.set('ingredients_text', product.ingredients_text);
-       params.set('nutriment_energy', product.nutriment_energy);
-       params.set('quantity', product.quantity);
+
        // option seting
        return this.http
-                  .get(this.postUrlProduct, {search: params})
+                  .get(this.postUrlProduct+productDataURI)
+                  .map(res => res.json())
+                  /*
                   .toPromise()
-                  .then(res => res.json().data)
-                  .catch(this.handleError);
+                  .then(res => res.json())
+                  //.catch(this.handleError);
+                  */
     }
 
-    private handleError(error: any) {
+    private handleErrorProm(error: any) {
       console.error('An error occurred', error);
       return Promise.reject(error.message || error);
     }
