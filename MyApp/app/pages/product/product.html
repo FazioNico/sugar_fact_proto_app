@@ -13,7 +13,7 @@
 <ion-content id="product-content" >
   <div *ngIf="result === 1">
 
-    <product-header *ngIf="productData" [productDataHeaderInput]="productData"></product-header>
+    <product-header *ngIf="productData" [productDataHeaderInput]="productData" [isClassOpacity]="titleH1Unvisible"></product-header>
     <product-focus *ngIf="focusData" [productFocusInput]="focusData"></product-focus>
 
       <div class="acc-wrapper">

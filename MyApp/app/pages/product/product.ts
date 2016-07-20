@@ -48,6 +48,7 @@ export class ProductPage {
   categories_hierarchy:any;
 
   titleUnvisible:boolean = true;
+  titleH1Unvisible:boolean = false;
 
   scrollTopValue:any ='0px';
   scrollTopContentValue:any = '268px'
@@ -166,8 +167,9 @@ export class ProductPage {
       //console.log(ionContentTitle)
       if(event.target.scrollTop >= 5){
           ionNavBarToolbar.classList.add('scroll')
-          
+
           this.titleUnvisible = false;
+          this.titleH1Unvisible = true;
           //ionContentTitle[1].classList.add('opacity')
       }
       else {
@@ -175,10 +177,10 @@ export class ProductPage {
           ionNavBarToolbar.classList.remove('scroll')
 
           this.titleUnvisible = true;
+          this.titleH1Unvisible = false;
           //ionContentTitle[1].classList.remove('opacity')
         }
       }
-      console.log(this.titleUnvisible )
 
   }
   ionViewWillEnter(){

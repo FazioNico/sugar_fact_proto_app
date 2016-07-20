@@ -8,11 +8,41 @@ import { Component, Input } from '@angular/core';
 */
 @Component({
   selector: 'product-header',
-  templateUrl: 'build/components/product-header/product-header.html'
+  templateUrl: 'build/components/product-header/product-header.html',
+  styles: [
+    `
+        .opacity-content {
+          opacity: 0;
+        }
+        .product-header h1{
+          text-align:center;
+        }
+
+        .product-header {
+          height: auto;
+        }
+
+        .product-img {
+          overflow: hidden;
+          width: 120px;
+          height: 120px;
+          margin: auto;
+          border-radius: 100%;
+          margin-bottom:20px;
+          position: relative;
+          background-position: center center;
+        }
+        
+        h1 {
+          transition: 0.3s all ease;
+        }
+    `
+  ]
 })
 export class ProductHeader {
 
   @Input() productDataHeaderInput: any[];
+  @Input() isClassOpacity: boolean = true;
 
   constructor() {
   }

@@ -4,29 +4,11 @@
   See https://angular.io/docs/ts/latest/api/core/ComponentMetadata-class.html
   for more info on Angular 2 Components.
 -->
-<style>
-.product-header h1{
-  text-align:center;
-}
 
-.product-header {
-  height: auto;
-}
-.product-img {
-  overflow: hidden;
-  width: 120px;
-  height: 120px;
-  margin: auto;
-  border-radius: 100%;
-  margin-bottom:20px;
-  position: relative;
-  background-position: center center;
-}
-</style>
 <div class="product-header">
   <div class="product-img" [style.background-image]="'url(' + productDataHeaderInput.image_thumb_url + ')'">
   </div>
-  <div *ngIf="productDataHeaderInput.product_name ">
+  <div *ngIf="productDataHeaderInput.product_name " [class.opacity-content]="isClassOpacity" >
     <h1 primary>
       {{ productDataHeaderInput.product_name  }}
       <br />
