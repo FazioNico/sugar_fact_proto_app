@@ -22,6 +22,7 @@ export class Store implements OnInit{
     private _ls     : LocalStorageService
   ){
     //this.getDataLS()
+    console.log(this.getDataLS())
   }
 
   /*** call Methode ***/
@@ -29,11 +30,26 @@ export class Store implements OnInit{
     let del = this.removeDataLS()
     let dataLS = this.getDataLS()
     let dataAPI = this.getDataAPI(value)
-    console.log(del)
-    console.log('from dataLS =>')
-    console.log(dataLS)
+
+    let updatDataLS = this.setDataLS(dataAPI)
+    console.log(updatDataLS)
     console.log('from dataAPI =>')
     console.log(dataAPI)
+
+    /*
+    if(Online == true){
+      let updatDataLS = this.setDataLS(dataAPI)
+      console.log(updatDataLS)
+      console.log('from dataAPI =>')
+      console.log(dataAPI)
+      return dataAPI
+    }
+    else {
+      console.log('from dataLS =>')
+      console.log(dataLS)
+      return dataLS
+    }
+    */
     return dataAPI;
   }
 
@@ -64,13 +80,23 @@ export class Store implements OnInit{
   }
 
   /*** LocalStorageService Methode ***/
+  returnDataLS(){
+    // return data 'formated' with api search
+
+  }
   getDataLS(){
     // load data from _ls & affect to ls_data
     return this._ls.get('products_data')
 
           .then(
             (data) => {
-              return JSON.parse(data)
+              if (data){
+                return JSON.parse(data)
+              }
+              else {
+                return []
+              }
+
             }
           )
 
@@ -86,6 +112,23 @@ export class Store implements OnInit{
       )
       */
   }
+
+  setDataLS(ObservableDataAPI){
+
+      return ObservableDataAPI.subscribe(
+        (res) => {
+          console.log(res)
+          this._ls.set('products_data', JSON.stringify(res))
+        },
+        (err) => {
+            console.log(err)
+        }
+      )
+      //console.log(dataTest)
+      //return dataTest
+      //return this._ls.set('products_data', JSON.stringify(value))
+  }
+
   removeDataLS(){
       return this._ls.remove('products_data')
   }

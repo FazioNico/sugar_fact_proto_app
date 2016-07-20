@@ -35,7 +35,7 @@ export class LocalStorageService {
   set(key: string, value: string): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
-        this.local.set(key, JSON.stringify(value));
+        this.local.set(key, value);
         resolve();
       } catch (e) {
         reject(e);
