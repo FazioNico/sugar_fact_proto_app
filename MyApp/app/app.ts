@@ -9,11 +9,12 @@ import {HeaderContent} from './components/header-content/header-content';
 import {HomePage} from './pages/home/home';
 
 import { ApiService } from './providers/api-service/api-service';
+import { LocalStorageService }    from './providers/local-storage/local-storage';
 
 
 @Component({
   templateUrl: 'build/app.html',
-  providers: [Routes, ApiService]
+  providers: [Routes, ApiService, LocalStorageService]
 })
 export class MyApp {
   rootPage: any;
