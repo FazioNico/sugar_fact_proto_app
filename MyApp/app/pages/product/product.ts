@@ -13,7 +13,6 @@ import { ProductRelated }                     from '../../components/product-rel
 import { ProductNotfound }                    from '../../components/product-notfound/product-notfound';
 
 import { AddPage }                            from '../add/add';
-import { ProductModel }                       from './product.model';
 
 /*
   Generated class for the ProductPage page.
@@ -40,8 +39,8 @@ export class ProductPage {
 
   result: any;
   productID:string;
+  productData:any;
   productName:string;
-  productData:ProductModel;
   focusData:any[];
   nutriments:any;
   ingredients:any;
@@ -49,7 +48,7 @@ export class ProductPage {
   categories_hierarchy:any;
 
   scrollTopValue:any ='0px';
-  scrollTopContentValue:any = '268px';
+  scrollTopContentValue:any = '268px'
 
   @ViewChild(Content)       content       : Content;
   @ViewChild(ProductFocus)  productFocus  : ProductFocus;
@@ -76,17 +75,17 @@ export class ProductPage {
             this.productData = data.product
           }
           else {
-            this.productData = null;
+            this.productData = false;
           }
         },
-        (error) => this.productData = null,
+        (error) => this.productData = false,
         () => this.setData()
       )
   }
 
   setData(){
-    //console.log(this.productData)
-    if(this.productData != null){
+    console.log(this.productData)
+    if(this.productData != false){
       this.productName      = this.productData.product_name
       this.nutriments       = this.productData.nutriments
       this.ingredients      = this.productData.ingredients
@@ -159,45 +158,31 @@ export class ProductPage {
   }
 
   onPageScroll(event) {
-      //event.target.parentElement.previousElementSibling.style.offsetTop = -event.target.scrollTop
       //console.log(event);
-      //console.log(event.target.offsetParent.previousElementSibling.firstElementChild.firstElementChild.children[2])
-      //console.log(event.target.offsetParent.previousElementSibling);
-      //console.log(event.target.scrollTop);
-      const ionNavBarTitle = event.target.offsetParent.previousElementSibling.firstElementChild.firstElementChild.children[2];
-      const ionNavBarToolbar = event.target.offsetParent.previousElementSibling.firstElementChild.firstElementChild;
-      const ionContentTitle = document.getElementsByTagName('h1');
+      let ionNavBarTitle = event.target.offsetParent.previousElementSibling.firstElementChild.firstElementChild.children[2];
+      let ionNavBarToolbar = event.target.offsetParent.previousElementSibling.firstElementChild.firstElementChild;
+      //let ionContentTitle = document.getElementsByTagName('h1');
       //console.log(ionContentTitle)
       if(event.target.scrollTop >= 5){
           ionNavBarToolbar.classList.add('scroll')
           ionNavBarTitle.classList.remove('hide')
-          ionContentTitle[1].classList.add('opacity')
+          //ionContentTitle[1].classList.add('opacity')
       }
       else {
         if (ionNavBarToolbar.classList.contains('scroll') == true ){
           ionNavBarToolbar.classList.remove('scroll')
           ionNavBarTitle.classList.add('hide')
-          ionContentTitle[1].classList.remove('opacity')
+          //ionContentTitle[1].classList.remove('opacity')
         }
-
       }
-      /*
-      if(event.target.scrollTop <= 56){
-        this.scrollTopValue = '-' + event.target.scrollTop + 'px'
-        event.target.parentElement.firstChild.style.marginTop = (268 - event.target.scrollTop) + 'px'
-      }
-      if(event.target.scrollTop > 56){
-        this.scrollTopValue = '-56px'
-      }
-      */
   }
-
+  ionViewDidEnter(){
+    //let ionNavBarTitle = document.getElementsByClassName('toolbar-content');
+    //ionNavBarTitle[1].classList.add('hide')
+  }
   ngAfterViewInit() {
-    const ionNavBarTitle = document.getElementsByClassName('toolbar-content');
-    ionNavBarTitle[1].classList.add('hide')
     this.content.addScrollListener((event) =>  {
         this.onPageScroll(event);
     });
-
   }
 }
