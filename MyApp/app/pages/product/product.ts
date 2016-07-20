@@ -47,6 +47,8 @@ export class ProductPage {
   additives_tags:any;
   categories_hierarchy:any;
 
+  titleUnvisible:boolean = true;
+
   scrollTopValue:any ='0px';
   scrollTopContentValue:any = '268px'
 
@@ -159,26 +161,30 @@ export class ProductPage {
 
   onPageScroll(event) {
       //console.log(event);
-      let ionNavBarTitle = event.target.offsetParent.previousElementSibling.firstElementChild.firstElementChild.children[2];
       let ionNavBarToolbar = event.target.offsetParent.previousElementSibling.firstElementChild.firstElementChild;
       //let ionContentTitle = document.getElementsByTagName('h1');
       //console.log(ionContentTitle)
       if(event.target.scrollTop >= 5){
           ionNavBarToolbar.classList.add('scroll')
-          ionNavBarTitle.classList.remove('hide')
+          
+          this.titleUnvisible = false;
           //ionContentTitle[1].classList.add('opacity')
       }
       else {
         if (ionNavBarToolbar.classList.contains('scroll') == true ){
           ionNavBarToolbar.classList.remove('scroll')
-          ionNavBarTitle.classList.add('hide')
+
+          this.titleUnvisible = true;
           //ionContentTitle[1].classList.remove('opacity')
         }
       }
+      console.log(this.titleUnvisible )
+
   }
-  ionViewDidEnter(){
+  ionViewWillEnter(){
     //let ionNavBarTitle = document.getElementsByClassName('toolbar-content');
     //ionNavBarTitle[1].classList.add('hide')
+
   }
   ngAfterViewInit() {
     this.content.addScrollListener((event) =>  {
