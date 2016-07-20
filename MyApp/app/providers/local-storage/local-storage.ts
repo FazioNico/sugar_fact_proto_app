@@ -15,23 +15,25 @@ export class LocalStorageService {
   local:Storage   = new Storage(LocalStorage);
 
   constructor() {
-    this.getData()
+    //this.getData()
   }
 
   /** Get mehtode **/
+  get(key: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      try {
+        let value = window.localStorage.getItem(key);
+        resolve(value);
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+
   getData(){
     if(this.data == null){
       return this.local.get('products_data')
-          .then((data) => {
-            if (data != null) return JSON.parse(data);
-          })
-          .then((data) => {
-            return this.data = data;
-            //console.log(this.data)
-          })
-          .catch(error => {
-            console.log(error);
-          });
+
     }
 
   }

@@ -15,17 +15,24 @@ import { LocalStorageService } from '../local-storage/local-storage';
 @Injectable()
 export class Store implements OnInit{
   data:     any;
+  ls_data:  any;
 
   constructor(
     private _api    : ApiService,
     private _ls     : LocalStorageService
   ){
-    this.data = this._ls.getData()
+    //this.getDataLS()
   }
 
   /*** call Methode ***/
   getData(value){
-    return this.getDataAPI(value)
+    let dataLS = this.getDataLS()
+    let dataAPI = this.getDataAPI(value)
+    console.log('from dataLS =>')
+    console.log(dataLS)
+    console.log('from dataAPI =>')
+    console.log(dataAPI)
+    return dataAPI;
   }
 
   getProductData(value){
@@ -35,6 +42,7 @@ export class Store implements OnInit{
   getCategorieData(value){
     return this.getCategorieDataAPI(value)
   }
+  /*** ########################## ***/
 
   /*** Food API Methode ***/
   getDataAPI(value){
@@ -52,6 +60,31 @@ export class Store implements OnInit{
   getCategorieDataAPI(value){
     return this._api.getCategorieData(value)
   }
+
+  /*** LocalStorageService Methode ***/
+  getDataLS(){
+    // load data from _ls & affect to ls_data
+    return this._ls.get('products_data')
+
+          .then(
+            (data) => {
+              return JSON.parse(data)
+            }
+          )
+
+      /*
+
+      .then(
+        (data) => {
+          this.ls_data = JSON.parse(data)
+        }
+      )
+      .then(
+        () => console.log(this.ls_data)
+      )
+      */
+  }
+
 
   ngOnInit(){
   }
