@@ -32,6 +32,23 @@ export class LocalStorageService {
 
 
   /** Set Methode **/
+  preSet(key: string, datasToStore: any){
+    let dataStored = [];
+    this.get(key)
+      .then(
+        (data) => {
+          if (data){
+            dataStored = JSON.parse(data)
+          }
+        }
+      )
+      console.log(dataStored)
+      console.log(datasToStore)
+      var concatData = Object.assign(dataStored, datasToStore);
+      console.log(concatData)
+      this.set('products_data', JSON.stringify(concatData))
+  }
+
   set(key: string, value: string): Promise<any> {
     return new Promise((resolve, reject) => {
       try {

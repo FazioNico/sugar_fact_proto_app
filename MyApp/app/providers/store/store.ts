@@ -17,25 +17,29 @@ export class Store implements OnInit{
   data:     any;
   ls_data:  any;
 
+  dataAPI:any;
+  dataLS:any;
+
   constructor(
     private _api    : ApiService,
     private _ls     : LocalStorageService
   ){
     //this.getDataLS()
-    console.log(this.getDataLS())
+    //console.log(this.getDataLS())
   }
 
   /*** call Methode ***/
   getData(value){
-    let del = this.removeDataLS()
+    //// get data LS
     let dataLS = this.getDataLS()
+        //console.log(dataLS)
+    //// get data API
     let dataAPI = this.getDataAPI(value)
-
-    let updatDataLS = this.setDataLS(dataAPI)
-    console.log(updatDataLS)
-    console.log('from dataAPI =>')
-    console.log(dataAPI)
-
+        //console.log(dataAPI)
+    //// combin data & save to LS
+    this.setDataInArray(dataAPI,dataLS)
+    //// return data API
+    return dataAPI;
     /*
     if(Online == true){
       let updatDataLS = this.setDataLS(dataAPI)
@@ -50,7 +54,6 @@ export class Store implements OnInit{
       return dataLS
     }
     */
-    return dataAPI;
   }
 
   getProductData(value){
@@ -79,15 +82,67 @@ export class Store implements OnInit{
     return this._api.getCategorieData(value)
   }
 
+  setDataInArray(ObservableDataAPI,PromiseDataLS){
+    return PromiseDataLS.then(
+      (data) => this.dataLS = data
+    )
+    .then(
+      () => {
+        // now dataLS Loaded then load dataAPI
+        return ObservableDataAPI.subscribe(
+          (res) => this.dataAPI = (res),
+          (err) => console.log(err),
+          () => {
+            console.log('now have all data')
+            console.log([this.dataLS, this.dataAPI])
+            this.setDataLS([this.dataLS, this.dataAPI])
+            return [this.dataLS, this.dataAPI]
+          }
+        )
+
+      }
+    )
+
+    /*
+    let o = ObservableDataAPI.subscribe(
+      (res) => this.dataAPI = (res),
+      (err) => console.log(err),
+      () => {
+        console.log(this.dataAPI)
+        console.log(this.dataLS)
+        return this.dataAPI
+      }
+    )
+    */
+    /*
+      let dataReady; // Concated
+      let dataAPI;
+      let dataStored = this.getDataLS()
+      return ObservableDataAPI.subscribe(
+        (res) => {
+          console.log(res)
+          //this._ls.set('products_data', JSON.stringify(res))
+          //dataSetted = this._ls.preSet('products_data', res)
+          dataReady = Object.assign(dataStored, res);
+          console.log(dataReady)
+        },
+        (err) => {
+            console.log(err)
+        }
+      )
+    */
+      //return dataTest
+      //return this._ls.set('products_data', JSON.stringify(value))
+  }
+
   /*** LocalStorageService Methode ***/
   returnDataLS(){
     // return data 'formated' with api search
 
   }
   getDataLS(){
-    // load data from _ls & affect to ls_data
+    // return data from _ls
     return this._ls.get('products_data')
-
           .then(
             (data) => {
               if (data){
@@ -96,41 +151,22 @@ export class Store implements OnInit{
               else {
                 return []
               }
-
             }
           )
-
-      /*
-
-      .then(
-        (data) => {
-          this.ls_data = JSON.parse(data)
-        }
-      )
-      .then(
-        () => console.log(this.ls_data)
-      )
-      */
   }
 
-  setDataLS(ObservableDataAPI){
-
-      return ObservableDataAPI.subscribe(
-        (res) => {
-          console.log(res)
-          this._ls.set('products_data', JSON.stringify(res))
-        },
-        (err) => {
-            console.log(err)
-        }
-      )
-      //console.log(dataTest)
-      //return dataTest
-      //return this._ls.set('products_data', JSON.stringify(value))
+  setDataLS(dataArray){
+    // remove old data LS
+    this.removeDataLS()
+    // concat Array value
+    let data = dataArray[0]
+    // save caoncat data to LS
+    this._ls.set('products_data', JSON.stringify(data))
+    console.log('data stored !')
   }
 
   removeDataLS(){
-      return this._ls.remove('products_data')
+      this._ls.remove('products_data')
   }
 
   ngOnInit(){
