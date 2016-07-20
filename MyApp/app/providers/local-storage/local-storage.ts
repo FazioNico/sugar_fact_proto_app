@@ -22,7 +22,7 @@ export class LocalStorageService {
   get(key: string): Promise<string> {
     return new Promise((resolve, reject) => {
       try {
-        let value = window.localStorage.getItem(key);
+        let value = this.local.get(key);
         resolve(value);
       } catch (e) {
         reject(e);
@@ -30,15 +30,29 @@ export class LocalStorageService {
     });
   }
 
-  getData(){
-    if(this.data == null){
-      return this.local.get('products_data')
-
-    }
-
-  }
 
   /** Set Methode **/
+  set(key: string, value: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.local.set(key, JSON.stringify(value));
+        resolve();
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+
+  remove(key: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.local.remove(key);
+        resolve();
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
 
   addData(data){
     this.data.push(JSON.stringify(data))

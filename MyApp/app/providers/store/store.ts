@@ -26,8 +26,10 @@ export class Store implements OnInit{
 
   /*** call Methode ***/
   getData(value){
+    let del = this.removeDataLS()
     let dataLS = this.getDataLS()
     let dataAPI = this.getDataAPI(value)
+    console.log(del)
     console.log('from dataLS =>')
     console.log(dataLS)
     console.log('from dataAPI =>')
@@ -84,7 +86,9 @@ export class Store implements OnInit{
       )
       */
   }
-
+  removeDataLS(){
+      return this._ls.remove('products_data')
+  }
 
   ngOnInit(){
   }
