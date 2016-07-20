@@ -82,28 +82,29 @@ export class AddPage {
 
     if(this.myForm.status == 'INVALID'){
       console.log('Form valid -> submitted ');
-      this.product = this.myForm.value
+      this.product                  = this.myForm.value
 
-      let dataReady:any = {}
-      dataReady.code = this.product.barcode
-      dataReady.product_name = this.product.name
+      let dataReady:any             = {}
+      dataReady.code                = this.product.barcode
+      dataReady.product_name        = this.product.name
       //dataReady.product_denomination = this.product.denomination
-      dataReady.quantity = this.product.quantity
+      dataReady.quantity            = this.product.quantity
 
-      dataReady.nutriment_energy = this.product.nutriments.energy
-      dataReady.nutriment_fat = this.product.nutriments.fat
-      dataReady.nutriment_fat_sat = this.product.nutriments.fat_sat
-      dataReady.nutriment_sugar = this.product.nutriments.sugar
+      dataReady.nutriment_energy    = this.product.nutriments.energy
+      dataReady.nutriment_fat       = this.product.nutriments.fat
+      dataReady.nutriment_fat_sat   = this.product.nutriments.fat_sat
+      dataReady.nutriment_sugar     = this.product.nutriments.sugar
       dataReady.nutriment_sugar_sat = this.product.nutriments.sugar_sat
-      dataReady.nutriment_fiber = this.product.nutriments.fiber
-      dataReady.nutriment_proteins = this.product.nutriments.proteins
-      dataReady.nutriment_salt = this.product.nutriments.salt
-      dataReady.ingredients_text = this.product.ingredients
+      dataReady.nutriment_fiber     = this.product.nutriments.fiber
+      dataReady.nutriment_proteins  = this.product.nutriments.proteins
+      dataReady.nutriment_salt      = this.product.nutriments.salt
+      dataReady.ingredients_text    = this.product.ingredients
 
+      dataReady.lang                = 'fr';
       //dataReady.user_id = this.userLog
       //dataReady.password = this.userPass
 
-      console.log(this.SerializeParams(dataReady))
+      //console.log(this.SerializeParams(dataReady))
       let resultPost = this.apiService.save(this.SerializeParams(dataReady));
       console.log(resultPost)
     }
