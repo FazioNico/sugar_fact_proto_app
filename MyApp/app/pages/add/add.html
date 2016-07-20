@@ -15,7 +15,7 @@
   <ion-icon name="add"></ion-icon>
 </button>
 <ion-content>
-  <form [ngFormModel]="myForm"  >
+  <form *ngIf="productAdded === false" [ngFormModel]="myForm"  >
 
     <div class="add-header" padding text-center>
       <h2 blanc>Photo du produit</h2>
@@ -144,7 +144,11 @@
     </div>
 
   </form>
-
+  <div *ngIf="productAdded === true">
+    <p>
+      L'article à correctement été ajouté
+    </p>
+  </div>
 
 
 </ion-content>

@@ -32,8 +32,7 @@ export class AddPage {
   ingredients: string;
   */
 
-  userLog:string= 'fazio';
-  userPass:string= 'OFF2663000?_';
+  productAdded:boolean = false;
 
   constructor(private nav: NavController,public apiService: ApiService, private fb: FormBuilder) {
 
@@ -101,12 +100,11 @@ export class AddPage {
       dataReady.ingredients_text    = this.product.ingredients
 
       dataReady.lang                = 'fr';
-      //dataReady.user_id = this.userLog
-      //dataReady.password = this.userPass
 
       //console.log(this.SerializeParams(dataReady))
       let resultPost = this.apiService.save(this.SerializeParams(dataReady));
       console.log(resultPost)
+      this.productAdded = true;
     }
   }
   onClickToggle(e){
