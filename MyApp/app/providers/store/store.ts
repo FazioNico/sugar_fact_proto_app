@@ -28,7 +28,6 @@ import * as _ from 'lodash';
 export class Store implements OnInit{
 
   data:     any;
-  ls_data:  any;
 
   dataAPI:any;
   dataLS:any;
@@ -58,53 +57,35 @@ export class Store implements OnInit{
     }
     else {
       console.log('offline!')
-      dataReady =  this.dataToObservable(dataLS, value)
+      dataReady =  this.dataToObservable(dataLS, 'product_name', value)
     }
     return dataReady;
   };
-
-  dataToObservable(dataLS, value){
-    let promise = dataLS
-      .then(
-      (data) => {
-        let test =  _.filter(data,{ 'product_name': value })
-        return test
-      }
-    )
-    let source = fromPromise(promise)
-    return source
-  }
 
   getProductData(value){
     if(this.online == true){
       return this.getProductDataAPI(value);
     }
     else {
-      return this.getProductDataAPI(value);
+      return this.getProductDataLS(value);
     }
   }
 
   getCategorieData(value){
     return this.getCategorieDataAPI(value)
   }
-  /*** ########################## ***/
 
-  /*** Food API Methode ***/
-  getDataAPI(value){
-    console.log('http consect')
-    return this._api.getData(value)
-        .map(
-          (data) => {
-            this.data = data.products
-            return data.products
-          }
-        )
-  }
-  getProductDataAPI(value){
-    return this._api.getProductData(value);
-  }
-  getCategorieDataAPI(value){
-    return this._api.getCategorieData(value)
+  /*** formationg Method ***/
+  dataToObservable(dataLS, key, value){
+    let promise = dataLS
+      .then(
+      (data) => {
+        let test =  _.filter(data,{ [key]: value })
+        return test
+      }
+    )
+    let source = fromPromise(promise)
+    return source
   }
 
   setDataToCombine(ObservableDataAPI,PromiseDataLS){
@@ -118,9 +99,7 @@ export class Store implements OnInit{
           (res) => this.dataAPI = (res),
           (err) => console.log(err),
           () => {
-            console.log('now have all data')
             let dataCombined = _.unionWith(this.dataLS, this.dataAPI, _.isEqual);
-            console.log(dataCombined)
             this.setDataLS(dataCombined)
             return dataCombined
           }
@@ -129,13 +108,30 @@ export class Store implements OnInit{
       }
     )
   }
+  /*** ########################## ***/
+
+  /*** Food API Methode ***/
+  getDataAPI(value){
+    return this._api.getData(value)
+        .map(
+          (data) => {
+            this.data = data.products
+            return data.products
+          }
+        )
+  }
+
+  getProductDataAPI(value){
+    return this._api.getProductData(value);
+  }
+
+  getCategorieDataAPI(value){
+    return this._api.getCategorieData(value)
+  }
+
 
 
   /*** LocalStorageService Methode ***/
-  returnDataLS(){
-    // return data 'formated' with api search
-
-  }
   getDataLS(){
     // return data from _ls
     return this._ls.get('products_data')
@@ -151,12 +147,19 @@ export class Store implements OnInit{
           )
   }
 
+  getProductDataLS(value){
+      let dataReady;
+      let dataLS = this.getDataLS()             /** get data LS  **/
+      dataReady =  this.dataToObservable(dataLS, 'id', value)
+      //return this._ls.getProductData(value);
+      return dataReady;
+  }
+
   setDataLS(dataArray){
     // remove old data LS
     this.removeDataLS()
-    // save caoncat data to LS
+    // save concat data to LS
     this._ls.set('products_data', JSON.stringify(dataArray))
-    console.log('data stored !')
   }
 
   removeDataLS(){
