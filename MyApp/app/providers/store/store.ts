@@ -1,3 +1,10 @@
+/**
+* @Author: Nicolas Fazio <webmaster-fazio>
+* @Date:   13-07-2016
+* @Email:  contact@nicolasfazio.ch
+* @Last modified by:   webmaster-fazio
+* @Last modified time: 21-07-2016
+*/
 
 import { Injectable, OnInit } from '@angular/core';
 
@@ -19,55 +26,62 @@ import * as _ from 'lodash';
 */
 @Injectable()
 export class Store implements OnInit{
+
   data:     any;
   ls_data:  any;
 
   dataAPI:any;
   dataLS:any;
+  online:boolean = true;
 
   constructor(
     private _api    : ApiService,
     private _ls     : LocalStorageService
   ){
-    //this.getDataLS()
-    //console.log(this.getDataLS())
+
+    if(navigator.onLine == false){
+      //console.log('disconnected')
+      this.online = false
+    }
   }
 
   /*** call Methode ***/
   getData(value){
-    let Online = false;
     let dataReady;
-    //// get data LS
-    let dataLS = this.getDataLS() //console.log(dataLS)
+    let dataLS = this.getDataLS()             /** get data LS  **/
 
-    if(Online == true){
-      //// get data API
-      let dataAPI = this.getDataAPI(value)  //console.log(dataAPI)
-      //// combin data & save to LS
-      this.setDataToCombine(dataAPI,dataLS)
-      //// return data API
-      dataReady = dataAPI;
+    if(this.online == true){
+      console.log('online!')
+      let dataAPI = this.getDataAPI(value)    /** get data API  **/
+      this.setDataToCombine(dataAPI,dataLS)   /** combin data & save to LS  **/
+      dataReady = dataAPI                     /** return data API **/
     }
     else {
+      console.log('offline!')
       dataReady =  this.dataToObservable(dataLS, value)
     }
-    return dataReady
-  }
+    return dataReady;
+  };
 
   dataToObservable(dataLS, value){
-    let promose = dataLS
+    let promise = dataLS
       .then(
       (data) => {
         let test =  _.filter(data,{ 'product_name': value })
         return test
       }
     )
-    let source = fromPromise(promose)
+    let source = fromPromise(promise)
     return source
   }
 
   getProductData(value){
-    return this.getProductDataAPI(value);
+    if(this.online == true){
+      return this.getProductDataAPI(value);
+    }
+    else {
+      return this.getProductDataAPI(value);
+    }
   }
 
   getCategorieData(value){
@@ -77,6 +91,7 @@ export class Store implements OnInit{
 
   /*** Food API Methode ***/
   getDataAPI(value){
+    console.log('http consect')
     return this._api.getData(value)
         .map(
           (data) => {

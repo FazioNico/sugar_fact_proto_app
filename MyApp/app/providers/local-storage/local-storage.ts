@@ -1,3 +1,11 @@
+/**
+* @Author: Nicolas Fazio <webmaster-fazio>
+* @Date:   13-07-2016
+* @Email:  contact@nicolasfazio.ch
+* @Last modified by:   webmaster-fazio
+* @Last modified time: 21-07-2016
+*/
+
 import { Injectable } from '@angular/core';
 import {Storage, LocalStorage} from 'ionic-angular';
 import 'rxjs/add/operator/map';
