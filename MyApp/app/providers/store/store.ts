@@ -1,3 +1,4 @@
+
 import { Injectable, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -5,6 +6,8 @@ import {Observable} from 'rxjs/Observable';
 
 import { ApiService } from '../api-service/api-service';
 import { LocalStorageService } from '../local-storage/local-storage';
+
+import * as _ from 'lodash';
 
 /*
   Generated class for the Store provider.
@@ -37,7 +40,7 @@ export class Store implements OnInit{
     let dataAPI = this.getDataAPI(value)
         //console.log(dataAPI)
     //// combin data & save to LS
-    this.setDataInArray(dataAPI,dataLS)
+    this.setDataToCombine(dataAPI,dataLS)
     //// return data API
     return dataAPI;
     /*
@@ -82,7 +85,7 @@ export class Store implements OnInit{
     return this._api.getCategorieData(value)
   }
 
-  setDataInArray(ObservableDataAPI,PromiseDataLS){
+  setDataToCombine(ObservableDataAPI,PromiseDataLS){
     return PromiseDataLS.then(
       (data) => this.dataLS = data
     )
@@ -94,46 +97,17 @@ export class Store implements OnInit{
           (err) => console.log(err),
           () => {
             console.log('now have all data')
-            console.log([this.dataLS, this.dataAPI])
-            this.setDataLS([this.dataLS, this.dataAPI])
-            return [this.dataLS, this.dataAPI]
+            let dataCombined = _.unionWith(this.dataLS, this.dataAPI, _.isEqual);
+            console.log(dataCombined)
+            this.setDataLS(dataCombined)
+            return dataCombined
           }
         )
 
       }
     )
-
-    /*
-    let o = ObservableDataAPI.subscribe(
-      (res) => this.dataAPI = (res),
-      (err) => console.log(err),
-      () => {
-        console.log(this.dataAPI)
-        console.log(this.dataLS)
-        return this.dataAPI
-      }
-    )
-    */
-    /*
-      let dataReady; // Concated
-      let dataAPI;
-      let dataStored = this.getDataLS()
-      return ObservableDataAPI.subscribe(
-        (res) => {
-          console.log(res)
-          //this._ls.set('products_data', JSON.stringify(res))
-          //dataSetted = this._ls.preSet('products_data', res)
-          dataReady = Object.assign(dataStored, res);
-          console.log(dataReady)
-        },
-        (err) => {
-            console.log(err)
-        }
-      )
-    */
-      //return dataTest
-      //return this._ls.set('products_data', JSON.stringify(value))
   }
+
 
   /*** LocalStorageService Methode ***/
   returnDataLS(){
@@ -158,10 +132,8 @@ export class Store implements OnInit{
   setDataLS(dataArray){
     // remove old data LS
     this.removeDataLS()
-    // concat Array value
-    let data = dataArray[0]
     // save caoncat data to LS
-    this._ls.set('products_data', JSON.stringify(data))
+    this._ls.set('products_data', JSON.stringify(dataArray))
     console.log('data stored !')
   }
 
