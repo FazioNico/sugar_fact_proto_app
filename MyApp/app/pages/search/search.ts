@@ -2,6 +2,7 @@ import { Component }              from '@angular/core';
 import { NavController, Loading } from 'ionic-angular';
 
 import { Routes }                 from '../../providers/routes/routes'
+import { LocalStorageService }    from '../../providers/local-storage/local-storage';
 import { Store }                  from '../../providers/store/store';
 
 import { HeaderContent }          from '../../components/header-content/header-content';
@@ -21,7 +22,8 @@ import { SearchResult }           from '../../components/search-result/search-re
     SearchResult
   ],
   providers: [
-    [Store]
+    [Store],
+    [LocalStorageService]
   ]
 })
 export class SearchPage {
@@ -30,13 +32,14 @@ export class SearchPage {
   loading:Loading;
   /** Not normally mandatory but create bugs if ommited. **/
   static get parameters() {
-        return [[NavController], [Routes], [Store]];
+        return [[NavController], [Routes], [Store], [LocalStorageService]];
   }
 
   constructor(
     private nav     : NavController,
     private routes  : Routes,
-    private _st     : Store
+    private _st     : Store,
+    private _ls     : LocalStorageService
   ){
     this.loading = Loading.create({
       content: "Chargement...",

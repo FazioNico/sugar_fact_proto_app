@@ -1,8 +1,10 @@
 
 import { Injectable, OnInit } from '@angular/core';
+
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-import {Observable} from 'rxjs/Observable';
+import {fromPromise} from 'rxjs/observable/fromPromise';
 
 import { ApiService } from '../api-service/api-service';
 import { LocalStorageService } from '../local-storage/local-storage';
@@ -33,30 +35,35 @@ export class Store implements OnInit{
 
   /*** call Methode ***/
   getData(value){
+    let Online = false;
+    let dataReady;
     //// get data LS
-    let dataLS = this.getDataLS()
-        //console.log(dataLS)
-    //// get data API
-    let dataAPI = this.getDataAPI(value)
-        //console.log(dataAPI)
-    //// combin data & save to LS
-    this.setDataToCombine(dataAPI,dataLS)
-    //// return data API
-    return dataAPI;
-    /*
+    let dataLS = this.getDataLS() //console.log(dataLS)
+
     if(Online == true){
-      let updatDataLS = this.setDataLS(dataAPI)
-      console.log(updatDataLS)
-      console.log('from dataAPI =>')
-      console.log(dataAPI)
-      return dataAPI
+      //// get data API
+      let dataAPI = this.getDataAPI(value)  //console.log(dataAPI)
+      //// combin data & save to LS
+      this.setDataToCombine(dataAPI,dataLS)
+      //// return data API
+      dataReady = dataAPI;
     }
     else {
-      console.log('from dataLS =>')
-      console.log(dataLS)
-      return dataLS
+      dataReady =  this.dataToObservable(dataLS, value)
     }
-    */
+    return dataReady
+  }
+
+  dataToObservable(dataLS, value){
+    let promose = dataLS
+      .then(
+      (data) => {
+        let test =  _.filter(data,{ 'product_name': value })
+        return test
+      }
+    )
+    let source = fromPromise(promose)
+    return source
   }
 
   getProductData(value){
