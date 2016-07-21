@@ -9,7 +9,7 @@
 import { Component }              from '@angular/core';
 import { NavController, Loading } from 'ionic-angular';
 
-import { Routes }                 from '../../providers/routes/routes'
+import { Routes }                 from '../../providers/routes/routes';
 import { Store }                  from '../../providers/store/store';
 
 import { HeaderContent }          from '../../components/header-content/header-content';
