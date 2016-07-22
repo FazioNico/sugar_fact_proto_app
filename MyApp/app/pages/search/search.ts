@@ -1,3 +1,11 @@
+/**
+* @Author: Nicolas Fazio <webmaster-fazio>
+* @Date:   22-07-2016
+* @Email:  contact@nicolasfazio.ch
+* @Last modified by:   webmaster-fazio
+* @Last modified time: 22-07-2016
+*/
+
 import { Component }              from '@angular/core';
 import { NavController, Loading } from 'ionic-angular';
 
@@ -28,6 +36,7 @@ export class SearchPage {
 
   searchResultData: any;
   loading:Loading;
+
   /** Not normally mandatory but create bugs if ommited. **/
   static get parameters() {
         return [[NavController], [Routes], [Store]];
@@ -38,69 +47,84 @@ export class SearchPage {
     private routes  : Routes,
     private _st     : Store
   ){
-    this.loading = Loading.create({
-      content: "Chargement...",
-      duration: 3000
-    });
+    this.loading;
   }
-  /** Core Methode **/
 
+  /** Core Methode **/
+  private hideLoading(){
+    this.loading.dismiss();
+  }
+
+  private queryString(searchDataInput) {
+    this._st.getData(searchDataInput.value)
+        .subscribe(
+          (data) => {
+            this._st.data = data
+            this.searchResultData = data
+          },
+          (err) => {
+            console.log(err)
+          },
+          () => {
+            if(Object.keys(this.searchResultData).length == 0) {
+              this.nav.push(
+                this.routes.getPage(this.routes.PRODUCT),
+                { id: 'inconnu' }
+              );
+            }
+          }
+        );
+  }
+
+  private queryNumber(searchDataInput) {
+    this._st.getProductData(searchDataInput.value)
+        .subscribe(
+          (data) => {
+            if(data.status === 1){
+              this.searchResultData = []
+              this.searchResultData.push(data.product)
+              //console.log(data.product)
+            }
+            else {
+              this.searchResultData = []
+              this.nav.push(
+                this.routes.getPage(this.routes.PRODUCT),
+                { id: searchDataInput.value }
+              );
+            }
+          }
+        );
+  }
   /** Events Methode **/
   onInutChange(searchDataInput){
     if (<number>searchDataInput.value.length < 3) return;
     if (isNaN(searchDataInput.value) === true){
-      /** query string **/
-      this._st.getData(searchDataInput.value)
-          .subscribe(
-            (data) => {
-              this._st.data = data
-              this.searchResultData = data
-            },
-            (err) => {
-              console.log(err)
-            },
-            () => {
-              if(Object.keys(this.searchResultData).length == 0) {
-                this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: 'inconnu' })
-              }
-            }
-          )
+        /** query is a string **/
+        this.queryString(searchDataInput)
     }
     else {
-      /** query number **/
-      this._st.getProductData(searchDataInput.value)
-          .subscribe(
-            (data) => {
-              if(data.status === 1){
-                this.searchResultData = []
-                this.searchResultData.push(data.product)
-                //console.log(data.product)
-              }
-              else {
-                this.searchResultData = []
-                this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: searchDataInput.value })
-              }
-            }
-          )
+        /** query is a number **/
+        this.queryNumber(searchDataInput)
     }
   }
 
   onGoProduct(event,id){
-    //console.log('event emited')
-    //console.log(event.id)
-    //this.nav.present(this.loading);
-    this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: event.id });
+    this.nav.present(this.loading);
+    this.nav.push(
+      this.routes.getPage(this.routes.PRODUCT),
+      { id: event.id }
+    );
   }
 
-  ionViewWillLeave() {
-    console.log("Looks like I'm about to leave :(");
-    //this.nav.present(this.loading);
-  }
+  /*** Ionic ViewEvent ***/
   ionViewDidLeave(){
-    //this.loading = null;
-    console.log('leaved')
+    this.hideLoading()
   }
-  private hideLoading(){
-    this.loading.dismiss();
+
+  ionViewDidEnter(){
+    this.loading = Loading.create({
+      content: "Chargement..."
+    });
   }
+
 }
