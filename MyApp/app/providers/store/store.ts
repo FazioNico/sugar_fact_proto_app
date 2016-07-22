@@ -77,9 +77,21 @@ export class Store implements OnInit{
 
   /*** formationg Method ***/
   dataToObservable(dataLS, key, value){
+    let lowerValue = _.lowerCase(value)
+    console.log(lowerValue)
+
     let promise = dataLS
       .then(
       (data) => {
+        /*
+        //// test for filter by lower product_name => not working :-(
+        _.forIn(data, function(val, key) {
+          if(val.product_name == value){
+            return data
+          }
+          //console.log(_.lowerCase(val.product_name));
+        });
+        */
         let test =  _.filter(data,{ [key]: value })
         return test
       }
