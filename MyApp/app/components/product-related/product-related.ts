@@ -1,5 +1,13 @@
+/**
+* @Author: Nicolas Fazio <webmaster-fazio>
+* @Date:   18-07-2016
+* @Email:  contact@nicolasfazio.ch
+* @Last modified by:   webmaster-fazio
+* @Last modified time: 22-07-2016
+*/
+
 import { Component, Input, OnInit, EventEmitter, Output  } from '@angular/core';
-import { Store }                  from '../../providers/store/store';
+import { Store }  from '../../providers/store/store';
 
 /*
   Generated class for the ProductRelated component.
@@ -26,6 +34,7 @@ export class ProductRelated  implements OnInit {
     this.relatedProduct = [];
   }
 
+  /*** Core Method ***/
   loadData(){
     let categorieData = this._st.getCategorieData(this.catName)
     if(categorieData == null){
@@ -51,9 +60,9 @@ export class ProductRelated  implements OnInit {
           }
         )
     }
-
-
   }
+
+  /*** Event Method ***/
 
   onClickRelated(event,id){
      this.onRelated.emit({ event:event, id: id })
@@ -66,7 +75,7 @@ export class ProductRelated  implements OnInit {
   ngOnInit() {
     this.catName = this.categoriesInput
     this.loadData()
-    console.log(this.categoriesInput)
+    //console.log(this.categoriesInput)
   }
 
 }
