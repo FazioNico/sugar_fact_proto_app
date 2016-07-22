@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, EventEmitter, Output  } from '@angular/core';
-import { ApiService } from '../../providers/api-service/api-service';
+import { Store }                  from '../../providers/store/store';
 
 /*
   Generated class for the ProductRelated component.
@@ -10,7 +10,7 @@ import { ApiService } from '../../providers/api-service/api-service';
 @Component({
   selector: 'product-related',
   templateUrl: 'build/components/product-related/product-related.html',
-  providers: [ApiService]
+  providers: [Store]
 })
 export class ProductRelated  implements OnInit {
 
@@ -22,28 +22,36 @@ export class ProductRelated  implements OnInit {
   @Output() onToggle:         EventEmitter<any>   = new EventEmitter();
   @Output() onRelated:        EventEmitter<any>   = new EventEmitter();
 
-  constructor( public apiService: ApiService ) {
+  constructor( private _st: Store ) {
     this.relatedProduct = [];
   }
 
   loadData(){
-    this.apiService.getCategorieData(this.catName)
-      .subscribe(
-        (data) => {
-          let result = data.count
-          if(result >= 1){
-            this.relatedProduct = data.products
+    let categorieData = this._st.getCategorieData(this.catName)
+    if(categorieData == null){
+      this.relatedProduct = [];
+      this.total = 0
+    }
+    else {
+      categorieData
+        .subscribe(
+          (data) => {
+            let result = data.count
+            if(result >= 1){
+              this.relatedProduct = data.products
+            }
+            else {
+              this.relatedProduct = [];
+            }
+          },
+          (error) => this.relatedProduct = [],
+          () => {
+            this.total = this.relatedProduct.length
+            //console.log(this.relatedProduct)
           }
-          else {
-            this.relatedProduct = [];
-          }
-        },
-        (error) => this.relatedProduct = [],
-        () => {
-          this.total = this.relatedProduct.length
-          //console.log(this.relatedProduct)
-        }
-      )
+        )
+    }
+
 
   }
 

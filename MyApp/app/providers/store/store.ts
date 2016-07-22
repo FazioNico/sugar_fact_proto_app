@@ -75,7 +75,12 @@ export class Store implements OnInit{
   }
 
   getCategorieData(value){
-    return this.getCategorieDataAPI(value)
+    if(this.online == true){
+      return this.getCategorieDataAPI(value);
+    }
+    else {
+      return null;
+    }
   }
 
   /*** formationg Method ***/
