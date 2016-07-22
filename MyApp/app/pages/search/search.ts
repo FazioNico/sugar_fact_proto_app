@@ -6,14 +6,14 @@
 * @Last modified time: 21-07-2016
 */
 
-import { Component }              from '@angular/core';
-import { NavController, Loading } from 'ionic-angular';
+import { Component, ViewChild }             from '@angular/core';
+import { NavController, Loading, Content }  from 'ionic-angular';
 
-import { Routes }                 from '../../providers/routes/routes';
-import { Store }                  from '../../providers/store/store';
+import { Routes }                           from '../../providers/routes/routes';
+import { Store }                            from '../../providers/store/store';
 
-import { HeaderContent }          from '../../components/header-content/header-content';
-import { SearchResult }           from '../../components/search-result/search-result';
+import { HeaderContent }                    from '../../components/header-content/header-content';
+import { SearchResult }                     from '../../components/search-result/search-result';
 
 /*
   Generated class for the SearchPage page.
@@ -45,6 +45,8 @@ export class SearchPage {
           [Store]
         ];
   }
+
+  @ViewChild(Content)       content       : Content;
 
   constructor(
     private nav     : NavController,
@@ -126,5 +128,29 @@ export class SearchPage {
   }
   ionViewDidLeave(){
     //this.loading = null;
+  }
+
+
+  onPageScroll(event) {
+      //console.log(event);
+
+      let ionHeader = this.content.getElementRef().nativeElement.previousElementSibling
+      console.log(ionHeader)
+
+      if(event.target.scrollTop >= 5){
+          ionHeader.classList.add('scroll')
+      }
+      else {
+        if (ionHeader.classList.contains('scroll') == true ){
+          ionHeader.classList.remove('scroll')
+        }
+      }
+
+  }
+
+  ngAfterViewInit() {
+    this.content.addScrollListener((event) =>  {
+        this.onPageScroll(event);
+    });
   }
 }
