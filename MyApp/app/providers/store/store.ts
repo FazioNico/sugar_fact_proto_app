@@ -3,20 +3,20 @@
 * @Date:   13-07-2016
 * @Email:  contact@nicolasfazio.ch
 * @Last modified by:   webmaster-fazio
-* @Last modified time: 21-07-2016
+* @Last modified time: 22-07-2016
 */
 
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, OnInit }   from '@angular/core';
 
-import {Observable} from 'rxjs/Observable';
+import { Observable }           from 'rxjs/Observable';
+import { fromPromise }          from 'rxjs/observable/fromPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-import {fromPromise} from 'rxjs/observable/fromPromise';
 
-import { ApiService } from '../api-service/api-service';
-import { LocalStorageService } from '../local-storage/local-storage';
+import { ApiService }           from '../api-service/api-service';
+import { LocalStorageService }  from '../local-storage/local-storage';
 
-import * as _ from 'lodash';
+import * as _                   from 'lodash';
 
 /*
   Generated class for the Store provider.
@@ -24,18 +24,21 @@ import * as _ from 'lodash';
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
+
 @Injectable()
 export class Store implements OnInit{
 
-  data:     any;
+  data:any;
 
   dataAPI:any;
   dataLS:any;
   online:boolean = true;
 
   constructor(
+
     private _api    : ApiService,
     private _ls     : LocalStorageService
+
   ){
 
     if(navigator.onLine == false){
