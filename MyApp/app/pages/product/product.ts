@@ -150,6 +150,10 @@ export class ProductPage {
         acc[i].classList.toggle("open");
         btn[i].classList.toggle("rotate");
     }
+    let self = this;
+    setTimeout(function(){
+      self.animateSugar()
+    }, 500)
   }
 
   onClickAdd(){
@@ -183,9 +187,21 @@ export class ProductPage {
       }
 
   }
-  ionViewWillEnter(){
+  animateSugar(){
+    let sugars:any = document.getElementsByClassName('sugar')
+    console.log(sugars)
+
+    let i = 0;
+    for (let sugar of sugars) {
+      setTimeout(function(){
+        sugar.style.opacity = 1
+      }, ++i*100)
+    }
+  }
+  ionViewDidEnter(){
     //let ionNavBarTitle = document.getElementsByClassName('toolbar-content');
     //ionNavBarTitle[1].classList.add('hide')
+    this.animateSugar()
 
   }
   ngAfterViewInit() {
