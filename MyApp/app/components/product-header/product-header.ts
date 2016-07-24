@@ -16,6 +16,7 @@ import { Component, Input } from '@angular/core';
         }
         .product-header h1{
           text-align:center;
+          transition: 0.3s all ease;
         }
 
         .product-header {
@@ -31,8 +32,7 @@ import { Component, Input } from '@angular/core';
           position: relative;
           background-position: center center;
         }
-
-        h1 {
+        .transition_anim_5ms {
           transition: 0.3s all ease;
         }
     `
