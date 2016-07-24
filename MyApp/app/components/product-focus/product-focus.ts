@@ -1,6 +1,8 @@
-import { Component, Input }   from '@angular/core';
+import { Component, Input, ViewChild }   from '@angular/core';
+import { Slides } from 'ionic-angular';
 
 import { Sugar }              from '../sugar/sugar';
+import { Fat }              from '../fat/fat';
 
 /*
   Generated class for the ProductFocus component.
@@ -12,18 +14,27 @@ import { Sugar }              from '../sugar/sugar';
 @Component({
   selector: 'product-focus',
   templateUrl: 'build/components/product-focus/product-focus.html',
-  directives: [Sugar]
+  directives: [
+    Sugar,
+    Fat
+  ]
 })
 export class ProductFocus {
 
   sugar_100g:number;
+  fat_100g:number;
+  fat_portion:number;
   focusTab: string;
 
   @Input() productFocusInput: any[];
+  @ViewChild('mySlider') slider: Slides;
+  @ViewChild('mySliderFat') sliderFat: Slides;
+  @ViewChild('Fat') fat: Fat;
 
   constructor(
   ) {
     this.focusTab = "sugar";
+    this.sugar_100g;
   }
 
   calculeSugar(){
@@ -35,6 +46,34 @@ export class ProductFocus {
     }
     //console.log(this.sugar_100g)
     //console.log('calcule')
+  }
+
+  onSegmentChanged(event){
+      // capture event segment
+      console.log(event.value)
+      if(event.value == 'fat'){
+        let self = this;
+        setTimeout(function(){
+          self.fat_100g = self.productFocusInput[0].fat_100
+          if(self.productFocusInput[0].fat_portion){
+            self.fat_portion = self.productFocusInput[0].fat_portion
+          }
+        }, 500)
+
+        //console.log(this.fat.text)
+      }
+  }
+
+  onSlideChanged(){
+    // capture event slider
+    if(this.slider){
+      //let currentIndex = this.slider.getActiveIndex();
+      //console.log(this.slider);
+    }
+    if(this.sliderFat){
+      //let currentIndex = this.sliderFat.getActiveIndex();
+      //console.log(this.sliderFat);
+    }
   }
 
   ngOnInit() {
