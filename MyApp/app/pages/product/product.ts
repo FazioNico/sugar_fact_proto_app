@@ -187,10 +187,9 @@ export class ProductPage {
       }
 
   }
+  
   animateSugar(){
     let sugars:any = document.getElementsByClassName('sugar')
-    console.log(sugars)
-
     let i = 0;
     for (let sugar of sugars) {
       setTimeout(function(){
@@ -198,6 +197,7 @@ export class ProductPage {
       }, ++i*100)
     }
   }
+
   ionViewDidEnter(){
     //let ionNavBarTitle = document.getElementsByClassName('toolbar-content');
     //ionNavBarTitle[1].classList.add('hide')
