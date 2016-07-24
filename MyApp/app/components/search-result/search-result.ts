@@ -10,7 +10,16 @@ import {NavController} from 'ionic-angular';
 
 @Component({
   selector: 'search-result',
-  templateUrl: 'build/components/search-result/search-result.html'
+  templateUrl: 'build/components/search-result/search-result.html',
+  styles: [`
+      .img_thumb {
+        background-size: contain;
+        background-position: center center;
+        height: 80px;
+        width: 80px;
+        border-radius: 80px;
+      }
+    `]
 })
 export class SearchResult {
 

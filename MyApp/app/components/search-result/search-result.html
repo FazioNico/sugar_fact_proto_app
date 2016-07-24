@@ -3,7 +3,7 @@
 @Date:   06-07-2016
 @Email:  contact@nicolasfazio.ch
 @Last modified by:   webmaster-fazio
-@Last modified time: 21-07-2016
+@Last modified time: 24-07-2016
 -->
 
 <!--
@@ -18,7 +18,7 @@
   <ion-item *ngFor="let productData of dataInput" (click)="onGoProduct($event,productData.id)">
 
     <ion-thumbnail item-left>
-      <img [src]="productData.image_thumb_url">
+      <div class="img_thumb" [style.background-image]="'url(' + productData.image_thumb_url + ')'"></div>
     </ion-thumbnail>
 
     <h2>{{ productData.product_name }}</h2>
