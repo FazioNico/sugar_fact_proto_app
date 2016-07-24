@@ -7,6 +7,7 @@
 */
 
 import { Component }       from '@angular/core';
+import { ViewChild }       from '@angular/core';
 import {
   FORM_DIRECTIVES,
   FormBuilder,
@@ -15,7 +16,8 @@ import {
   ControlGroup
 }                           from '@angular/common';
 import { NavController }    from 'ionic-angular';
-import {Camera}             from 'ionic-native';
+import { Content }          from 'ionic-angular';
+import { Camera }           from 'ionic-native';
 
 import { ApiService }       from '../../providers/api-service/api-service';
 import { HeaderContent }    from '../../components/header-content/header-content';
@@ -50,6 +52,8 @@ export class AddPage {
   quantity:string;
   ingredients: string;
   */
+
+  @ViewChild(Content) content : Content;
 
   constructor(
     private nav       : NavController,
@@ -131,6 +135,12 @@ export class AddPage {
     el.children[0].classList.toggle("rotate")
   }
 
+
+
+  ngAfterViewInit() {
+    let ionHeader = this.content.getElementRef().nativeElement.previousElementSibling
+    ionHeader.classList.add('scroll')
+  }
 
   SerializeParams<T>(Data: T): string|number {
      let keys:any = Object.keys(Data);

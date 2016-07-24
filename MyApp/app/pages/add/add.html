@@ -17,11 +17,6 @@
     <header-content title="Nouveau produit"></header-content>
 </ion-header>
 
-
-
-<button block (click)="onSubmit()"  fab fab-bottom fab-center secondary>
-  <ion-icon name="add"></ion-icon>
-</button>
 <ion-content>
   <form *ngIf="productAdded === false" [ngFormModel]="myForm"  >
 
@@ -143,9 +138,13 @@
           </div>
         </div>
       </div>
-
+      <div style="clear: both;"></div>
     </div>
-
+    <div text-center padding>
+      <br>
+      <button (click)="onSubmit()" secondary large>Ajouter</button>
+      <br>
+    </div>
   </form>
   <div *ngIf="productAdded === true">
     <p>
