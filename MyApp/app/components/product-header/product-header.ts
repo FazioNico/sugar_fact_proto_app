@@ -26,13 +26,12 @@ import { Component, Input } from '@angular/core';
           overflow: hidden;
           width: 120px;
           height: 120px;
-          margin: auto;
+          margin: 20px auto;
           border-radius: 100%;
-          margin-bottom:20px;
           position: relative;
           background-position: center center;
         }
-        
+
         h1 {
           transition: 0.3s all ease;
         }
