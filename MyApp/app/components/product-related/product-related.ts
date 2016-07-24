@@ -18,7 +18,16 @@ import { Store }  from '../../providers/store/store';
 @Component({
   selector: 'product-related',
   templateUrl: 'build/components/product-related/product-related.html',
-  providers: [Store]
+  providers: [Store],
+  styles: [`
+      .img_thumb {
+        background-size: contain;
+        background-position: center center;
+        height: 80px;
+        width: 80px;
+        border-radius: 80px;
+      }
+    `]
 })
 export class ProductRelated  implements OnInit {
 

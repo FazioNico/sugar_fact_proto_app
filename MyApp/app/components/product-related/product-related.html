@@ -1,4 +1,12 @@
 <!--
+@Author: Nicolas Fazio <webmaster-fazio>
+@Date:   23-07-2016
+@Email:  contact@nicolasfazio.ch
+@Last modified by:   webmaster-fazio
+@Last modified time: 24-07-2016
+-->
+
+<!--
   Generated template for the ProductRelated component.
 
   See https://angular.io/docs/ts/latest/api/core/ComponentMetadata-class.html
@@ -15,7 +23,7 @@
       <ion-list>
         <ion-item *ngFor="let productData of relatedProduct" (click)="onClickRelated($event,productData.id)">
           <ion-thumbnail item-left>
-            <img [src]="productData.image_thumb_url">
+            <div class="img_thumb" [style.background-image]="'url(' + productData.image_thumb_url + ')'"></div>
           </ion-thumbnail>
           <h2>{{ productData.product_name }}</h2>
           <p *ngIf="productData.brands != productData.product_name">{{ productData.brands }}</p>
