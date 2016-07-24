@@ -1,5 +1,13 @@
+/**
+* @Author: Nicolas Fazio <webmaster-fazio>
+* @Date:   18-07-2016
+* @Email:  contact@nicolasfazio.ch
+* @Last modified by:   webmaster-fazio
+* @Last modified time: 22-07-2016
+*/
+
 import { Component, Input, OnInit, EventEmitter, Output  } from '@angular/core';
-import { ApiService } from '../../providers/api-service/api-service';
+import { Store }  from '../../providers/store/store';
 
 /*
   Generated class for the ProductRelated component.
@@ -10,7 +18,7 @@ import { ApiService } from '../../providers/api-service/api-service';
 @Component({
   selector: 'product-related',
   templateUrl: 'build/components/product-related/product-related.html',
-  providers: [ApiService]
+  providers: [Store]
 })
 export class ProductRelated  implements OnInit {
 
@@ -22,30 +30,39 @@ export class ProductRelated  implements OnInit {
   @Output() onToggle:         EventEmitter<any>   = new EventEmitter();
   @Output() onRelated:        EventEmitter<any>   = new EventEmitter();
 
-  constructor( public apiService: ApiService ) {
+  constructor( private _st: Store ) {
     this.relatedProduct = [];
   }
 
+  /*** Core Method ***/
   loadData(){
-    this.apiService.getCategorieData(this.catName)
-      .subscribe(
-        (data) => {
-          let result = data.count
-          if(result >= 1){
-            this.relatedProduct = data.products
+    let categorieData = this._st.getCategorieData(this.catName)
+    if(categorieData == null){
+      this.relatedProduct = [];
+      this.total = 0
+    }
+    else {
+      categorieData
+        .subscribe(
+          (data) => {
+            let result = data.count
+            if(result >= 1){
+              this.relatedProduct = data.products
+            }
+            else {
+              this.relatedProduct = [];
+            }
+          },
+          (error) => this.relatedProduct = [],
+          () => {
+            this.total = this.relatedProduct.length
+            //console.log(this.relatedProduct)
           }
-          else {
-            this.relatedProduct = [];
-          }
-        },
-        (error) => this.relatedProduct = [],
-        () => {
-          this.total = this.relatedProduct.length
-          //console.log(this.relatedProduct)
-        }
-      )
-
+        )
+    }
   }
+
+  /*** Event Method ***/
 
   onClickRelated(event,id){
      this.onRelated.emit({ event:event, id: id })
@@ -58,7 +75,7 @@ export class ProductRelated  implements OnInit {
   ngOnInit() {
     this.catName = this.categoriesInput
     this.loadData()
-    console.log(this.categoriesInput)
+    //console.log(this.categoriesInput)
   }
 
 }

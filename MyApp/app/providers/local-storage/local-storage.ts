@@ -1,7 +1,15 @@
-import { Injectable } from '@angular/core';
-import {Storage, LocalStorage} from 'ionic-angular';
+/**
+* @Author: Nicolas Fazio <webmaster-fazio>
+* @Date:   13-07-2016
+* @Email:  contact@nicolasfazio.ch
+* @Last modified by:   webmaster-fazio
+* @Last modified time: 22-07-2016
+*/
+
+import { Injectable }             from '@angular/core';
+import { Storage, LocalStorage }  from 'ionic-angular';
+import { Observable }             from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import {Observable} from 'rxjs/Observable';
 
 /*
   Generated class for the LocalStorage provider.
@@ -9,62 +17,52 @@ import {Observable} from 'rxjs/Observable';
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
+
 @Injectable()
 export class LocalStorageService {
-  data:any        = null;
+
   local:Storage   = new Storage(LocalStorage);
 
   constructor() {
-    this.getData()
+
   }
 
   /** Get mehtode **/
-  getData(){
-    if(this.data == null){
-      return this.local.get('products_data')
-          .then((data) => {
-            if (data != null) return JSON.parse(data);
-          })
-          .then((data) => {
-            return this.data = data;
-            //console.log(this.data)
-          })
-          .catch(error => {
-            console.log(error);
-          });
-    }
 
+  get(key: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      try {
+        resolve(this.local.get(key));
+      } catch (e) {
+        reject(e);
+      }
+    });
   }
 
   /** Set Methode **/
 
-  addData(data){
-    this.data.push(JSON.stringify(data))
-    this.setLocal()
-  }
-
-  setLocal() {
-    this.local.set('products_data', this.data);
-  }
-
-  /*** BOf - test ***
-
-  initLocalStorage() {
-
-   return new Promise((resolve, reject) => {
-     this.local.get("products_data").then((productsData) => {
-       resolve(productsData => {console.log(productsData)});
-     }).catch( error => {
-       reject(error);
-     })
-   });
-  }
-
-  observableLS(){
-    return Observable.create(observer => {
-        observer.next(this.initLocalStorage());
-        observer.complete();
+  set(key: string, value: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.local.set(key, value);
+        resolve();
+      } catch (e) {
+        reject(e);
+      }
     });
   }
-   *** Eof - test ***/
+
+  /*** Remove Method ***/
+
+  remove(key: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      try {
+        this.local.remove(key);
+        resolve();
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+
 }

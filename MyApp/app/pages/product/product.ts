@@ -1,7 +1,8 @@
 import { Component, ViewChild }               from '@angular/core';
 import { NavController, NavParams, Content }  from 'ionic-angular';
 
-import { ApiService }                         from '../../providers/api-service/api-service';
+import { Store }                              from '../../providers/store/store';
+//import { ApiService }                         from '../../providers/api-service/api-service';
 
 import { HeaderContent }                      from '../../components/header-content/header-content';
 import { ProductHeader }                      from '../../components/product-header/product-header';
@@ -33,7 +34,7 @@ import { AddPage }                            from '../add/add';
     ProductRelated,
     ProductNotfound
   ],
-  providers: [ApiService]
+  providers: [Store]
 })
 export class ProductPage {
 
@@ -58,7 +59,7 @@ export class ProductPage {
 
 
   constructor(
-    public apiService       : ApiService,
+    private _st             : Store,
     private nav             : NavController,
     private params          : NavParams
   ) {
@@ -70,15 +71,33 @@ export class ProductPage {
   /** Core Methode **/
   getData(barcode){
     this.productID = barcode;
-    this.apiService.getProductData(this.productID)
+    this._st.getProductData(this.productID)
       .subscribe(
         (data) => {
-          this.result = data.status
+          if(data.status){
+            this.result = data.status
+          }
+          else {
+            this.result = 0
+          }
           if(this.result === 1){
             this.productData = data.product
           }
           else {
-            this.productData = false;
+            /*** no result in API or no internet connection ***/
+            if(data.length == 1){
+              /*** if data return somthing ***/
+              if(data[0].id){
+                this.productData = data[0];
+                this.result = 1
+              }
+              else {
+                this.productData = false;
+              }
+            }
+            else {
+              this.productData = false;
+            }
           }
         },
         (error) => this.productData = false,
@@ -87,7 +106,7 @@ export class ProductPage {
   }
 
   setData(){
-    console.log(this.productData)
+    //console.log(this.productData)
     if(this.productData != false){
       this.productName      = this.productData.product_name
       this.nutriments       = this.productData.nutriments
@@ -121,8 +140,8 @@ export class ProductPage {
         serving_size:       this.productData.serving_size
 
       })
-      console.log(this.productData)
-      console.log(this.focusData)
+      //console.log(this.productData)
+      //console.log(this.focusData)
     }
     //this.productFocus.calculeSugar()
   }

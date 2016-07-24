@@ -1,22 +1,35 @@
-import {Component, PLATFORM_DIRECTIVES, provide} from '@angular/core';
-import {Platform, ionicBootstrap} from 'ionic-angular';
-import {AuthHttp, AuthConfig} from 'angular2-jwt';
-import {Http, HTTP_PROVIDERS} from '@angular/http';
-import {StatusBar} from 'ionic-native';
+/**
+* @Author: Nicolas Fazio <webmaster-fazio>
+* @Date:   06-07-2016
+* @Email:  contact@nicolasfazio.ch
+* @Last modified by:   webmaster-fazio
+* @Last modified time: 21-07-2016
+*/
 
-import {Routes} from './providers/routes/routes'
-import {HeaderContent} from './components/header-content/header-content';
-import {HomePage} from './pages/home/home';
+import { Component, PLATFORM_DIRECTIVES, provide } from '@angular/core';
+import { Platform, ionicBootstrap }     from 'ionic-angular';
+import { AuthHttp, AuthConfig }         from 'angular2-jwt';
+import { Http, HTTP_PROVIDERS }         from '@angular/http';
+import { StatusBar }                    from 'ionic-native';
 
-import { ApiService } from './providers/api-service/api-service';
-import { LocalStorageService }    from './providers/local-storage/local-storage';
+import { Routes }                       from './providers/routes/routes'
+import { HeaderContent }                from './components/header-content/header-content';
+import { HomePage }                     from './pages/home/home';
+
+import { ApiService }                   from './providers/api-service/api-service';
+import { LocalStorageService }          from './providers/local-storage/local-storage';
 
 
 @Component({
   templateUrl: 'build/app.html',
-  providers: [Routes, ApiService, LocalStorageService]
+  providers: [
+    Routes,
+    ApiService,
+    LocalStorageService
+  ]
 })
 export class MyApp {
+
   rootPage: any;
 
   constructor(platform: Platform, private routes:Routes) {

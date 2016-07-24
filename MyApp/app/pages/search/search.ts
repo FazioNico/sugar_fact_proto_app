@@ -1,11 +1,19 @@
-import { Component }              from '@angular/core';
-import { NavController, Loading } from 'ionic-angular';
+/**
+* @Author: Nicolas Fazio <webmaster-fazio>
+* @Date:   18-07-2016
+* @Email:  contact@nicolasfazio.ch
+* @Last modified by:   webmaster-fazio
+* @Last modified time: 21-07-2016
+*/
 
-import { Routes }                 from '../../providers/routes/routes'
-import { Store }                  from '../../providers/store/store';
+import { Component, ViewChild }             from '@angular/core';
+import { NavController, Loading, Content }  from 'ionic-angular';
 
-import { HeaderContent }          from '../../components/header-content/header-content';
-import { SearchResult }           from '../../components/search-result/search-result';
+import { Routes }                           from '../../providers/routes/routes';
+import { Store }                            from '../../providers/store/store';
+
+import { HeaderContent }                    from '../../components/header-content/header-content';
+import { SearchResult }                     from '../../components/search-result/search-result';
 
 /*
   Generated class for the SearchPage page.
@@ -28,79 +36,121 @@ export class SearchPage {
 
   searchResultData: any;
   loading:Loading;
+
   /** Not normally mandatory but create bugs if ommited. **/
   static get parameters() {
-        return [[NavController], [Routes], [Store]];
+        return [
+          [NavController],
+          [Routes],
+          [Store]
+        ];
   }
+
+  @ViewChild(Content)       content       : Content;
 
   constructor(
     private nav     : NavController,
     private routes  : Routes,
     private _st     : Store
   ){
+
     this.loading = Loading.create({
       content: "Chargement...",
       duration: 3000
     });
+
   }
+
   /** Core Methode **/
+  queryString(searchDataInput){
+    this._st.getData(searchDataInput.value)
+        .subscribe(
+          (data) => {
+            //this._st.data = data
+            this.searchResultData = data
+          },
+          (err) => {
+            console.log(err)
+          },
+          () => {
+            if(Object.keys(this.searchResultData).length == 0) {
+              this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: 'inconnu' })
+            }
+          }
+        )
+  }
+
+  queryNumber(searchDataInput){
+    this._st.getProductData(searchDataInput.value)
+        .subscribe(
+          (data) => {
+            if(data.status === 1){
+              this.searchResultData = []
+              this.searchResultData.push(data.product)
+            }
+            else {
+              this.searchResultData = []
+              this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: searchDataInput.value })
+            }
+          },
+          (err) => {
+            console.log(err)
+          }
+        )
+  }
+
+
+  private hideLoading(){
+    this.loading.dismiss();
+  }
 
   /** Events Methode **/
   onInutChange(searchDataInput){
     if (<number>searchDataInput.value.length < 3) return;
     if (isNaN(searchDataInput.value) === true){
       /** query string **/
-      this._st.getData(searchDataInput.value)
-          .subscribe(
-            (data) => {
-              this._st.data = data
-              this.searchResultData = data
-            },
-            (err) => {
-              console.log(err)
-            },
-            () => {
-              if(Object.keys(this.searchResultData).length == 0) {
-                this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: 'inconnu' })
-              }
-            }
-          )
+      this.queryString(searchDataInput)
     }
     else {
       /** query number **/
-      this._st.getProductData(searchDataInput.value)
-          .subscribe(
-            (data) => {
-              if(data.status === 1){
-                this.searchResultData = []
-                this.searchResultData.push(data.product)
-                //console.log(data.product)
-              }
-              else {
-                this.searchResultData = []
-                this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: searchDataInput.value })
-              }
-            }
-          )
+      this.queryNumber(searchDataInput)
+
     }
   }
 
   onGoProduct(event,id){
-    //console.log('event emited')
-    //console.log(event.id)
     //this.nav.present(this.loading);
     this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: event.id });
   }
 
   ionViewWillLeave() {
-    console.log("Looks like I'm about to leave :(");
     //this.nav.present(this.loading);
   }
   ionViewDidLeave(){
     //this.loading = null;
-    console.log('leaved')
   }
-  private hideLoading(){
-    this.loading.dismiss();
+
+
+  onPageScroll(event) {
+      //console.log(event);
+
+      let ionHeader = this.content.getElementRef().nativeElement.previousElementSibling
+      console.log(ionHeader)
+
+      if(event.target.scrollTop >= 5){
+          ionHeader.classList.add('scroll')
+      }
+      else {
+        if (ionHeader.classList.contains('scroll') == true ){
+          ionHeader.classList.remove('scroll')
+        }
+      }
+
+  }
+
+  ngAfterViewInit() {
+    this.content.addScrollListener((event) =>  {
+        this.onPageScroll(event);
+    });
   }
 }
