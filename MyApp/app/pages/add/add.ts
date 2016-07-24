@@ -61,7 +61,6 @@ export class AddPage {
     this.myForm = fb.group({
       barcode:      ["", Validators.required],
       name:         ["", Validators.required],
-      denomination: ["", Validators.required],
       quantity:     ["", Validators.required],
       ingredients:  ["", Validators.required],
       nutriments: fb.group({
@@ -106,7 +105,6 @@ export class AddPage {
       let dataReady:any             = {}
       dataReady.code                = this.product.barcode
       dataReady.product_name        = this.product.name
-      //dataReady.product_denomination = this.product.denomination
       dataReady.quantity            = this.product.quantity
 
       dataReady.nutriment_energy    = this.product.nutriments.energy
