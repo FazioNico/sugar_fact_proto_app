@@ -3,7 +3,7 @@
 * @Date:   18-07-2016
 * @Email:  contact@nicolasfazio.ch
 * @Last modified by:   webmaster-fazio
-* @Last modified time: 21-07-2016
+* @Last modified time: 22-07-2016
 */
 
 import { Component, ViewChild }             from '@angular/core';
@@ -53,20 +53,19 @@ export class SearchPage {
     private routes  : Routes,
     private _st     : Store
   ){
-
-    this.loading = Loading.create({
-      content: "Chargement...",
-      duration: 3000
-    });
-
+    this.loading;
   }
 
   /** Core Methode **/
-  queryString(searchDataInput){
+  private hideLoading(){
+    this.loading.dismiss();
+  }
+
+  private queryString(searchDataInput) {
     this._st.getData(searchDataInput.value)
         .subscribe(
           (data) => {
-            //this._st.data = data
+            this._st.data = data
             this.searchResultData = data
           },
           (err) => {
@@ -74,62 +73,57 @@ export class SearchPage {
           },
           () => {
             if(Object.keys(this.searchResultData).length == 0) {
-              this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: 'inconnu' })
+
+              this.nav.push(
+                this.routes.getPage(this.routes.PRODUCT),
+                { id: 'inconnu' }
+              );
             }
           }
-        )
+        );
+
   }
 
-  queryNumber(searchDataInput){
+  private queryNumber(searchDataInput) {
     this._st.getProductData(searchDataInput.value)
         .subscribe(
           (data) => {
             if(data.status === 1){
               this.searchResultData = []
               this.searchResultData.push(data.product)
+              //console.log(data.product)
             }
             else {
               this.searchResultData = []
-              this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: searchDataInput.value })
+              this.nav.push(
+                this.routes.getPage(this.routes.PRODUCT),
+                { id: searchDataInput.value }
+              );
             }
-          },
-          (err) => {
-            console.log(err)
           }
-        )
-  }
-
-
-  private hideLoading(){
-    this.loading.dismiss();
+        );
   }
 
   /** Events Methode **/
   onInutChange(searchDataInput){
     if (<number>searchDataInput.value.length < 3) return;
     if (isNaN(searchDataInput.value) === true){
-      /** query string **/
-      this.queryString(searchDataInput)
+        /** query is a string **/
+        this.queryString(searchDataInput)
     }
     else {
-      /** query number **/
-      this.queryNumber(searchDataInput)
-
+        /** query is a number **/
+        this.queryNumber(searchDataInput)
     }
   }
 
   onGoProduct(event,id){
-    //this.nav.present(this.loading);
-    this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: event.id });
+    this.nav.present(this.loading);
+    this.nav.push(
+      this.routes.getPage(this.routes.PRODUCT),
+      { id: event.id }
+    );
   }
-
-  ionViewWillLeave() {
-    //this.nav.present(this.loading);
-  }
-  ionViewDidLeave(){
-    //this.loading = null;
-  }
-
 
   onPageScroll(event) {
       //console.log(event);
@@ -148,9 +142,22 @@ export class SearchPage {
 
   }
 
-  ngAfterViewInit() {
-    this.content.addScrollListener((event) =>  {
-        this.onPageScroll(event);
+  /*** Ionic ViewEvent ***/
+  ionViewDidLeave(){
+    this.hideLoading()
+  }
+
+  ionViewDidEnter(){
+    this.loading = Loading.create({
+      content: "Chargement..."
     });
+  }
+
+  ngAfterViewInit() {
+    this.content.addScrollListener(
+      (event) =>  {
+        this.onPageScroll(event);
+      }
+    )
   }
 }
