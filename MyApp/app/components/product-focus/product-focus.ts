@@ -48,9 +48,26 @@ export class ProductFocus {
     //console.log('calcule')
   }
 
+  animateSugar(){
+    let sugars:any = document.getElementsByClassName('sugar')
+    let i = 0;
+    for (let sugar of sugars) {
+      setTimeout(function(){
+        sugar.style.opacity = 1
+      }, ++i*100)
+    }
+  }
+
   onSegmentChanged(event){
       // capture event segment
       console.log(event.value)
+      if(event.value == 'sugar') {
+        console.log('loading sugar animation')
+        let self = this;
+        setTimeout(function(){
+          self.animateSugar()
+        }, 500)
+      }
       if(event.value == 'fat'){
         let self = this;
         setTimeout(function(){
@@ -79,6 +96,10 @@ export class ProductFocus {
   ngOnInit() {
     //console.log('init')
     this.calculeSugar()
+    let self = this;
+    setTimeout(function(){
+      self.animateSugar()
+    }, 1000)
   }
 
 }

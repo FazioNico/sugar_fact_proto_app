@@ -171,8 +171,15 @@ export class ProductPage {
     }
     let self = this;
     setTimeout(function(){
+      self.productFocus.animateSugar()
+    }, 500)
+
+    /*
+    let self = this;
+    setTimeout(function(){
       self.animateSugar()
     }, 500)
+    */
   }
 
   onClickAdd(){
@@ -206,21 +213,13 @@ export class ProductPage {
       }
 
   }
-  
-  animateSugar(){
-    let sugars:any = document.getElementsByClassName('sugar')
-    let i = 0;
-    for (let sugar of sugars) {
-      setTimeout(function(){
-        sugar.style.opacity = 1
-      }, ++i*100)
-    }
-  }
+
+
 
   ionViewDidEnter(){
     //let ionNavBarTitle = document.getElementsByClassName('toolbar-content');
     //ionNavBarTitle[1].classList.add('hide')
-    this.animateSugar()
+    //this.animateSugar()
 
   }
   ngAfterViewInit() {
