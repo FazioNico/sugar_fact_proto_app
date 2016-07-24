@@ -60,9 +60,9 @@ export class ProductFocus {
 
   onSegmentChanged(event){
       // capture event segment
-      console.log(event.value)
+      //console.log(event.value)
       if(event.value == 'sugar') {
-        console.log('loading sugar animation')
+        //console.log('loading sugar animation')
         let self = this;
         setTimeout(function(){
           self.animateSugar()
