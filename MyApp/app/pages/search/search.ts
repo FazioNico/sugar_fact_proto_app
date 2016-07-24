@@ -3,7 +3,7 @@
 * @Date:   18-07-2016
 * @Email:  contact@nicolasfazio.ch
 * @Last modified by:   webmaster-fazio
-* @Last modified time: 22-07-2016
+* @Last modified time: 24-07-2016
 */
 
 import { Component, ViewChild }             from '@angular/core';
@@ -127,10 +127,7 @@ export class SearchPage {
 
   onPageScroll(event) {
       //console.log(event);
-
       let ionHeader = this.content.getElementRef().nativeElement.previousElementSibling
-      console.log(ionHeader)
-
       if(event.target.scrollTop >= 5){
           ionHeader.classList.add('scroll')
       }
@@ -139,7 +136,6 @@ export class SearchPage {
           ionHeader.classList.remove('scroll')
         }
       }
-
   }
 
   /*** Ionic ViewEvent ***/
