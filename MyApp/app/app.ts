@@ -19,6 +19,7 @@ import { HomePage }                     from './pages/home/home';
 import { ApiService }                   from './providers/api-service/api-service';
 import { LocalStorageService }          from './providers/local-storage/local-storage';
 
+import * as firebase from 'firebase';
 
 @Component({
   templateUrl: 'build/app.html',
@@ -33,6 +34,14 @@ export class MyApp {
   rootPage: any;
 
   constructor(platform: Platform, private routes:Routes) {
+    let config = {
+      apiKey: "AIzaSyCL5kxvo0CLiBefaUDmWu5SjqxSv4piMAw",
+      authDomain: "sugar-app-serve.firebaseapp.com",
+      databaseURL: "https://sugar-app-serve.firebaseio.com",
+      storageBucket: "sugar-app-serve.appspot.com",
+    };
+    firebase.initializeApp(config);
+
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
