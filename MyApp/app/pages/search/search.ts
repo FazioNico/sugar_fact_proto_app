@@ -138,6 +138,11 @@ export class SearchPage {
       }
   }
 
+  onClickLogin(){
+    //console.log('emit onClickLogin')
+    this.nav.push(this.routes.getPage(this.routes.USER))
+  }
+
   /*** Ionic ViewEvent ***/
   ionViewDidLeave(){
     this.hideLoading()

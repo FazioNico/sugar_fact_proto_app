@@ -9,6 +9,8 @@
 import { Component } from '@angular/core';
 import { NavController, Modal } from 'ionic-angular';
 
+import { HeaderContent }    from '../../components/header-content/header-content';
+
 import {Routes} from '../../providers/routes/routes';
 //import {Auth} from '../../providers/auth/auth';
 
@@ -20,8 +22,9 @@ import {Routes} from '../../providers/routes/routes';
 */
 @Component({
   templateUrl: 'build/pages/login/login.html',
+  directives: [HeaderContent]
 })
-export class LoginPage {
+export class UserPage {
 
   email:string;
   password:string;

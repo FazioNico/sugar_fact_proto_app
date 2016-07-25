@@ -1,4 +1,12 @@
 <!--
+@Author: Nicolas Fazio <webmaster-fazio>
+@Date:   23-07-2016
+@Email:  contact@nicolasfazio.ch
+@Last modified by:   webmaster-fazio
+@Last modified time: 25-07-2016
+-->
+
+<!--
   Generated template for the SearchPage page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
@@ -7,12 +15,12 @@
 
 <ion-header>
 
-    <header-content title="Recherche"></header-content>
+    <header-content title="Recherche" (clickLog)="onClickLogin()"></header-content>
     <ion-searchbar #searchDataInput (change)="onInutChange(searchDataInput)" placeholder="nom du produit; code barre"></ion-searchbar>
 
 </ion-header>
 
-<ion-content class="search" fullscreen>
+<ion-content class="search" fullscreen #content>
 
   <search-result [dataInput]="searchResultData" (goProduct)="onGoProduct($event,id)"></search-result>
 

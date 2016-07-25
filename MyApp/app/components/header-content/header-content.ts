@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 /*
   Generated class for the ButtonMenu directive.
 
@@ -21,12 +21,16 @@ export class HeaderContent {
 
   @Input() title: string;
   @Input() isClassOpacity:boolean = false
+  @Output() clickLog: EventEmitter<any> = new EventEmitter();
 
   constructor() {
 
   }
 
-
+  onClickLogin(){
+    console.log('onClickLogin')
+    this.clickLog.emit({})
+  }
 
   ngOnInit() {
   }

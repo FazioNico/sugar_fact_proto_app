@@ -13,11 +13,14 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <header-content title="login"></header-content>
+    <header-content title="Mon Compte" isClassOpacity="true"></header-content>
 </ion-header>
 
 
 <ion-content padding>
+  <h1 primary text-center>Se connecter</h1>
+  <p primary text-center>Connectez-vous à votre compte pour pouvoir ajouter les produits que vous consommez et qui ne sont pas encore dans la base de donnée.</p>
+  <br>
   <ion-list class="login_list">
     <ion-item>
       <ion-label fixed>Email</ion-label>
@@ -31,8 +34,9 @@
     <ion-item *ngIf="error" class="login_error">
     {{error}}
     </ion-item>
-
-      <button full (click)="login()">Sign In</button>
-      <button item-center outline (click)="openSignup()">Sign up</button>
+      <br>
+      <br>
+      <button full (click)="login()">Se connecter</button>
+      <button item-center outline (click)="openSignup()">Créer un compte</button>
   </ion-list>
 </ion-content>
