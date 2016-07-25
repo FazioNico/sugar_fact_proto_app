@@ -20,7 +20,8 @@ export class HeaderContent {
 
 
   @Input() title: string;
-  @Input() isClassOpacity:boolean = false
+  @Input() isClassOpacity:boolean = false;
+  @Input() btnUserAuth:boolean = false;
   @Output() clickLog: EventEmitter<any> = new EventEmitter();
 
   constructor() {

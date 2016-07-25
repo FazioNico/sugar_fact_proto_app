@@ -13,7 +13,7 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <header-content title="Mon Compte" isClassOpacity="true"></header-content>
+    <header-content title="Mon Compte" isClassOpacity="true" [btnUserAuth]="null"></header-content>
 </ion-header>
 
 
@@ -42,7 +42,7 @@
         <button item-center outline (click)="openSignup()">Créer un compte</button>
     </ion-list>
   </div>
-  
+
   <div *ngIf="isAuth === true" padding>
     <div text-center>
       <h1 primary>

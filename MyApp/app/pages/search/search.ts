@@ -34,6 +34,7 @@ import { SearchResult }                     from '../../components/search-result
 })
 export class SearchPage {
 
+  isAuth:boolean = false;
   searchResultData: any;
   loading:Loading;
 

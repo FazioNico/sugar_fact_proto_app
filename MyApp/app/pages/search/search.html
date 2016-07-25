@@ -15,7 +15,7 @@
 
 <ion-header>
 
-    <header-content title="Recherche" (clickLog)="onClickLogin()"></header-content>
+    <header-content title="Recherche" (clickLog)="onClickLogin()" [btnUserAuth]="isAuth"></header-content>
     <ion-searchbar #searchDataInput (change)="onInutChange(searchDataInput)" placeholder="nom du produit; code barre"></ion-searchbar>
 
 </ion-header>
