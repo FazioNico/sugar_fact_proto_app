@@ -21,11 +21,11 @@ import {Routes} from '../../providers/routes/routes';
   Ionic pages and navigation.
 */
 @Component({
-  templateUrl: 'build/pages/login/login.html',
+  templateUrl: 'build/pages/user/user.html',
   directives: [HeaderContent]
 })
 export class UserPage {
-
+  isAuth:boolean = true;
   email:string;
   password:string;
   error:string;

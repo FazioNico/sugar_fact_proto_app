@@ -18,25 +18,44 @@
 
 
 <ion-content padding>
-  <h1 primary text-center>Se connecter</h1>
-  <p primary text-center>Connectez-vous à votre compte pour pouvoir ajouter les produits que vous consommez et qui ne sont pas encore dans la base de donnée.</p>
-  <br>
-  <ion-list class="login_list">
-    <ion-item>
-      <ion-label fixed>Email</ion-label>
-      <ion-input type="text" [(ngModel)]="email"></ion-input>
-    </ion-item>
 
-    <ion-item>
-      <ion-label fixed>Password</ion-label>
-      <ion-input type="password" [(ngModel)]="password"></ion-input>
-    </ion-item>
-    <ion-item *ngIf="error" class="login_error">
-    {{error}}
-    </ion-item>
+  <div *ngIf="isAuth === false">
+    <h1 primary text-center>Se connecter</h1>
+    <p primary text-center>Connectez-vous à votre compte pour pouvoir ajouter les produits que vous consommez et qui ne sont pas encore dans la base de donnée.</p>
+    <br>
+    <ion-list class="login_list">
+      <ion-item>
+        <ion-label fixed>Email</ion-label>
+        <ion-input type="text" [(ngModel)]="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>Password</ion-label>
+        <ion-input type="password" [(ngModel)]="password"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="error" class="login_error">
+      {{error}}
+      </ion-item>
+        <br>
+        <br>
+        <button full (click)="login()">Se connecter</button>
+        <button item-center outline (click)="openSignup()">Créer un compte</button>
+    </ion-list>
+  </div>
+  
+  <div *ngIf="isAuth === true" padding>
+    <div text-center>
+      <h1 primary>
+        Salut User !
+      </h1>
+      <p secondarytext>
+        Maintenant que tu est connecté tu peux ajouter un produit si il n'est pas répértorié dans la base de donnée.
+      </p>
       <br>
-      <br>
-      <button full (click)="login()">Se connecter</button>
-      <button item-center outline (click)="openSignup()">Créer un compte</button>
-  </ion-list>
+      <button outline primary>Modifier mes infos</button>
+      <button outline danger>Se déconnecter</button>
+    </div>
+    </div>
+
+
 </ion-content>
