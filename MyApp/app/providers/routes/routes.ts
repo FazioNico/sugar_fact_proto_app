@@ -6,6 +6,8 @@ import { SearchPage }         from '../../pages/search/search';
 import { ProductPage }        from '../../pages/product/product';
 import { AddPage }            from '../../pages/add/add';
 
+import { LoginPage }          from '../../pages/login/login';
+
 @Injectable()
 export class Routes {
 
@@ -15,6 +17,7 @@ export class Routes {
   SEARCH: string              = "search"
   PRODUCT: string             = "product"
   ADD: string                 = "add"
+  LOGIN: string               = "login"
 
   constructor(){
 
@@ -23,6 +26,7 @@ export class Routes {
     this.routes[this.SEARCH]  = SearchPage
     this.routes[this.PRODUCT] = ProductPage
     this.routes[this.ADD]     = AddPage
+    this.routes[this.LOGIN]     = LoginPage
 
   }
 
