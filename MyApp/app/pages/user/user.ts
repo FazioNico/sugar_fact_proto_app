@@ -25,7 +25,7 @@ import {Routes} from '../../providers/routes/routes';
   directives: [HeaderContent]
 })
 export class UserPage {
-  isAuth:boolean = true;
+  isAuth:boolean = false;
   email:string;
   password:string;
   error:string;
