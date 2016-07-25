@@ -28,7 +28,6 @@ export class HeaderContent {
   }
 
   onClickLogin(){
-    console.log('onClickLogin')
     this.clickLog.emit({})
   }
 
