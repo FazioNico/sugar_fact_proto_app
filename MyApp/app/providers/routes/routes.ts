@@ -7,6 +7,7 @@ import { ProductPage }        from '../../pages/product/product';
 import { AddPage }            from '../../pages/add/add';
 
 import { UserPage }          from '../../pages/user/user.ts';
+//import { FirebaseService }   from '../firebase/firebase';
 
 @Injectable()
 export class Routes {
@@ -19,7 +20,9 @@ export class Routes {
   ADD: string                 = "add"
   USER: string               = "user"
 
-  constructor(){
+  constructor(
+    //private auth:FirebaseService
+  ){
 
     this.routes[this.HOME]    = HomePage
     this.routes[this.SCAN]    = ScanPage
@@ -31,7 +34,20 @@ export class Routes {
   }
 
   getPage(id){
-    const   route = this.routes[id]
+    let   route = this.routes[id]
+/*
+    if(id == 'add'){
+      this.auth.fireAuth.onAuthStateChanged((user) => {
+        if (user) {
+          // If there's a user take him to the home page.
+          route = this.routes[id]
+        } else {
+          // If there's no user logged in send him to the LoginPage
+          route = this.routes[this.USER]
+        }
+      })
+    }
+*/
     return  route
   }
 

@@ -20,6 +20,7 @@ import { Content }          from 'ionic-angular';
 import { Camera }           from 'ionic-native';
 
 import { ApiService }       from '../../providers/api-service/api-service';
+import { FirebaseService }       from '../../providers/firebase/firebase';
 import { HeaderContent }    from '../../components/header-content/header-content';
 
 /*
@@ -35,7 +36,10 @@ import { HeaderContent }    from '../../components/header-content/header-content
     HeaderContent,
     FORM_DIRECTIVES
   ],
-  providers: [ApiService]
+  providers: [
+    ApiService,
+    FirebaseService
+  ]
 })
 export class AddPage {
 
