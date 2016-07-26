@@ -1,22 +1,28 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import {Observable} from "rxjs/Observable";
+/**
+* @Author: Nicolas Fazio <webmaster-fazio>
+* @Date:   25-07-2016
+* @Email:  contact@nicolasfazio.ch
+* @Last modified by:   webmaster-fazio
+* @Last modified time: 26-07-2016
+*/
+
+import { Injectable }           from '@angular/core';
+import { Http }                 from '@angular/http';
+import { Observable }           from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 
-import {NavController, Alert} from 'ionic-angular';
-import * as firebase from 'firebase';
+import { NavController, Alert } from 'ionic-angular';
+import * as firebase            from 'firebase';
 
 @Injectable()
 export class FirebaseService {
 
-    public fireAuth: any;
-    public userProfile: any;
-    local: Storage;
-
+    fireAuth:     any;
+    userProfile:  any;
 
     constructor(public nav: NavController) {
-      this.fireAuth = firebase.auth();
-      this.userProfile = firebase.database().ref('/userProfile');
+      this.fireAuth     = firebase.auth();
+      this.userProfile  = firebase.database().ref('/userProfile');
     }
 
     loginUserFB(email: string, password: string): any {
@@ -35,11 +41,11 @@ export class FirebaseService {
         })
       }, (error) => {
         var errorMessage: string = error.message;
-          let prompt = Alert.create({
+        let prompt = Alert.create({
             message: errorMessage,
             buttons: [{text: "Ok"}]
-          });
-          this.nav.present(prompt);
+        });
+        this.nav.present(prompt);
       });
     }
 
