@@ -6,8 +6,8 @@
 * @Last modified time: 26-07-2016
 */
 
-import { Component }       from '@angular/core';
-import { ViewChild }       from '@angular/core';
+import { Component }        from '@angular/core';
+import { ViewChild }        from '@angular/core';
 import {
   FORM_DIRECTIVES,
   FormBuilder,
@@ -22,7 +22,8 @@ import {
 }                           from 'ionic-angular';
 import { Camera }           from 'ionic-native';
 
-import { ApiService }       from '../../providers/api-service/api-service';
+//import { ApiService }       from '../../providers/api-service/api-service';
+import { Store }            from '../../providers/store/store';
 import { HeaderContent }    from '../../components/header-content/header-content';
 
 /*
@@ -39,7 +40,7 @@ import { HeaderContent }    from '../../components/header-content/header-content
     FORM_DIRECTIVES
   ],
   providers: [
-    ApiService
+    Store
   ]
 })
 export class AddPage {
@@ -54,7 +55,7 @@ export class AddPage {
 
   constructor(
     private   nav         : NavController,
-    public    apiService  : ApiService,
+    private   _st         : Store,
     private   fb          : FormBuilder,
     private   params      : NavParams
   ) {
@@ -114,12 +115,10 @@ export class AddPage {
 
   /** Event Methode ***/
   onSubmit(){
-    //this.myData = formData;
-    console.log(this.myForm)
+    //console.log(this.myForm)
     if(this.myForm.status == 'VALID'){
-      console.log('Form valid -> submitted ');
+      console.log('Form valid -> ready to submitted ');
       this.product                  = this.myForm.value
-
       let dataReady:any             = {}
       dataReady.code                = this.product.barcode
       dataReady.product_name        = this.product.name
@@ -135,10 +134,19 @@ export class AddPage {
       dataReady.ingredients_text    = this.product.ingredients
       dataReady.lang                = 'fr';
 
-      //let resultPost = this.apiService.save(this.SerializeParams(dataReady));
-      let resultPost = 'TEST: Post Form OK'
+      let resultPost = this._st.savedata(this.SerializeParams(dataReady));
+      //let resultPost = 'TEST befor use aip: Post Form OK'
       console.log(resultPost)
       this.productAdded = true;
+
+      /*** test to post image product to API ** /
+       let dataImg = image from input
+       let resultPostImg = this._st.saveImg(dataImg, this.product.barcode);
+
+      /***
+      * But test not working.. dont'know how to get image from input
+      * and send to api as  multipart/form-data format =>  need suport
+      ***/
     }
   }
 

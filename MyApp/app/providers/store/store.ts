@@ -149,7 +149,12 @@ export class Store implements OnInit{
     return this._api.getCategorieData(value)
   }
 
-
+  savedata(data){
+    return this._api.save(data)
+  }
+  saveImg(img,barcode){
+    return this._api.postImg(img,barcode)
+  }
 
   /*** LocalStorageService Methode ***/
   getDataLS(){

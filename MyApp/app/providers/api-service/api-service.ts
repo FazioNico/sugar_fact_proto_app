@@ -1,8 +1,15 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { Injectable }   from '@angular/core';
+import {
+  Http,
+  Response,
+  Headers,
+  RequestOptions,
+  URLSearchParams
+}                       from '@angular/http';
+
+import { Observable }   from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-import {Observable} from 'rxjs/Observable';
 
 /*
   Generated class for the ApiService provider.
@@ -10,6 +17,7 @@ import {Observable} from 'rxjs/Observable';
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
+
 @Injectable()
 export class ApiService {
 
@@ -24,15 +32,21 @@ export class ApiService {
     format:string         = '&search_simple=1&json=1';
     parmUrl:string;
 
-    postUrlProduct:string = 'http://world.openfoodfacts.org/cgi/product_jqm2.pl';
+    postUrlProduct:string     = 'http://world.openfoodfacts.org/cgi/product_jqm2.pl';
     postUrlProductTest:string = 'http://world.openfoodfacts.net/cgi/product_jqm2.pl';
-    user:string           = 'fazio';
-    password:string       = 'OFF2663000?_';
+    postImgProduct: string    = 'http://world.openfoodfacts.org/cgi/product_image_upload.pl';
+
+    //user:string           = 'fazio';
+    //password:string       = 'OFF2663000?_';
+    user:string           = 'off';
+    password:string       = 'off';
 
     constructor(
-      public http   : Http
+      public http : Http
     ) {
     }
+
+    /*** Get Methode ***/
 
     getData(value){
       this.parmUrl = value;
@@ -55,47 +69,44 @@ export class ApiService {
         .map(res => res.json())
     }
 
-    // add new product
+    /*** Save Methode ***/
+
     save(product)   {
       console.log('save befor server')
-      return this.post(product)
+      return this.postData(product)
       .subscribe((data)=> {
         console.log(data)
       });
     }
 
-    private post(productDataURI: string): Observable<any> {
-      productDataURI += '&user_id=' + this.user + '&password=' + this.password
-      /**
-      let fd = new FormData();
-      let headers = new Headers({
-        //'Content-Type': 'application/json'
-        'Content-Type': 'multipart/form-data'
-      });
-      fd.append('data', JSON.stringify(product));
+    /**
+    * function working but retune 'Acces-Control-Allow-Origin'
+    * => need suport
+    **/
+    private postData(productDataURI: string): Observable<any> {
+      //productDataURI += '&user_id=' + this.user + '&password=' + this.password;
       return this.http
-                 .post(this.postUrlProductTest, fd, {headers: headers})
-                 .toPromise()
-                 .then(res => res.json().data)
-                 .catch(this.handleError);
-      **/
-       //product.user_id = 'off';
-       //product.password = 'off';
-       //console.log(product)
-       // Parameters obj-
-       //let params: URLSearchParams = new URLSearchParams();
-       //params.set('code', product.code);
-
-       // option seting
-       return this.http
-                  .get(this.postUrlProduct+productDataURI)
-                  .map(res => res.json())
-                  /*
-                  .toPromise()
-                  .then(res => res.json())
-                  //.catch(this.handleError);
-                  */
+                .get(this.postUrlProduct+productDataURI)
+                .map(res => res.json())
     }
+
+    /** test to post image product to API **/
+    postImg(img,barcode){
+      let formData = new FormData();
+      formData.append("code",  barcode);
+      formData.append("imagefield",  'front');
+      formData.append("imgupload_front",  img);
+      let headers = new Headers({'Content-Type': 'multipart/form-data'})
+      let options = new RequestOptions({headers: headers})
+      this.http.post(this.postImgProduct+'?code='+barcode, formData, options)
+      .toPromise()
+      .then(res => res.json().data)
+      .catch(this.handleErrorProm);
+    }
+    /***
+    * But test not working.. dont'know how to get image from input
+    * and send to api as  multipart/form-data format =>  need suport
+    ***/
 
     private handleErrorProm(error: any) {
       console.error('An error occurred', error);
