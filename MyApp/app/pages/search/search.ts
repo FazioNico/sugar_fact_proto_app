@@ -83,6 +83,7 @@ export class SearchPage {
           (data) => {
             this._st.data = data
             this.searchResultData = data
+            this.hideLoading()
           },
           (err) => {
             console.log(err)
@@ -107,6 +108,7 @@ export class SearchPage {
             if(data.status === 1){
               this.searchResultData = []
               this.searchResultData.push(data.product)
+              this.hideLoading()
               //console.log(data.product)
             }
             else {
@@ -123,7 +125,15 @@ export class SearchPage {
   /** Events Methode **/
   onInutChange(searchDataInput){
     if (<number>searchDataInput.value.length < 3) return;
+
     Keyboard.close()
+
+    this.loading = Loading.create({
+      content: "Chargement...",
+      dismissOnPageChange: true,
+    });
+    this.nav.present(this.loading);
+
     if (isNaN(searchDataInput.value) === true){
         /** query is a string **/
         this.queryString(searchDataInput)
@@ -135,7 +145,12 @@ export class SearchPage {
   }
 
   onGoProduct(event,id){
+    this.loading = Loading.create({
+      content: "Chargement...",
+      dismissOnPageChange: true,
+    });
     this.nav.present(this.loading);
+
     this.nav.push(
       this.routes.getPage(this.routes.PRODUCT),
       { id: event.id }
@@ -162,12 +177,13 @@ export class SearchPage {
 
   /*** Ionic ViewEvent ***/
   ionViewDidLeave(){
-    this.hideLoading()
+    //this.hideLoading()
   }
 
   ionViewDidEnter(){
     this.loading = Loading.create({
-      content: "Chargement..."
+      content: "Chargement...",
+      dismissOnPageChange: true,
     });
   }
 
