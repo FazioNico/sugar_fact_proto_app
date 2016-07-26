@@ -145,11 +145,13 @@ export class SearchPage {
   }
 
   onGoProduct(event,id){
+    /*
     this.loading = Loading.create({
       content: "Chargement...",
       dismissOnPageChange: true,
     });
     this.nav.present(this.loading);
+    */
 
     this.nav.push(
       this.routes.getPage(this.routes.PRODUCT),

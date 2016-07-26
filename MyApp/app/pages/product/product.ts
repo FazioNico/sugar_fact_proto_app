@@ -7,7 +7,7 @@
 */
 
 import { Component, ViewChild }               from '@angular/core';
-import { NavController, NavParams, Content }  from 'ionic-angular';
+import { NavController, NavParams, Content, Loading }  from 'ionic-angular';
 
 import { Store }                              from '../../providers/store/store';
 import { FirebaseService }                    from '../../providers/firebase/firebase';
@@ -67,6 +67,8 @@ export class ProductPage {
 
   isAuth:any = false;
   email:string;
+
+  loading:Loading;
 
   @ViewChild(Content)       content       : Content;
   @ViewChild(ProductFocus)  productFocus  : ProductFocus;
@@ -240,9 +242,16 @@ export class ProductPage {
 
   }
 
-
+  ionViewLoaded(){
+    this.loading = Loading.create({
+      content: "Chargement...",
+      dismissOnPageChange: true,
+    });
+    this.nav.present(this.loading);
+  }
 
   ionViewDidEnter(){
+    this.loading.dismiss();
     //let ionNavBarTitle = document.getElementsByClassName('toolbar-content');
     //ionNavBarTitle[1].classList.add('hide')
     //this.animateSugar()
