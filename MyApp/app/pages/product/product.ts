@@ -1,3 +1,11 @@
+/**
+* @Author: Nicolas Fazio <webmaster-fazio>
+* @Date:   18-07-2016
+* @Email:  contact@nicolasfazio.ch
+* @Last modified by:   webmaster-fazio
+* @Last modified time: 26-07-2016
+*/
+
 import { Component, ViewChild }               from '@angular/core';
 import { NavController, NavParams, Content }  from 'ionic-angular';
 
@@ -159,7 +167,6 @@ export class ProductPage {
       //console.log(this.productData)
       //console.log(this.focusData)
     }
-    //this.productFocus.calculeSugar()
   }
 
   /** Events Methode **/
@@ -189,13 +196,6 @@ export class ProductPage {
     setTimeout(function(){
       self.productFocus.animateSugar()
     }, 500)
-
-    /*
-    let self = this;
-    setTimeout(function(){
-      self.animateSugar()
-    }, 500)
-    */
   }
 
   onClickAdd(){
