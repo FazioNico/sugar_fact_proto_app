@@ -10,7 +10,7 @@ import { Component, PLATFORM_DIRECTIVES, provide } from '@angular/core';
 import { Platform, ionicBootstrap }     from 'ionic-angular';
 import { AuthHttp, AuthConfig }         from 'angular2-jwt';
 import { Http, HTTP_PROVIDERS }         from '@angular/http';
-import { StatusBar }                    from 'ionic-native';
+import { StatusBar, Keyboard }          from 'ionic-native';
 
 import { Routes }                       from './providers/routes/routes'
 import { HeaderContent }                from './components/header-content/header-content';
@@ -47,6 +47,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       //StatusBar.styleDefault();
+      Keyboard.hideKeyboardAccessoryBar(false);
       if(navigator.onLine == false){
         console.log('disconnected')
       }
