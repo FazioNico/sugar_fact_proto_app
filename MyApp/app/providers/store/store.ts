@@ -3,7 +3,7 @@
 * @Date:   13-07-2016
 * @Email:  contact@nicolasfazio.ch
 * @Last modified by:   webmaster-fazio
-* @Last modified time: 22-07-2016
+* @Last modified time: 26-07-2016
 */
 
 import { Injectable, OnInit }   from '@angular/core';
@@ -42,9 +42,9 @@ export class Store implements OnInit{
   ){
 
     if(navigator.onLine == false){
-      //console.log('disconnected')
       this.online = false
     }
+    // this.online = false
   }
 
   /*** call Methode ***/
@@ -53,13 +53,13 @@ export class Store implements OnInit{
     let dataLS = this.getDataLS()             /** get data LS  **/
 
     if(this.online == true){
-      console.log('online!')
+      //console.log('online!')
       let dataAPI = this.getDataAPI(value)    /** get data API  **/
       this.setDataToCombine(dataAPI,dataLS)   /** combin data & save to LS  **/
       dataReady = dataAPI                     /** return data API **/
     }
     else {
-      console.log('offline!')
+      //console.log('offline!')
       dataReady =  this.dataToObservable(dataLS, 'product_name', value)
     }
     return dataReady;
@@ -85,27 +85,28 @@ export class Store implements OnInit{
 
   /*** formationg Method ***/
   dataToObservable(dataLS, key, value){
-    let lowerValue = _.lowerCase(value)
-    console.log(lowerValue)
-
+    let newArray = []
     let promise = dataLS
       .then(
       (data) => {
-        /*
-        //// test for filter by lower product_name => not working :-(
+        //// for get only one product
+        if(key == 'id'){
+          let test =  _.filter(data,{ [key]: value })
+          return test
+        }
+        //// Else : Bof -  filter for search in all product
+        ///  .then return list of product contains value (like regex)
         _.forIn(data, function(val, key) {
-          if(val.product_name == value){
-            return data
+          if(_.lowerCase(val.product_name).search(_.lowerCase(value)) != -1){
+            newArray.push(val)
           }
-          //console.log(_.lowerCase(val.product_name));
+          return data
         });
-        */
-        let test =  _.filter(data,{ [key]: value })
-        return test
+        return newArray
+        //// Eof - filter for search product
       }
     )
-    let source = fromPromise(promise)
-    return source
+    return fromPromise(promise)
   }
 
   setDataToCombine(ObservableDataAPI,PromiseDataLS){
@@ -173,11 +174,8 @@ export class Store implements OnInit{
   }
 
   getProductDataLS(value){
-      let dataReady;
       let dataLS = this.getDataLS()             /** get data LS  **/
-      dataReady =  this.dataToObservable(dataLS, 'id', value)
-      //return this._ls.getProductData(value);
-      return dataReady;
+      return this.dataToObservable(dataLS, 'id', value);
   }
 
   setDataLS(dataArray){
