@@ -9,6 +9,8 @@
 import { Component, ViewChild }             from '@angular/core';
 import { NavController, Loading, Content }  from 'ionic-angular';
 
+import { Keyboard }              from 'ionic-native';
+
 import { Routes }                           from '../../providers/routes/routes';
 import { Store }                            from '../../providers/store/store';
 import { FirebaseService }                    from '../../providers/firebase/firebase';
@@ -121,6 +123,7 @@ export class SearchPage {
   /** Events Methode **/
   onInutChange(searchDataInput){
     if (<number>searchDataInput.value.length < 3) return;
+    Keyboard.close()
     if (isNaN(searchDataInput.value) === true){
         /** query is a string **/
         this.queryString(searchDataInput)
