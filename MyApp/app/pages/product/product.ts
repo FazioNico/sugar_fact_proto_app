@@ -221,14 +221,11 @@ export class ProductPage {
   onPageScroll(event) {
       //console.log(event);
       let ionNavBarToolbar = event.target.offsetParent.previousElementSibling.firstElementChild.firstElementChild;
-      //let ionContentTitle = document.getElementsByTagName('h1');
-      //console.log(ionContentTitle)
       if(event.target.scrollTop >= 5){
           ionNavBarToolbar.classList.add('scroll')
 
           this.titleUnvisible = false;
           this.titleH1Unvisible = true;
-          //ionContentTitle[1].classList.add('opacity')
       }
       else {
         if (ionNavBarToolbar.classList.contains('scroll') == true ){
@@ -236,7 +233,6 @@ export class ProductPage {
 
           this.titleUnvisible = true;
           this.titleH1Unvisible = false;
-          //ionContentTitle[1].classList.remove('opacity')
         }
       }
 
@@ -252,10 +248,6 @@ export class ProductPage {
 
   ionViewDidEnter(){
     this.loading.dismiss();
-    //let ionNavBarTitle = document.getElementsByClassName('toolbar-content');
-    //ionNavBarTitle[1].classList.add('hide')
-    //this.animateSugar()
-
   }
   ngAfterViewInit() {
     this.content.addScrollListener((event) =>  {

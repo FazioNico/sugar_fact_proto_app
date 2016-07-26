@@ -3,17 +3,21 @@
 * @Date:   18-07-2016
 * @Email:  contact@nicolasfazio.ch
 * @Last modified by:   webmaster-fazio
-* @Last modified time: 24-07-2016
+* @Last modified time: 26-07-2016
 */
 
 import { Component, ViewChild }             from '@angular/core';
-import { NavController, Loading, Content }  from 'ionic-angular';
+import {
+  NavController,
+  Loading,
+  Content
+}                                           from 'ionic-angular';
 
-import { Keyboard }              from 'ionic-native';
+import { Keyboard }                         from 'ionic-native';
 
 import { Routes }                           from '../../providers/routes/routes';
 import { Store }                            from '../../providers/store/store';
-import { FirebaseService }                    from '../../providers/firebase/firebase';
+import { FirebaseService }                  from '../../providers/firebase/firebase';
 
 import { HeaderContent }                    from '../../components/header-content/header-content';
 import { SearchResult }                     from '../../components/search-result/search-result';
@@ -55,17 +59,16 @@ export class SearchPage {
   @ViewChild(Content)       content       : Content;
 
   constructor(
-    private nav     : NavController,
-    private routes  : Routes,
-    private _st     : Store,
-    public authData         : FirebaseService
+    private nav       : NavController,
+    private routes    : Routes,
+    private _st       : Store,
+    public authData   : FirebaseService
   ){
     this.loading;
     this.authData = authData;
     this.authData.fireAuth.onAuthStateChanged((user) => {
       if (user) {
         this.isAuth = true
-        //this.email = user.email
       } else {
         this.isAuth = false
       }
