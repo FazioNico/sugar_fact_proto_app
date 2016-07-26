@@ -3,7 +3,7 @@
 * @Date:   12-07-2016
 * @Email:  contact@nicolasfazio.ch
 * @Last modified by:   webmaster-fazio
-* @Last modified time: 24-07-2016
+* @Last modified time: 26-07-2016
 */
 
 import { Component }       from '@angular/core';
@@ -15,12 +15,14 @@ import {
   AbstractControl,
   ControlGroup
 }                           from '@angular/common';
-import { NavController, NavParams }    from 'ionic-angular';
-import { Content }          from 'ionic-angular';
+import {
+  NavController,
+  NavParams ,
+  Content
+}                           from 'ionic-angular';
 import { Camera }           from 'ionic-native';
 
 import { ApiService }       from '../../providers/api-service/api-service';
-import { FirebaseService }       from '../../providers/firebase/firebase';
 import { HeaderContent }    from '../../components/header-content/header-content';
 
 /*
@@ -37,8 +39,7 @@ import { HeaderContent }    from '../../components/header-content/header-content
     FORM_DIRECTIVES
   ],
   providers: [
-    ApiService,
-    FirebaseService
+    ApiService
   ]
 })
 export class AddPage {
@@ -49,44 +50,36 @@ export class AddPage {
   product:any          = null;
   productAdded:boolean = false;
 
-  /*
-  myData: any;
-  name: string;
-  denomination:string;
-  quantity:string;
-  ingredients: string;
-  */
-
   @ViewChild(Content) content : Content;
 
   constructor(
-    private nav       : NavController,
-    public apiService : ApiService,
-    private fb        : FormBuilder,
-    private params          : NavParams
+    private   nav         : NavController,
+    public    apiService  : ApiService,
+    private   fb          : FormBuilder,
+    private   params      : NavParams
   ) {
-    console.log(this.params.get('id'))
+    // if get nav params => set input barcode value
     if(this.params.get('id')){this.barcode = this.params.get('id')}
-    //this.myData = null;
+    // Set Form ControlGroup
     this.myForm = fb.group({
       barcode:      ["", Validators.required],
       name:         ["", Validators.required],
       quantity:     ["", Validators.required],
       ingredients:  ["", Validators.required],
       nutriments: fb.group({
-          energy:     ["", Validators.required],
-          proteins:   ["", Validators.required],
-          fat:        ["", Validators.required],
-          fat_sat:    ["", Validators.required],
-          sugar:      ["", Validators.required],
-          sugar_sat:  ["", Validators.required],
-          fiber:      ["", Validators.required],
-          salt:       ["", Validators.required],
+          energy:     [""],
+          proteins:   [""],
+          fat:        [""],
+          fat_sat:    [""],
+          sugar:      [""],
+          sugar_sat:  [""],
+          fiber:      [""],
+          salt:       [""],
       })
     })
   }
 
-
+  /*** Core Methode ***/
   getPicture(){
     console.log('pic starting')
     Camera.getPicture({
@@ -104,10 +97,25 @@ export class AddPage {
     )
   }
 
-  onSubmit(){
-    console.log(this.myForm)
-    //this.myData = formData;
+  SerializeParams<T>(Data: T): string|number {
+     let keys:any = Object.keys(Data);
+     let stringParams: string = "?";
+     for (let i in keys) {
+         let name = keys[i];
+         if(Data[name].length >= 1){
+           if (i == '0')
+               stringParams += name + "=" + Data[name];
+           else
+               stringParams += "&" + name + "=" + Data[name]
+         }
+     }
+     return stringParams;
+  };
 
+  /** Event Methode ***/
+  onSubmit(){
+    //this.myData = formData;
+    console.log(this.myForm)
     if(this.myForm.status == 'VALID'){
       console.log('Form valid -> submitted ');
       this.product                  = this.myForm.value
@@ -116,7 +124,6 @@ export class AddPage {
       dataReady.code                = this.product.barcode
       dataReady.product_name        = this.product.name
       dataReady.quantity            = this.product.quantity
-
       dataReady.nutriment_energy    = this.product.nutriments.energy
       dataReady.nutriment_fat       = this.product.nutriments.fat
       dataReady.nutriment_fat_sat   = this.product.nutriments.fat_sat
@@ -141,25 +148,13 @@ export class AddPage {
     el.children[0].classList.toggle("rotate")
   }
 
-
+  onbackToSearch(){
+    this.nav.popToRoot()
+  }
 
   ngAfterViewInit() {
     let ionHeader = this.content.getElementRef().nativeElement.previousElementSibling
     ionHeader.classList.add('scroll')
   }
 
-  SerializeParams<T>(Data: T): string|number {
-     let keys:any = Object.keys(Data);
-     let stringParams: string = "?";
-     for (let i in keys) {
-         let name = keys[i];
-         if(Data[name].length >= 1){
-           if (i == '0')
-               stringParams += name + "=" + Data[name];
-           else
-               stringParams += "&" + name + "=" + Data[name]
-         }
-     }
-     return stringParams;
-  };
 }
