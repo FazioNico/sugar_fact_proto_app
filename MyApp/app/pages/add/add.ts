@@ -15,7 +15,7 @@ import {
   AbstractControl,
   ControlGroup
 }                           from '@angular/common';
-import { NavController }    from 'ionic-angular';
+import { NavController, NavParams }    from 'ionic-angular';
 import { Content }          from 'ionic-angular';
 import { Camera }           from 'ionic-native';
 
@@ -62,9 +62,11 @@ export class AddPage {
   constructor(
     private nav       : NavController,
     public apiService : ApiService,
-    private fb        : FormBuilder
+    private fb        : FormBuilder,
+    private params          : NavParams
   ) {
-
+    console.log(this.params.get('id'))
+    if(this.params.get('id')){this.barcode = this.params.get('id')}
     //this.myData = null;
     this.myForm = fb.group({
       barcode:      ["", Validators.required],

@@ -2,6 +2,8 @@ import { Component, ViewChild }               from '@angular/core';
 import { NavController, NavParams, Content }  from 'ionic-angular';
 
 import { Store }                              from '../../providers/store/store';
+import { FirebaseService }                    from '../../providers/firebase/firebase';
+//import { Routes }                             from '../../providers/routes/routes';
 
 import { HeaderContent }                      from '../../components/header-content/header-content';
 import { ProductHeader }                      from '../../components/product-header/product-header';
@@ -13,10 +15,8 @@ import { ProductRelated }                     from '../../components/product-rel
 import { ProductNotfound }                    from '../../components/product-notfound/product-notfound';
 
 import { AddPage }                            from '../add/add';
-import { UserPage }                            from '../user/user';
+import { UserPage }                           from '../user/user';
 
-import {FirebaseService} from '../../providers/firebase/firebase';
-//import { Routes }                            from '../../providers/routes/routes';
 
 /*
   Generated class for the ProductPage page.
@@ -57,9 +57,6 @@ export class ProductPage {
   titleUnvisible:boolean = true;
   titleH1Unvisible:boolean = false;
 
-  scrollTopValue:any ='0px';
-  scrollTopContentValue:any = '268px';
-
   isAuth:any = false;
   email:string;
 
@@ -90,7 +87,7 @@ export class ProductPage {
   /** Core Methode **/
   getData(barcode){
     this.productID = barcode;
-    this._st.getProductData(this.productID)
+    this._st.getProductData(barcode)
       .subscribe(
         (data) => {
           if(data.status){
@@ -203,7 +200,12 @@ export class ProductPage {
 
   onClickAdd(){
     if(this.isAuth == true){
-      this.nav.push(AddPage)
+      if(isNaN(+this.productID) === true){
+        this.nav.push(AddPage)
+      }
+      else {
+        this.nav.push(AddPage, { id: this.productID })
+      }
     }
     else {
       this.nav.push(UserPage)
