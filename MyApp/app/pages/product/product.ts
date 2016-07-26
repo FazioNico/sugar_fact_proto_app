@@ -2,7 +2,6 @@ import { Component, ViewChild }               from '@angular/core';
 import { NavController, NavParams, Content }  from 'ionic-angular';
 
 import { Store }                              from '../../providers/store/store';
-//import { ApiService }                         from '../../providers/api-service/api-service';
 
 import { HeaderContent }                      from '../../components/header-content/header-content';
 import { ProductHeader }                      from '../../components/product-header/product-header';
@@ -14,6 +13,10 @@ import { ProductRelated }                     from '../../components/product-rel
 import { ProductNotfound }                    from '../../components/product-notfound/product-notfound';
 
 import { AddPage }                            from '../add/add';
+import { UserPage }                            from '../user/user';
+
+import {FirebaseService} from '../../providers/firebase/firebase';
+//import { Routes }                            from '../../providers/routes/routes';
 
 /*
   Generated class for the ProductPage page.
@@ -34,7 +37,10 @@ import { AddPage }                            from '../add/add';
     ProductRelated,
     ProductNotfound
   ],
-  providers: [Store]
+  providers: [
+    Store,
+    FirebaseService
+  ]
 })
 export class ProductPage {
 
@@ -52,7 +58,10 @@ export class ProductPage {
   titleH1Unvisible:boolean = false;
 
   scrollTopValue:any ='0px';
-  scrollTopContentValue:any = '268px'
+  scrollTopContentValue:any = '268px';
+
+  isAuth:any = false;
+  email:string;
 
   @ViewChild(Content)       content       : Content;
   @ViewChild(ProductFocus)  productFocus  : ProductFocus;
@@ -61,11 +70,21 @@ export class ProductPage {
   constructor(
     private _st             : Store,
     private nav             : NavController,
-    private params          : NavParams
+    private params          : NavParams,
+    public authData         : FirebaseService
   ) {
-
+      //// Get data with nav parameters
       this.getData(this.params.get('id'))
-      //console.log(this.params.get('id'))
+      //// Check if user Auth == true
+      this.authData = authData;
+      this.authData.fireAuth.onAuthStateChanged((user) => {
+        if (user) {
+          this.isAuth = true
+          this.email = user.email
+        } else {
+          this.isAuth = false
+        }
+      });
   }
 
   /** Core Methode **/
@@ -183,7 +202,12 @@ export class ProductPage {
   }
 
   onClickAdd(){
-    this.nav.push(AddPage)
+    if(this.isAuth == true){
+      this.nav.push(AddPage)
+    }
+    else {
+      this.nav.push(UserPage)
+    }
   }
 
   onClickBack(){
