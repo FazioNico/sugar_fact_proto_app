@@ -89,9 +89,11 @@ export class SearchPage {
             this.hideLoading()
           },
           (err) => {
+            this.hideLoading()
             console.log(err)
           },
           () => {
+            this.hideLoading()
             if(Object.keys(this.searchResultData).length == 0) {
 
               this.nav.push(
