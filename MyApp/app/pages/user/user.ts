@@ -74,7 +74,7 @@ export class UserPage {
     })
     */
   }
-  
+
   capitalise(string) {
       return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
@@ -128,65 +128,6 @@ export class UserPage {
     });
     this.nav.present(prompt);
   }
-/*
-  public registerUser(credentials) {
-    console.log(credentials)
-    this.showLoading()
 
-    this.auth.createUser(credentials).then((authData) => {
-      this.loading.dismiss();
-      let prompt = Alert.create({
-        title: 'Success',
-        subTitle: 'Your new Account was created!',
-        buttons: ['OK']
-      });
-      this.nav.present(prompt);
-    }).catch((error) => {
-      this.showError(error);
-      this.loading.dismiss();
-    });
-  }
-  public login(credentials) {
-    this.showLoading()
-
-    this.auth.login(credentials).then((authData) => {
-      this.loading.dismiss();
-      console.log('loged')
-    }).catch((error) => {
-      this.showError(error);
-    });
-  }
-
-  showLoading() {
-    this.loading = Loading.create({
-      content: 'Please wait...'
-    });
-    this.nav.present(this.loading);
-  }
-
-  showError(text) {
-    setTimeout(() => {
-      this.loading.dismiss();
-    });
-
-    let prompt = Alert.create({
-      title: 'Fail',
-      subTitle: text,
-      buttons: ['OK']
-    });
-    this.nav.present(prompt);
-  }
-
-
-
-  goAdd(){
-      this.nav.push(this.routes.getPage(this.routes.ADD))
-  }
-
-  openSignup(){
-    //let modal = Modal.create(this.routes.getPage(this.routes.SIGNUP));
-    //this.nav.present(modal);
-  }
-*/
 
 }
