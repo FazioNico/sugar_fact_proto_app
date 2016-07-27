@@ -239,15 +239,19 @@ export class ProductPage {
   }
 
   ionViewLoaded(){
+    /*
     this.loading = Loading.create({
       content: "Chargement...",
       dismissOnPageChange: true,
     });
     this.nav.present(this.loading);
+    */
   }
 
   ionViewDidEnter(){
+    /*
     this.loading.dismiss();
+    */
   }
   ngAfterViewInit() {
     this.content.addScrollListener((event) =>  {

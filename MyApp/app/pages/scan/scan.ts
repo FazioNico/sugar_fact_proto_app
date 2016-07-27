@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import {BarcodeScanner} from 'ionic-native';
+import { Component }              from '@angular/core';
+import { NavController, Loading } from 'ionic-angular';
+import {BarcodeScanner}           from 'ionic-native';
 
-import {Routes} from '../../providers/routes/routes'
+import {Routes}                   from '../../providers/routes/routes'
 /*
   Generated class for the ScanPage page.
 
@@ -17,7 +17,7 @@ export class ScanPage {
 
   barcodeData: BarcodeData;
   scanDetails:any;
-
+  loading:Loading;
   /** Not normally mandatory but create bugs if ommited. **/
 
   static get parameters() {
@@ -34,6 +34,8 @@ export class ScanPage {
   scan() {
     BarcodeScanner.scan()
     .then((result) => {
+
+
       if (!result.cancelled) {
         const barcodeData = new BarcodeData(result.text, result.format);
         this.goScanDetails(barcodeData);
@@ -50,6 +52,8 @@ export class ScanPage {
   goScanDetails(datacode){
       let param = datacode.text
       this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: param });
+
+
   }
 }
 
