@@ -85,6 +85,7 @@ export class ApiService {
     **/
     private postData(productDataURI: string): Observable<any> {
       //productDataURI += '&user_id=' + this.user + '&password=' + this.password;
+
       return this.http
                 .get(this.postUrlProduct+productDataURI)
                 .map(res => res.json())

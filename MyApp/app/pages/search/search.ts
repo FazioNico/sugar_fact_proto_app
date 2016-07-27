@@ -115,6 +115,7 @@ export class SearchPage {
               //console.log(data.product)
             }
             else {
+              this.hideLoading()
               this.searchResultData = []
               this.nav.push(
                 this.routes.getPage(this.routes.PRODUCT),
