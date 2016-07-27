@@ -19,42 +19,46 @@
 
 <ion-content padding>
 
-  <div *ngIf="isAuth === false">
-    <h1 primary text-center>Se connecter</h1>
-    <p primary text-center>Connecte toi à ton compte pour pouvoir ajouter les produits que tu consommes et qui ne sont pas encore dans la base de donnée.</p>
-    <br>
+  <div *ngIf="isAuth === false"  class="table">
+    <div class="table-cell">
+      
+      <h1 primary text-center>Se connecter</h1>
+      <p primary text-center>Connecte toi à ton compte pour pouvoir ajouter les produits que tu consommes et qui ne sont pas encore dans la base de donnée.</p>
+      <br>
 
-    <form #loginForm="ngForm">
-      <ion-item>
-        <ion-label floating>Email</ion-label>
-        <ion-input type="email" ngControl="email"></ion-input>
-      </ion-item>
+      <form #loginForm="ngForm">
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input type="email" ngControl="email"></ion-input>
+        </ion-item>
 
-      <ion-item>
-        <ion-label floating>Password</ion-label>
-        <ion-input type="password" ngControl="password"></ion-input>
-      </ion-item>
+        <ion-item>
+          <ion-label floating>Password</ion-label>
+          <ion-input type="password" ngControl="password"></ion-input>
+        </ion-item>
 
-      <div padding>
-        <button block (click)="loginUser(loginForm.value)">Login</button>
-        <button block (click)="goToSignup(loginForm.value)">Create New Account</button>
-      </div>
-    </form>
+        <div padding>
+          <button block (click)="loginUser(loginForm.value)">Login</button>
+          <button block (click)="goToSignup(loginForm.value)">Create New Account</button>
+        </div>
+      </form>
+
+    </div>
   </div>
 
-  <div *ngIf="isAuth === true" padding>
-    <div text-center>
-      <h1 primary>
-        Salut {{email}} !
-      </h1>
-      <p secondarytext>
-        Maintenant que tu es connecté tu peux ajouter un produit quand il n'est pas répértorié dans la base de donnée.
-      </p>
-      <br>
-      <button outline primary>Modifier mes infos</button>
-      <button outline danger (click)="gologout()">Se déconnecter</button>
-    </div>
-    </div>
+  <div *ngIf="isAuth === true" padding class="table">
+      <div class="table-cell" text-center>
+        <h1 primary>
+          Salut {{email}} !
+        </h1>
+        <p secondarytext>
+          Maintenant que tu es connecté tu peux ajouter un produit quand il n'est pas répértorié dans la base de donnée.
+        </p>
+        <br>
+        <button outline primary>Modifier mes infos</button>
+        <button outline danger (click)="gologout()">Se déconnecter</button>
+      </div>
+  </div>
 
 
 </ion-content>

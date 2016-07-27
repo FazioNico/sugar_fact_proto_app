@@ -3,23 +3,27 @@
 @Date:   18-07-2016
 @Email:  contact@nicolasfazio.ch
 @Last modified by:   webmaster-fazio
-@Last modified time: 26-07-2016
+@Last modified time: 27-07-2016
 -->
 
 <ion-content padding class="home" blanc text-center>
-  <h1 blanc>My App</h1>
-  <p blanc>
-    Lorem ipsum dolor sit amet, consectetur adipiscing .
-    <br />
-    Elit integer sollicitudin elementum euismod.
-  </p>
-  <div>
-    <p>
-      <button (click)="goScan()" large blanc class="btn-block-50 text-secondary"><ion-icon name="barcode"></ion-icon> Scan</button>
-    </p>
-    <p>
-      <button (click)="goSearch()" large blanc class="btn-block-50 text-secondary"><ion-icon name="search"></ion-icon> Recherche</button>
-    </p>
+  <div class="table">
+    <div class="table-cell">
+      <h1 blanc>Du Sucre ?</h1>
+      <p blanc>
+        Découvre la quantitée de sucres contenus dans tes produits alimentaires favoris.
+      </p>
+      <br>
+      <div>
+        <p>
+          <button (click)="goScan()" large blanc class="btn-block-50 text-secondary"><ion-icon name="barcode"></ion-icon> Scan</button>
+        </p>
+        <p>
+          <button (click)="goSearch()" large blanc class="btn-block-50 text-secondary"><ion-icon name="search"></ion-icon> Recherche</button>
+        </p>
+      </div>
+    </div>
   </div>
+
   <scan-plug></scan-plug>
 </ion-content>
