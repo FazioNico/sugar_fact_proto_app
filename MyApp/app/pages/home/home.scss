@@ -5,7 +5,13 @@
 // @Last modified time: 27-07-2016
 
 .home {
+  background: url(../img/bg-app.png) center center;
+  background-size: cover;
+  background-repeat: no-repeat;
   background-color: #03A9F4;
+}
+.home * {
+  font-weight: 400;
 }
 .btn-block-60 {
     min-width: 60%;
@@ -13,6 +19,7 @@
 .table {
     display: table;
     height: 100%;
+    width:100%;
 }
 .table-cell {
     display: table-cell;
