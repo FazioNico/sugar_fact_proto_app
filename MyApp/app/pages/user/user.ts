@@ -59,7 +59,8 @@ export class UserPage {
       if (user) {
         // If there's a user take him to the home page.
         this.isAuth = true
-        this.email = user.email
+
+        this.email = this.capitalise(user.email.split('@')[0])
       } else {
         // If there's no user logged in send him to the LoginPage
         this.isAuth = false
@@ -73,7 +74,10 @@ export class UserPage {
     })
     */
   }
-
+  
+  capitalise(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  }
 
   loginUser(value){
     this.loading = Loading.create({
@@ -97,7 +101,7 @@ export class UserPage {
       dismissOnPageChange: true,
     });
     this.nav.present(this.loading);
-    
+
     this.authData.signupUser(value.email, value.password)
       .then((data) => {
         this.loading.dismiss();
