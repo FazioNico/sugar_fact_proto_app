@@ -35,7 +35,7 @@ export class FirebaseService {
           this.userProfile.child(authenticatedUser.uid).set({
             email: email
           }).then(() => {
-            console.log('user loged')
+            console.log('user Creat & loged')
           });
 
         })

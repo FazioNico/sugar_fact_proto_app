@@ -80,7 +80,7 @@ export class UserPage {
       dismissOnPageChange: true,
     });
     this.nav.present(this.loading);
-    
+
     this.authData.loginUserFB(value.email, value.password)
     .then((authData) => {
       this.loading.dismiss();
@@ -92,8 +92,16 @@ export class UserPage {
 
   }
 
-  goToSignup(){
-    //this.nav.push(SignupPage);
+  goToSignup(value){
+    this.loading = Loading.create({
+      dismissOnPageChange: true,
+    });
+    this.nav.present(this.loading);
+    
+    this.authData.signupUser(value.email, value.password)
+      .then((data) => {
+        this.loading.dismiss();
+      })
   }
 
   goToResetPassword(){
