@@ -3,7 +3,7 @@
 @Date:   12-07-2016
 @Email:  contact@nicolasfazio.ch
 @Last modified by:   webmaster-fazio
-@Last modified time: 26-07-2016
+@Last modified time: 28-07-2016
 -->
 
 <!--
@@ -19,6 +19,19 @@
 
 <ion-content>
   <div *ngIf="productAdded === false" >
+    <form>
+      <div class="form-group">
+    		<label for="exampleInputEmail1">id test</label>
+    		<input type="number" class="form-control" id="exampleInputEmail1" placeholder="id" [(ngModel)]="idtest">
+    	</div>
+      <div class="form-group">
+    		<label for="exampleInputFile">File input</label>
+    		<input type="file" id="exampleInputFile" (change)="selectFile($event)">
+    	</div>
+    	<button type="submit" class="btn btn-default" (click)="upload();">Submit</button>
+
+    </form>
+
 
     <form [ngFormModel]="myForm"  >
 

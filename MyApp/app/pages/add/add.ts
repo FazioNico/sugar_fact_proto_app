@@ -3,7 +3,7 @@
 * @Date:   12-07-2016
 * @Email:  contact@nicolasfazio.ch
 * @Last modified by:   webmaster-fazio
-* @Last modified time: 26-07-2016
+* @Last modified time: 28-07-2016
 */
 
 import { Component }        from '@angular/core';
@@ -19,13 +19,17 @@ import {
   NavController,
   NavParams ,
   Content
-}                           from 'ionic-angular';
-import { Camera }           from 'ionic-native';
+}                            from 'ionic-angular';
+import { Camera }            from 'ionic-native';
 
-//import { ApiService }       from '../../providers/api-service/api-service';
-import { Store }            from '../../providers/store/store';
-import { HeaderContent }    from '../../components/header-content/header-content';
+//import { ApiService }        from '../../providers/api-service/api-service';
+import { Store }             from '../../providers/store/store';
+import { HeaderContent }     from '../../components/header-content/header-content';
 
+import { MultipartItem }     from "../../plugins/multipart-upload/multipart-item";
+import { MultipartUploader } from "../../plugins/multipart-upload/multipart-uploader";
+
+const URL = 'http://world.openfoodfacts.org/cgi/product_image_upload.pl?code=2000000033861';
 /*
   Generated class for the AddPage page.
 
@@ -50,6 +54,15 @@ export class AddPage {
   base64Image: any     = null;
   product:any          = null;
   productAdded:boolean = false;
+
+  /*** test multipart ***/
+  private uploader:MultipartUploader = new MultipartUploader({url: URL});
+	multipartItem:MultipartItem = new MultipartItem(this.uploader);
+	idtest:string;
+	file: File;
+	upload : () => void;
+	uploadCallback : (data) => void;
+  /** eof **/
 
   @ViewChild(Content) content : Content;
 
@@ -78,9 +91,53 @@ export class AddPage {
           salt:       [""],
       })
     })
+    /*** test multipart ***/
+    this.upload = () => {
+			console.debug("home.ts & upload() ==>");
+			if (null == this.file || null == this.idtest){
+				console.error("home.ts & upload() form invalid.");
+				return;
+			}
+			if (this.multipartItem == null){
+				this.multipartItem = new MultipartItem(this.uploader);
+			}
+			if (this.multipartItem.formData == null)
+				this.multipartItem.formData = new FormData();
+
+      this.multipartItem.formData.append("code",  this.idtest);
+      this.multipartItem.formData.append("imagefield",  'front');
+			this.multipartItem.formData.append("imgupload_front",  this.file);
+
+			this.multipartItem.callback = this.uploadCallback;
+			this.multipartItem.upload();
+		}
+
+		this.uploadCallback = (data) => {
+			console.debug("home.ts & uploadCallback() ==>");
+			this.file = null;
+			if (data){
+				console.debug("home.ts & uploadCallback() upload file success.");
+			}else{
+				console.error("home.ts & uploadCallback() upload file false.");
+			}
+		}
+    /** eof ***/
   }
 
   /*** Core Methode ***/
+  /*** test multipart ***/
+  selectFile($event): void {
+		var inputValue = $event.target;
+		if( null == inputValue || null == inputValue.files[0]){
+			console.debug("Input file error.");
+			return;
+		}else {
+			this.file = inputValue.files[0];
+			console.debug("Input File name: " + this.file.name + " type:" + this.file.size + " size:" + this.file.size);
+		}
+	}
+  /** eof **/
+
   getPicture(){
     console.log('pic starting')
     Camera.getPicture({
