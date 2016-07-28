@@ -86,15 +86,16 @@ export class SearchPage {
           (data) => {
             this._st.data = data
             this.searchResultData = data
-            this.hideLoading()
+            
+            if(this._st.online === true){
+                this.hideLoading()
+            }
           },
           (err) => {
-            this.hideLoading()
             console.log(err)
           },
           () => {
             if(Object.keys(this.searchResultData).length == 0) {
-
               this.nav.push(
                 this.routes.getPage(this.routes.PRODUCT),
                 { id: 'inconnu' }
@@ -112,11 +113,18 @@ export class SearchPage {
             if(data.status === 1){
               this.searchResultData = []
               this.searchResultData.push(data.product)
-              this.hideLoading()
+
+              if(this._st.online === true){
+                  this.hideLoading()
+              }
               //console.log(data.product)
             }
             else {
-              this.hideLoading()
+
+              if(this._st.online === true){
+                  this.hideLoading()
+              }
+
               this.searchResultData = []
               this.nav.push(
                 this.routes.getPage(this.routes.PRODUCT),
@@ -125,7 +133,6 @@ export class SearchPage {
             }
           },
           (err) => {
-            this.hideLoading()
             console.log(err)
           }
         );
@@ -137,12 +144,12 @@ export class SearchPage {
 
     Keyboard.close()
 
-    this.loading = Loading.create({
-      content: "Chargement...",
-      dismissOnPageChange: true,
-    });
-    this.nav.present(this.loading);
-
+    if(this._st.online === true){
+      this.loading = Loading.create({
+        content: "Chargement..."
+      });
+      this.nav.present(this.loading);
+    }
     if (isNaN(searchDataInput.value) === true){
         /** query is a string **/
         this.queryString(searchDataInput)
