@@ -1,0 +1,27 @@
+<!--
+@Author: Nicolas Fazio <webmaster-fazio>
+@Date:   23-07-2016
+@Email:  contact@nicolasfazio.ch
+@Last modified by:   webmaster-fazio
+@Last modified time: 26-07-2016
+-->
+
+<!--
+  Generated template for the ButtonMenu component.
+
+  See https://angular.io/docs/ts/latest/api/core/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+-->
+<ion-navbar blanc>
+  <ion-title [class.opacity-content]="isClassOpacity" ><span primary>{{title}}</span></ion-title>
+  <ion-buttons end *ngIf="btnUserAuth === false">
+      <button primary (click)="onClickLogin()">
+        <ion-icon name="log-in" ></ion-icon>
+      </button>
+  </ion-buttons>
+  <ion-buttons end *ngIf="btnUserAuth === true">
+      <button primary (click)="onClickLogin()">
+        <ion-icon name="log-out" ></ion-icon>
+      </button>
+  </ion-buttons>
+</ion-navbar>

@@ -1,3 +1,9 @@
+// @Author: Nicolas Fazio <webmaster-fazio>
+// @Date:   23-07-2016
+// @Email:  contact@nicolasfazio.ch
+// @Last modified by:   webmaster-fazio
+// @Last modified time: 25-07-2016
+
 // http://ionicframework.com/docs/v2/theming/
 
 // Ionic Shared Functions
@@ -26,10 +32,15 @@
 // are different per mode.
 
 $colors: (
-  primary:    #387ef5,
-  secondary:  #32db64,
+  primary:    #03A9F4,
+  secondary:  #FF4081,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222,
-  favorite:   #69BB7B
+  favorite:   #69BB7B,
+
+  blanc: #ffffff,
+  grisClaire: #f9f9f9,
+  noColor: transparent,
+  secondarytext: #727272
 );
