@@ -86,7 +86,6 @@ export class SearchPage {
           (data) => {
             this._st.data = data
             this.searchResultData = data
-            
             if(this._st.online === true){
                 this.hideLoading()
             }
