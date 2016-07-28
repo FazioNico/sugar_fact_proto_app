@@ -7,7 +7,12 @@
 */
 
 import { Component, ViewChild }               from '@angular/core';
-import { NavController, NavParams, Content, Loading }  from 'ionic-angular';
+import {
+  NavController,
+  NavParams,
+  Content,
+  Loading
+}                                             from 'ionic-angular';
 
 import { Store }                              from '../../providers/store/store';
 import { FirebaseService }                    from '../../providers/firebase/firebase';
@@ -181,10 +186,17 @@ export class ProductPage {
   onClickRelated(event,id){
     let param       = event.id
     this.productID  = param;
-
+    this.focusData    = null;
     this.getData(param)
+
+    this.loading = Loading.create({
+      content: "Chargement...",
+      duration: 500,
+    });
+    this.nav.present(this.loading);
+
     this.content.scrollToTop();
-    this.productFocus.calculeSugar()
+    //this.productFocus.calculeSugar()
 
     // close all accordeon
     let acc = document.getElementsByClassName('open')
@@ -219,18 +231,15 @@ export class ProductPage {
   }
 
   onPageScroll(event) {
-      //console.log(event);
       let ionNavBarToolbar = event.target.offsetParent.previousElementSibling.firstElementChild.firstElementChild;
       if(event.target.scrollTop >= 5){
           ionNavBarToolbar.classList.add('scroll')
-
           this.titleUnvisible = false;
           this.titleH1Unvisible = true;
       }
       else {
         if (ionNavBarToolbar.classList.contains('scroll') == true ){
           ionNavBarToolbar.classList.remove('scroll')
-
           this.titleUnvisible = true;
           this.titleH1Unvisible = false;
         }
@@ -238,21 +247,6 @@ export class ProductPage {
 
   }
 
-  ionViewLoaded(){
-    /*
-    this.loading = Loading.create({
-      content: "Chargement...",
-      dismissOnPageChange: true,
-    });
-    this.nav.present(this.loading);
-    */
-  }
-
-  ionViewDidEnter(){
-    /*
-    this.loading.dismiss();
-    */
-  }
   ngAfterViewInit() {
     this.content.addScrollListener((event) =>  {
         this.onPageScroll(event);

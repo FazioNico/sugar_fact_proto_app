@@ -1,8 +1,20 @@
-import { Component, Input, ViewChild }   from '@angular/core';
-import { Slides } from 'ionic-angular';
+/**
+* @Author: Nicolas Fazio <webmaster-fazio>
+* @Date:   06-07-2016
+* @Email:  contact@nicolasfazio.ch
+* @Last modified by:   webmaster-fazio
+* @Last modified time: 28-07-2016
+*/
+
+import {
+  Component,
+  Input,
+  ViewChild
+}                             from '@angular/core';
+import { Slides }             from 'ionic-angular';
 
 import { Sugar }              from '../sugar/sugar';
-import { Fat }              from '../fat/fat';
+import { Fat }                from '../fat/fat';
 
 /*
   Generated class for the ProductFocus component.
@@ -26,10 +38,10 @@ export class ProductFocus {
   fat_portion:number;
   focusTab: string;
 
-  @Input() productFocusInput: any[];
-  @ViewChild('mySlider') slider: Slides;
-  @ViewChild('mySliderFat') sliderFat: Slides;
-  @ViewChild('Fat') fat: Fat;
+  @Input() productFocusInput            : any[];
+  @ViewChild('mySlider')      slider    : Slides;
+  @ViewChild('mySliderFat')   sliderFat : Slides;
+  @ViewChild('Fat')           fat       : Fat;
 
   constructor(
   ) {
@@ -44,8 +56,6 @@ export class ProductFocus {
     else {
       this.sugar_100g = this.productFocusInput[0].sugars_100
     }
-    //console.log(this.sugar_100g)
-    //console.log('calcule')
   }
 
   animateSugar(){
@@ -76,7 +86,6 @@ export class ProductFocus {
             self.fat_portion = self.productFocusInput[0].fat_portion
           }
         }, 500)
-
         //console.log(this.fat.text)
       }
   }
@@ -94,12 +103,11 @@ export class ProductFocus {
   }
 
   ngOnInit() {
-    //console.log('init')
     this.calculeSugar()
     let self = this;
     setTimeout(function(){
       self.animateSugar()
-    }, 1000)
+    }, 800)
   }
 
 }
