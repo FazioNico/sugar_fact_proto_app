@@ -93,7 +93,6 @@ export class SearchPage {
             console.log(err)
           },
           () => {
-            this.hideLoading()
             if(Object.keys(this.searchResultData).length == 0) {
 
               this.nav.push(
@@ -124,6 +123,10 @@ export class SearchPage {
                 { id: searchDataInput.value }
               );
             }
+          },
+          (err) => {
+            this.hideLoading()
+            console.log(err)
           }
         );
   }
@@ -151,18 +154,21 @@ export class SearchPage {
   }
 
   onGoProduct(event,id){
-    /*
+
     this.loading = Loading.create({
       content: "Chargement...",
       dismissOnPageChange: true,
     });
     this.nav.present(this.loading);
-    */
 
-    this.nav.push(
-      this.routes.getPage(this.routes.PRODUCT),
-      { id: event.id }
-    );
+    let self = this;
+    setTimeout(function(){
+      self.nav.push(
+        self.routes.getPage(self.routes.PRODUCT),
+        { id: event.id }
+      );
+    },800)
+
   }
 
   onPageScroll(event) {
