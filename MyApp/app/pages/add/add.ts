@@ -160,6 +160,22 @@ export class AddPage {
     this.nav.popToRoot()
   }
 
+  onInutFileChange(event,uploadFile){
+    console.log(event)
+    let self = this;
+    let file    = event.target.files[0];
+    let reader  = new FileReader();
+
+    reader.addEventListener("load", function () {
+      self.base64Image = reader.result;
+    }, false);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+    //uploadFile.value = event.target.value;
+  }
+
   ngAfterViewInit() {
     let ionHeader = this.content.getElementRef().nativeElement.previousElementSibling
     ionHeader.classList.add('scroll')
