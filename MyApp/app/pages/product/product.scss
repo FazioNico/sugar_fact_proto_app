@@ -2,7 +2,7 @@
 // @Date:   18-07-2016
 // @Email:  contact@nicolasfazio.ch
 // @Last modified by:   webmaster-fazio
-// @Last modified time: 28-07-2016
+// @Last modified time: 15-08-2016
 
 .product {
 
@@ -42,6 +42,7 @@ product-focus, .product-notfound-header {
 }
 .sugarZone {
   height: 100%;
+  max-width: 400px;
   margin: auto;
   text-align: center;
   transform: rotate(180deg);
