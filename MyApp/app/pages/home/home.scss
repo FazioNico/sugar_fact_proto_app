@@ -2,7 +2,7 @@
 // @Date:   18-07-2016
 // @Email:  contact@nicolasfazio.ch
 // @Last modified by:   webmaster-fazio
-// @Last modified time: 27-07-2016
+// @Last modified time: 15-08-2016
 
 .home {
   background: url(../img/bg-app.png) center center;
@@ -24,4 +24,8 @@
 .table-cell {
     display: table-cell;
     vertical-align: middle;
+}
+.home h1.app-title {
+  font-size: 3.5rem;
+  font-weight: 100;
 }
