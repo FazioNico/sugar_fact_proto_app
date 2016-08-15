@@ -14,12 +14,13 @@
 -->
 <ion-navbar blanc>
   <ion-title [class.opacity-content]="isClassOpacity" ><span primary>{{title}}</span></ion-title>
+  <!--
   <ion-buttons end *ngIf="btnUserAuth === false">
       <button primary (click)="onClickLogin()">
         <ion-icon name="log-in" ></ion-icon>
       </button>
   </ion-buttons>
-  <!--<ion-buttons end *ngIf="btnUserAuth === true">
+  <ion-buttons end *ngIf="btnUserAuth === true">
       <button primary (click)="onClickLogin()">
         <ion-icon name="log-out" ></ion-icon>
       </button>
