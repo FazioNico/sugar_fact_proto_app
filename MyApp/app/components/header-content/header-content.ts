@@ -22,7 +22,10 @@ export class HeaderContent {
   @Input() title: string;
   @Input() isClassOpacity:boolean = false;
   @Input() btnUserAuth:boolean = null;
+  @Input() backEnabled: Boolean;
   @Output() clickLog: EventEmitter<any> = new EventEmitter();
+  @Output() onBack: EventEmitter<any> = new EventEmitter();
+  showBack:Boolean;
 
   constructor() {
 
@@ -33,5 +36,10 @@ export class HeaderContent {
   }
 
   ngOnInit() {
-  }
+      this.showBack = this.backEnabled;
+ }
+
+ onClickBack(){
+    this.onBack.emit({})
+ }
 }

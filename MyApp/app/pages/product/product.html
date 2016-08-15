@@ -3,7 +3,7 @@
 @Date:   18-07-2016
 @Email:  contact@nicolasfazio.ch
 @Last modified by:   webmaster-fazio
-@Last modified time: 28-07-2016
+@Last modified time: 16-08-2016
 -->
 
 <!--
@@ -15,7 +15,7 @@
   [ngStyle]="{'top': scrollTopValue, 'background': '#fff'}"
 -->
 <ion-header id="scrollHeader" >
-    <header-content [isClassOpacity]="titleUnvisible" title="{{productName}}"></header-content>
+    <header-content [isClassOpacity]="titleUnvisible" title="{{productName}}" (onBack)="onClickBack()" backEnabled={{true}}></header-content>
 </ion-header>
 
 <ion-content id="product-content" >

@@ -10,7 +10,8 @@ import { Component, ViewChild }             from '@angular/core';
 import {
   NavController,
   Loading,
-  Content
+  Content,
+  MenuController
 }                                           from 'ionic-angular';
 
 import { Keyboard }                         from 'ionic-native';
@@ -62,7 +63,8 @@ export class SearchPage {
     private nav       : NavController,
     private routes    : Routes,
     private _st       : Store,
-    public authData   : FirebaseService
+    public authData   : FirebaseService,
+    public menuCtrl   : MenuController
   ){
     this.loading;
     this.authData = authData;
@@ -195,6 +197,9 @@ export class SearchPage {
     this.nav.push(this.routes.getPage(this.routes.USER))
   }
 
+  onClickBack(){
+    this.nav.pop()
+  }
   /*** Ionic ViewEvent ***/
   ionViewDidLeave(){
     //this.hideLoading()

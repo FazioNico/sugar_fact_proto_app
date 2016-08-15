@@ -3,7 +3,7 @@
 @Date:   23-07-2016
 @Email:  contact@nicolasfazio.ch
 @Last modified by:   webmaster-fazio
-@Last modified time: 15-08-2016
+@Last modified time: 16-08-2016
 -->
 
 <!--
@@ -12,8 +12,18 @@
   See https://angular.io/docs/ts/latest/api/core/ComponentMetadata-class.html
   for more info on Angular 2 Components.
 -->
-<ion-navbar blanc>
+<ion-toolbar blanc>
+  <ion-buttons left *ngIf="showBack">
+    <button (click)="onClickBack()">
+     <ion-icon name='arrow-back'></ion-icon>
+   </button>
+  </ion-buttons>
   <ion-title [class.opacity-content]="isClassOpacity" ><span primary>{{title}}</span></ion-title>
+  <ion-buttons right>
+      <button primary menuToggle>
+        <ion-icon name="menu" ></ion-icon>
+      </button>
+  </ion-buttons>
   <!--
   <ion-buttons end *ngIf="btnUserAuth === false">
       <button primary (click)="onClickLogin()">
@@ -26,4 +36,4 @@
       </button>
   </ion-buttons>
   -->
-</ion-navbar>
+</ion-toolbar>
