@@ -8,8 +8,18 @@
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-menu [content]="appcontent" side="right">
+  <ion-toolbar primary>
+    <ion-title>Menu</ion-title>
+  </ion-toolbar>
   <ion-content>
-    aaa
+    <ion-list>
+      <button ion-item>
+        A propos
+      </button>
+      <button ion-item>
+        Contact
+      </button>
+    </ion-list>
   </ion-content>
 </ion-menu>
 <ion-nav #appcontent [root]="rootPage" swipeBackEnabled="false"></ion-nav>
