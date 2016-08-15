@@ -3,7 +3,7 @@
 @Date:   06-07-2016
 @Email:  contact@nicolasfazio.ch
 @Last modified by:   webmaster-fazio
-@Last modified time: 28-07-2016
+@Last modified time: 15-08-2016
 -->
 
 <!--
@@ -32,7 +32,7 @@
 
   <div class="focusTab" [ngSwitch]="focusTab">
     <div *ngSwitchCase="'sugar'">
-      <p  blanc text-center>Recommandation OMS:<br /> env.90gr</p>
+      <p  blanc text-center>Recommandation OMS:<br /> env.90gr / total par jour</p>
       <ion-slides  #mySlider (ionDidChange)="onSlideChanged()" pager>
         <ion-slide *ngIf="productFocusInput[0].sugar_portion > 0">
           <sugar [dataInput]="productFocusInput[0].sugar_portion">{{ productFocusInput[0].sugar_portion }}gr / portion</sugar>
@@ -59,7 +59,7 @@
       </ion-slides>
     </div>
     <div *ngSwitchCase="'fat'">
-      <p  blanc text-center>Recommandation OMS:<br /> env.70gr</p>
+      <p  blanc text-center>Recommandation OMS:<br /> env.70gr / total par jour</p>
       <ion-slides #mySliderFat (ionDidChange)="onSlideChanged()" pager>
         <ion-slide *ngIf="productFocusInput[0].fat_portion">
           <fat *ngIf="productFocusInput[0].fat_portion" [dataInput]="fat_portion"></fat>
