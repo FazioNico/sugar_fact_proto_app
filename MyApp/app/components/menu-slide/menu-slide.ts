@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 /*
   Generated class for the MenuSlide component.
@@ -10,11 +10,26 @@ import { Component } from '@angular/core';
   selector: 'menu-slide',
   templateUrl: 'build/components/menu-slide/menu-slide.html'
 })
-export class MenuSlide {
-
-  text: string;
+export class MenuSlide implements OnInit {
+  contentInit:any;
+  @Input() content: any;
+  @Input() btnUserAuth:boolean = null;
+  @Output() clickLog: EventEmitter<any> = new EventEmitter();
+  @Output() clickMenu: EventEmitter<any> = new EventEmitter();
 
   constructor() {
-    this.text = 'Hello World';
+
+  }
+  onClickLogin(){
+    //console.log('emit')
+    this.clickLog.emit({})
+  }
+  eventClick(value){
+    //console.log(value)
+    this.clickMenu.emit({page: value})
+  }
+  ngOnInit(){
+    console.log('init')
+    this.contentInit = this.content;
   }
 }

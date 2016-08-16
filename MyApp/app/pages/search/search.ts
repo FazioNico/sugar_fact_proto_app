@@ -10,8 +10,7 @@ import { Component, ViewChild }             from '@angular/core';
 import {
   NavController,
   Loading,
-  Content,
-  MenuController
+  Content
 }                                           from 'ionic-angular';
 
 import { Keyboard }                         from 'ionic-native';
@@ -63,8 +62,7 @@ export class SearchPage {
     private nav       : NavController,
     private routes    : Routes,
     private _st       : Store,
-    public authData   : FirebaseService,
-    public menuCtrl   : MenuController
+    public authData   : FirebaseService
   ){
     this.loading;
     this.authData = authData;
@@ -190,11 +188,6 @@ export class SearchPage {
           ionHeader.classList.remove('scroll')
         }
       }
-  }
-
-  onClickLogin(){
-    //console.log('emit onClickLogin')
-    this.nav.push(this.routes.getPage(this.routes.USER))
   }
 
   onClickBack(){

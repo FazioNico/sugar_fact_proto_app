@@ -11,7 +11,8 @@ import {
   NavController,
   NavParams,
   Content,
-  Loading
+  Loading,
+  MenuController
 }                                             from 'ionic-angular';
 
 import { Store }                              from '../../providers/store/store';
@@ -26,6 +27,7 @@ import { ProductIngredient }                  from '../../components/product-ing
 import { ProductAdditive }                    from '../../components/product-additive/product-additive';
 import { ProductRelated }                     from '../../components/product-related/product-related';
 import { ProductNotfound }                    from '../../components/product-notfound/product-notfound';
+import { MenuSlide }                          from '../../components/menu-slide/menu-slide';
 
 import { AddPage }                            from '../add/add';
 import { UserPage }                           from '../user/user';
@@ -48,7 +50,8 @@ import { UserPage }                           from '../user/user';
     ProductIngredient,
     ProductAdditive,
     ProductRelated,
-    ProductNotfound
+    ProductNotfound,
+    MenuSlide
   ],
   providers: [
     Store,
@@ -245,6 +248,11 @@ export class ProductPage {
         }
       }
 
+  }
+
+  onClickLogin(){
+    console.log('emit onClickLogin')
+    this.nav.push(UserPage)
   }
 
   ngAfterViewInit() {

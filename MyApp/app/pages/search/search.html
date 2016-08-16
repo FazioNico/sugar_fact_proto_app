@@ -15,12 +15,12 @@
 
 <ion-header>
 
-    <header-content title="Recherche" (clickLog)="onClickLogin()" (onBack)="onClickBack()" [btnUserAuth]="isAuth" backEnabled={{true}}></header-content>
+    <header-content title="Recherche" (onBack)="onClickBack()" backEnabled={{true}}></header-content>
     <ion-searchbar #searchDataInput (change)="onInutChange(searchDataInput)" placeholder="nom du produit; code barre"></ion-searchbar>
 
 </ion-header>
 
-<ion-content class="search" fullscreen #content>
+<ion-content class="search" fullscreen #search>
 
   <search-result [dataInput]="searchResultData" (goProduct)="onGoProduct($event,id)"></search-result>
 
