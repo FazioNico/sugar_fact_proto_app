@@ -10,20 +10,23 @@
   </ion-toolbar>
   <ion-content>
     <ion-list>
-      <button ion-item>
+      <button ion-item (click)="eventClick('ScanPage')">
         <ion-icon name="barcode"></ion-icon> Scaner un produit
       </button>
       <button ion-item (click)="eventClick('SearchPage')">
         <ion-icon name="search"></ion-icon> Faire une recherche
       </button>
-      <button ion-item>
-        A propos
+      <button ion-item (click)="eventClick('UserPage')">
+        <ion-icon name="person" ></ion-icon> Mon profil
       </button>
+      <ion-buttons end *ngIf="btnUserAuth === false">
+          <button primary (click)="onClickLogin()">
+            <ion-icon name="log-in" ></ion-icon>
+          </button>
+      </ion-buttons>
+
       <button ion-item>
-        Contact
-      </button>
-      <button ion-item *ngIf="btnUserAuth === true" (click)="eventClick('UserPage')">
-        <ion-icon name="log-out" ></ion-icon> Logout
+        <ion-icon name="information-circle"></ion-icon> A propos
       </button>
     </ion-list>
   </ion-content>

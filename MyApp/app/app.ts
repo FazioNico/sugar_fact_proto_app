@@ -103,8 +103,15 @@ export class MyApp {
           this.nav.setRoot(this.routes.getPage(this.routes.USER))
         }
         break;
+      case 'ScanPage':
+        this.goScan();
+        break;
     }
-    
+
+  }
+  goScan(){
+    //this.scanPlugin.scan()
+    this.nav.setRoot(this.routes.getPage(this.routes.HOME))
   }
   ngOnInit() {
     this.rootPage = this.routes.getRootPage()
