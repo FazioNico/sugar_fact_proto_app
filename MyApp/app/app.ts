@@ -98,6 +98,11 @@ export class MyApp {
           this.nav.setRoot(this.routes.getPage(this.routes.SEARCH))
         }
         break;
+      case 'AboutPage':
+        if(navPage.name != event.page){
+          this.nav.setRoot(this.routes.getPage(this.routes.ABOUT))
+        }
+        break;
       case 'UserPage':
         if(navPage.name != event.page){
           this.nav.setRoot(this.routes.getPage(this.routes.USER))

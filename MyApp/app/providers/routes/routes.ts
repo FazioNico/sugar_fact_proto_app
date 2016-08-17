@@ -6,7 +6,8 @@ import { SearchPage }         from '../../pages/search/search';
 import { ProductPage }        from '../../pages/product/product';
 import { AddPage }            from '../../pages/add/add';
 
-import { UserPage }          from '../../pages/user/user.ts';
+import { UserPage }           from '../../pages/user/user.ts';
+import { AboutPage }          from '../../pages/about/about';
 //import { FirebaseService }   from '../firebase/firebase';
 
 @Injectable()
@@ -18,7 +19,8 @@ export class Routes {
   SEARCH: string              = "search"
   PRODUCT: string             = "product"
   ADD: string                 = "add"
-  USER: string               = "user"
+  USER: string                = "user"
+  ABOUT: string               = "about"
 
   constructor(
     //private auth:FirebaseService
@@ -30,6 +32,7 @@ export class Routes {
     this.routes[this.PRODUCT] = ProductPage
     this.routes[this.ADD]     = AddPage
     this.routes[this.USER]   = UserPage
+    this.routes[this.ABOUT]   = AboutPage
 
   }
 
