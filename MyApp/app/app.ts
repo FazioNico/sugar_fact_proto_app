@@ -16,6 +16,7 @@ import { Routes }                       from './providers/routes/routes'
 import { HeaderContent }                from './components/header-content/header-content';
 import { HomePage }                     from './pages/home/home';
 import { MenuSlide }                    from './components/menu-slide/menu-slide';
+import { Scan }                    from './components/scan/scan';
 
 import { ApiService }                   from './providers/api-service/api-service';
 import { LocalStorageService }          from './providers/local-storage/local-storage';
@@ -30,7 +31,8 @@ import * as firebase from 'firebase';
     LocalStorageService
   ],
   directives: [
-    MenuSlide
+    MenuSlide,
+    Scan
   ]
 })
 export class MyApp {
@@ -38,6 +40,7 @@ export class MyApp {
   isAuth:boolean = false;
   rootPage: any;
 
+  @ViewChild(Scan) scanPlugin: Scan;
   /**
       use @ViewChild instead to grab the NavController instance
       view more on:  https://forum.ionicframework.com/t/why-cant-i-import-navcontroller-and-viewcontroller-into-service-or-app/40999/12
@@ -115,8 +118,13 @@ export class MyApp {
 
   }
   goScan(){
-    //this.scanPlugin.scan()
-    this.nav.setRoot(this.routes.getPage(this.routes.HOME))
+    let param = this.scanPlugin.scanCode();
+    if(param){
+      //console.log(param)
+      this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: param });
+    }
+    //this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: param });
+    //this.nav.setRoot(this.routes.getPage(this.routes.HOME))
   }
   ngOnInit() {
     this.rootPage = this.routes.getRootPage()

@@ -3,10 +3,10 @@
 @Date:   23-07-2016
 @Email:  contact@nicolasfazio.ch
 @Last modified by:   webmaster-fazio
-@Last modified time: 17-08-2016
+@Last modified time: 18-08-2016
 -->
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <menu-slide [content]="appcontent" [btnUserAuth]="isAuth"  (clickMenu)="onEventMenuClick($event)" (clickLog)="onClickLogin()" ></menu-slide>
-
+<scan-plug></scan-plug>
 <ion-nav #appcontent [root]="rootPage" [userStatus]="isAuth" swipeBackEnabled="false"></ion-nav>
