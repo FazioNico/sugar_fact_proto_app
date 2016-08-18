@@ -3,25 +3,36 @@
 * @Date:   06-07-2016
 * @Email:  contact@nicolasfazio.ch
 * @Last modified by:   webmaster-fazio
-* @Last modified time: 21-07-2016
+* @Last modified time: 18-08-2016
 */
 
-import { Component, PLATFORM_DIRECTIVES, provide, Inject, ViewChild } from '@angular/core';
-import { Platform, ionicBootstrap, NavController, MenuController }     from 'ionic-angular';
-import { AuthHttp, AuthConfig }         from 'angular2-jwt';
-import { Http, HTTP_PROVIDERS }         from '@angular/http';
-import { StatusBar, Keyboard }          from 'ionic-native';
+import {
+  Component,
+  PLATFORM_DIRECTIVES,
+  provide,
+  Inject,
+  ViewChild
+}                                   from '@angular/core';
+import {
+  Platform,
+  ionicBootstrap,
+  NavController,
+  MenuController
+}                                   from 'ionic-angular';
+import { Http, HTTP_PROVIDERS }     from '@angular/http';
+import { StatusBar, Keyboard }      from 'ionic-native';
 
-import { Routes }                       from './providers/routes/routes'
-import { HeaderContent }                from './components/header-content/header-content';
-import { HomePage }                     from './pages/home/home';
-import { MenuSlide }                    from './components/menu-slide/menu-slide';
-import { Scan }                    from './components/scan/scan';
+import { HeaderContent }            from './components/header-content/header-content';
+import { MenuSlide }                from './components/menu-slide/menu-slide';
+import { Scan }                     from './components/scan/scan';
 
-import { ApiService }                   from './providers/api-service/api-service';
-import { LocalStorageService }          from './providers/local-storage/local-storage';
+import { HomePage }                 from './pages/home/home';
 
-import * as firebase from 'firebase';
+import { Routes }                   from './providers/routes/routes'
+import { ApiService }               from './providers/api-service/api-service';
+import { LocalStorageService }      from './providers/local-storage/local-storage';
+
+import * as firebase                from 'firebase';
 
 @Component({
   templateUrl: 'build/app.html',
