@@ -9,17 +9,17 @@
 import {Component, ViewChild} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {Routes} from '../../providers/routes/routes'
-import { ScanPage } from '../scan/scan';
+import { Scan } from '../../components/scan/scan';
 
 
 @Component({
   templateUrl: 'build/pages/home/home.html',
-  directives: [ScanPage]
+  directives: [Scan]
 })
 export class HomePage {
 
-  @ViewChild(ScanPage)
-  private scanPlugin: ScanPage;
+  @ViewChild(Scan)
+  private scanPlugin: Scan;
 
   /** Not normally mandatory but create bugs if ommited. **/
   static get parameters() {
@@ -33,7 +33,12 @@ export class HomePage {
   }
 
   goScan(){
-    this.scanPlugin.scan()
+    let param = this.scanPlugin.scanCode();
+    if(param){
+      //console.log(param)
+      this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: param });
+    }
+    //this.scanPlugin.scan()
     //this.nav.push(this.routes.getPage(this.routes.SCAN))
   }
 }
