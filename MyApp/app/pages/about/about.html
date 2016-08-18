@@ -15,9 +15,50 @@
 
 <ion-header>
     <header-content title="A propos"></header-content>
+    <div padding>
+      <ion-segment [(ngModel)]="aboutSegment">
+        <ion-segment-button value="history">
+          L'histoire
+        </ion-segment-button>
+        <ion-segment-button value="work">
+          Le fonctionnement
+        </ion-segment-button>
+      </ion-segment>
+    </div>
 </ion-header>
 
 
 <ion-content padding>
-  <p>content text</p>
+  <div [ngSwitch]="aboutSegment">
+    <div *ngSwitchCase="'history'">
+        <p primary>L'histoire de Sucres &amp; Lipides</p>
+        <p>
+          Salut!
+          Je m'appel Nicolas Fazio, je suis le créateur de Sucres &amp; Lipides.
+        </p>
+        <p>
+          L'idée de cette application m'est venu un jour ou je cherchais à acheter une boison fruitée à boire le matin...<br/>
+          J'ai alors vite remarqué que toutes ces boisons sont extrèmement sucrée et couvrent de par ce fait une très grande partie des recommandation faites par l'OMS pour adopter une alimentation saine et équilibrée.
+        </p>
+        <p>
+          C'est ainsi qu'est née l'idée de pouvoir voir de mainère simple et représentative, la quantité de sucres contenu dans les aliments que nous consommons.
+        </p>
+        <p>
+          Sucres &amp; Lipides permet donc de comparer les articles entre eux et ainsi de choisir le moin sucré, simplement en scanant le codebare d'un article.
+        </p>
+        <p>Et maintenant à vous de scaner !</p>
+    </div>
+
+    <div *ngSwitchCase="'work'">
+        <p primary>D'ou viennent les informations?</p>
+        <p>
+          Sucres &amp; Lipides utilise les datas de la base de donnée collaborative Open Food Fact qui répértorie plus de 80'000 produits alimentaires.
+        </p>
+        <p>
+          Cette base de donnée est open source et est donc amennée à évoluer avec les ajouts de produit effectué par les utilisateurs du site web Open Food Fact et des autres applications utilisant cette base de donnée.
+        </p>
+        <p>Actuellement la version actuel de Sucres &amp; Lipides ne permet pas encore d'ajouter à la base de donnée des produits inconnu, mais cette fonctionnalités sera disponible dans la prochaine mise à jour de cette application.</p>
+    </div>
+  </div>
+
 </ion-content>

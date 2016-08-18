@@ -19,6 +19,7 @@ import { Routes }           from '../../providers/routes/routes';
 export class AboutPage {
 
   isAuth:boolean = false;
+  aboutSegment: any;
 
   /** Not normally mandatory but create bugs if ommited. **/
   static get parameters() {
@@ -32,7 +33,7 @@ export class AboutPage {
     private nav       : NavController,
     private routes    : Routes
   ) {
-
+    this.aboutSegment = "history";
   }
 
 }
