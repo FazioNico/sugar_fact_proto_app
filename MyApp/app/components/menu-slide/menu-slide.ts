@@ -8,7 +8,12 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 */
 @Component({
   selector: 'menu-slide',
-  templateUrl: 'build/components/menu-slide/menu-slide.html'
+  templateUrl: 'build/components/menu-slide/menu-slide.html',
+  styles: [`
+    ion-menu ion-icon.item-icon {
+        margin-right: 10px;
+    }
+  `]
 })
 export class MenuSlide implements OnInit {
   contentInit:any;
