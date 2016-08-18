@@ -89,16 +89,6 @@ export class MyApp {
     });
   }
 
-  onClickLogin(){
-    //console.log('emit onClickLogin')
-    this.menuCtrl.close();
-    let navPage = this.nav.getActive()
-    if(navPage.name != 'UserPage'){
-      this.nav.setRoot(this.routes.getPage(this.routes.USER))
-    }
-    //console.log(navPage.name)
-  }
-
   /** todo : testing function **/
   onEventMenuClick(event){
     //console.log(event.page)

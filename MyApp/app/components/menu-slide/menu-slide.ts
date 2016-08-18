@@ -19,16 +19,12 @@ export class MenuSlide implements OnInit {
   contentInit:any;
   @Input() content: any;
   @Input() btnUserAuth:boolean = null;
-  @Output() clickLog: EventEmitter<any> = new EventEmitter();
   @Output() clickMenu: EventEmitter<any> = new EventEmitter();
 
   constructor() {
 
   }
-  onClickLogin(){
-    //console.log('emit')
-    this.clickLog.emit({})
-  }
+
   eventClick(value){
     //console.log(value)
     this.clickMenu.emit({page: value})
