@@ -119,13 +119,13 @@ export class MyApp {
 
   }
   goScan(){
-    let param = this.scanPlugin.scanCode();
-    if(param){
-      //console.log(param)
-      this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: param });
-    }
-    //this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: param });
-    //this.nav.setRoot(this.routes.getPage(this.routes.HOME))
+    //console.log('goScan function')
+    this.scanPlugin.scanCode().then((result)=>{
+      //console.log(result)
+      if(result.text){
+        this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: result.text });
+      }
+    })
   }
   ngOnInit() {
     this.rootPage = this.routes.getRootPage()

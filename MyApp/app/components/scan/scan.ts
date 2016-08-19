@@ -25,11 +25,12 @@ export class Scan {
 
 
   scanCode() {
-    BarcodeScanner.scan()
+    return BarcodeScanner.scan()
     .then((result) => {
       if (!result.cancelled) {
         const barcodeData = new BarcodeData(result.text, result.format);
-        return this.goScanDetails(barcodeData);
+        //return this.goScanDetails(barcodeData);
+        return barcodeData;
         /** to check in template: **/
         //this.scanDetails = barcodeData;
       }

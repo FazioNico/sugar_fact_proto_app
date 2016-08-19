@@ -33,12 +33,11 @@ export class HomePage {
   }
 
   goScan(){
-    let param = this.scanPlugin.scanCode();
-    if(param){
-      //console.log(param)
-      this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: param });
-    }
-    //this.scanPlugin.scan()
-    //this.nav.push(this.routes.getPage(this.routes.SCAN))
+    this.scanPlugin.scanCode().then((result)=>{
+      //console.log(result)
+      if(result.text){
+        this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: result.text });
+      }
+    })
   }
 }
