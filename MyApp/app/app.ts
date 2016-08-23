@@ -122,7 +122,7 @@ export class MyApp {
     //console.log('goScan function')
     this.scanPlugin.scanCode().then((result)=>{
       //console.log(result)
-      if(result.text){
+      if(result){
         this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: result.text });
       }
     })

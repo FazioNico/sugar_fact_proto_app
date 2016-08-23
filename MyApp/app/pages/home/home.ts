@@ -35,7 +35,7 @@ export class HomePage {
   goScan(){
     this.scanPlugin.scanCode().then((result)=>{
       //console.log(result)
-      if(result.text){
+      if(result){
         this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: result.text });
       }
     })
