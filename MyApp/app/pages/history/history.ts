@@ -53,12 +53,12 @@ export class HistoryPage {
           else {
             for (var key in snapshot.val()) {
               if (snapshot.val().hasOwnProperty(key)) {
-                console.log(key, snapshot.val()[key])
+                //console.log(key, snapshot.val()[key])
                 historySearch.push(key)
               }
             }
             //console.log('user historySearch database.ref() exist.')
-            console.log(snapshot.val())
+            //console.log(snapshot.val())
             self.searchDataProduct(historySearch)
           }
         });
@@ -69,7 +69,20 @@ export class HistoryPage {
   }
 
   searchDataProduct(arrayData){
-    this.historySearch = arrayData
+    let historySearch = this.historySearch
+    arrayData.map((data)=>{
+      var p2 = new Promise(function(resolve, reject) {
+        resolve(data)
+        return
+      });
+      p2.then(function(id) {
+        historySearch.push(id)
+        console.log('valeur ->',id)
+        console.log(historySearch)
+        return
+      })
+    })
+
   }
 
   /** Events Methode **/
