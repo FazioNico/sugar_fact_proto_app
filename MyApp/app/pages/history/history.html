@@ -9,6 +9,13 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
+  <ion-list>
+
+    <ion-item *ngFor="let productData of historySearch">
+      <h2>{{ productData }}</h2>
+    </ion-item>
+
+  </ion-list>
 </ion-content>
