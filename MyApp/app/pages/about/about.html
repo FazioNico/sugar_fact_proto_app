@@ -3,7 +3,7 @@
 @Date:   17-08-2016
 @Email:  contact@nicolasfazio.ch
 @Last modified by:   webmaster-fazio
-@Last modified time: 18-08-2016
+@Last modified time: 24-08-2016
 -->
 
 <!--
@@ -16,12 +16,21 @@
 <ion-header>
     <header-content title="A propos"></header-content>
     <div padding>
-      <ion-segment [(ngModel)]="aboutSegment">
-        <ion-segment-button value="history">
-          L'histoire
-        </ion-segment-button>
+      <ion-segment [(ngModel)]="aboutSegment" secondary>
         <ion-segment-button value="work">
-          Le fonctionnement
+          <span primary>
+            Fonctionnement
+          </span>
+        </ion-segment-button>
+        <ion-segment-button value="source">
+          <span primary>
+            Source
+          </span>
+        </ion-segment-button>
+        <ion-segment-button value="history">
+          <span primary>
+            Histoire
+          </span>
         </ion-segment-button>
       </ion-segment>
     </div>
@@ -33,11 +42,13 @@
     <div *ngSwitchCase="'history'">
         <p primary>L'histoire de Sucres &amp; Lipides</p>
         <p>
-          Salut!
+          Salut!<br/>
           Je m'appel Nicolas Fazio, je suis le créateur de Sucres &amp; Lipides.
         </p>
         <p>
-          L'idée de cette application m'est venu un jour ou je cherchais à acheter une boison fruitée à boire le matin...<br/>
+          L'idée de cette application m'est venu un jour ou je cherchais à acheter une boison fruitée à boire le matin...
+        </p>
+        <p>
           J'ai alors vite remarqué que toutes ces boisons sont extrèmement sucrée et couvrent de par ce fait une très grande partie des recommandation faites par l'OMS pour adopter une alimentation saine et équilibrée.
         </p>
         <p>
@@ -50,15 +61,37 @@
     </div>
 
     <div *ngSwitchCase="'work'">
-        <p primary>D'ou viennent les informations?</p>
-        <p>
-          Sucres &amp; Lipides utilise les datas de la base de donnée collaborative Open Food Fact qui répértorie plus de 80'000 produits alimentaires.
-        </p>
-        <p>
-          Cette base de donnée est open source et est donc amennée à évoluer avec les ajouts de produit effectué par les utilisateurs du site web Open Food Fact et des autres applications utilisant cette base de donnée.
-        </p>
-        <p>Actuellement la version actuel de Sucres &amp; Lipides ne permet pas encore d'ajouter à la base de donnée des produits inconnu, mais cette fonctionnalités sera disponible dans la prochaine mise à jour de cette application.</p>
-    </div>
-  </div>
+      <ion-slides [options]="slideOptions">
+        <ion-slide>
+          <img src="./build/img/slide1.png" />
+        </ion-slide>
+        <ion-slide>
+          <img src="./build/img/slide2.png" />
+        </ion-slide>
+        <ion-slide padding>
+          <p>
+            La version actuel de Sucres &amp; Lipides ne permet pas encore d'ajouter à la base de donnée des produits inconnu.
+          </p>
+          <p>
+            Cette fonctionnalités sera disponible dans la prochaine mise à jour de cette application.
+          </p>
+        </ion-slide>
+      </ion-slides>
 
+    </div>
+
+    <div *ngSwitchCase="'source'">
+      <p primary>D'ou viennent les informations?</p>
+      <p>
+        Les données sur les produits et les photos proviennent de la base collaborative Open Food Fact qui répértorie plus de 90'000 produits alimentaires.
+      </p>
+      <p>
+        Les données sont disponibles sous la licence ouverte Open Database License et les photos sous la licence Creative Commons Attribution Partage à l'identique. Les marques citées sont la propriété de leurs propriétaires respectifs.
+      </p>
+      <p>
+        La base de données est constituée de manière collaborative, il n'est pas possible de garantir qu'elle soit exempte d'erreurs. La composition des produits peut également avoir changé. Si vous constatez une erreur, merci de nous la signaler afin qu'elle soit corrigée.
+      </p>
+    </div>
+
+  </div>
 </ion-content>

@@ -1,5 +1,8 @@
 import { Component }        from '@angular/core';
-import { NavController }    from 'ionic-angular';
+import {
+    NavController,
+    Slides
+}                           from 'ionic-angular';
 
 import { HeaderContent }    from '../../components/header-content/header-content';
 
@@ -20,7 +23,10 @@ export class AboutPage {
 
   isAuth:boolean = false;
   aboutSegment: any;
-
+  slideOptions = {
+    initialSlide: 0,
+    loop: false
+  };
   /** Not normally mandatory but create bugs if ommited. **/
   static get parameters() {
         return [
@@ -33,7 +39,7 @@ export class AboutPage {
     private nav       : NavController,
     private routes    : Routes
   ) {
-    this.aboutSegment = "history";
+    this.aboutSegment = "work";
   }
 
 }
