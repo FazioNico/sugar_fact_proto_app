@@ -114,7 +114,7 @@ export class MyApp {
         break;
       case 'HistoryPage':
         if(navPage.name != event.page){
-          this.nav.setRoot(this.routes.getPage(this.routes.USER))
+          this.nav.push(this.routes.getPage(this.routes.HISTORY))
         }
         break;
       case 'ScanPage':
