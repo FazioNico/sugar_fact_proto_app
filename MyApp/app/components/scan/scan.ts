@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {BarcodeScanner}           from 'ionic-native';
 
-import {Routes}                   from '../../providers/routes/routes'
 /*
   Generated class for the Scan component.
 
@@ -39,13 +38,6 @@ export class Scan {
       alert(err);
     })
   }
-
-  goScanDetails(datacode){
-      let param = datacode.text
-      return param
-      //this.nav.push(this.routes.getPage(this.routes.PRODUCT), { id: param });
-  }
-
 }
 
 export class BarcodeData {
