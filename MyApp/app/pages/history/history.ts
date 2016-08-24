@@ -6,6 +6,8 @@ import { Routes }           from '../../providers/routes/routes';
 import { FirebaseService }  from '../../providers/firebase/firebase';
 import { Store }            from '../../providers/store/store';
 
+import { Observable }   from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 /*
   Generated class for the HistoryPage page.
 
@@ -51,41 +53,66 @@ export class HistoryPage {
     private _st       : Store
   ) {
     //// Check if user Auth == true
-    let self = this;
-    let historySearch = [];
     this.authData = authData;
     this.authData.fireAuth.onAuthStateChanged((user) => {
       if (user) {
         this.isAuth = true
-        // save product id in history.save.list
-        let database = this.authData.database.ref('historySearch/' + user.uid);
-        database.on('value', function(snapshot) {
-          //console.log(snapshot.val());
-          if(snapshot.val() === null){
-            // no historySearch
-          }
-          else {
-            for (var key in snapshot.val()) {
-              if (snapshot.val().hasOwnProperty(key)) {
-                //console.log(key, snapshot.val()[key])
-                historySearch.push(key)
-              }
-            }
-            //console.log('user historySearch database.ref() exist.')
-            //console.log(snapshot.val())
-            self.searchDataProduct(historySearch)
-          }
-        });
+        // load history list
+        this.loadDataHistory(user)
       } else {
         this.isAuth = false
       }
     });
   }
 
+  loadDataHistory(user){
+    let self = this;
+    let historySearch = [];
+    let database = this.authData.database.ref('historySearch/' + user.uid);
+    database.on('value', function(snapshot) {
+      //console.log(snapshot.val());
+      if(snapshot.val() === null){
+        // no historySearch
+      }
+      else {
+        for (var key in snapshot.val()) {
+          if (snapshot.val().hasOwnProperty(key)) {
+            //console.log(key, snapshot.val()[key])
+            historySearch.push([key, snapshot.val()[key].time])
+          }
+        }
+        //console.log('user historySearch database.ref() exist.')
+        console.log('base order history ->', historySearch)
+        self.searchDataProduct(historySearch)
+      }
+    });
+  }
+
   searchDataProduct(arrayData){
     let _st = this._st;
-    console.log(_st)
     let historySearch = this.historySearch
+    let arrayDataSorted = arrayData.sort(function (a, b) {
+        if (a.time > b.time)
+          return 1;
+        if (a.time < b.time)
+          return -1;
+        // a doit être égale à b
+        return 0;
+    });
+    for (var i = 0; i < arrayDataSorted.length; i++) {
+      let code = arrayDataSorted[i][0];
+      console.log(arrayDataSorted[i][0])
+      _st.getProductData(code)
+        .subscribe(
+          (data) => {
+            if(data.status === 1){
+              console.log(data.product)
+              historySearch.push(data.product)
+            }
+        });
+
+    }
+    /*
     arrayData.map((data)=>{
       var p2 = new Promise(function(resolve, reject) {
         _st.getProductData(data)
@@ -105,6 +132,7 @@ export class HistoryPage {
         return
       })
     })
+    */
 
   }
 
