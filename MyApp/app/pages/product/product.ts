@@ -90,12 +90,41 @@ export class ProductPage {
   ) {
       //// Get data with nav parameters
       this.getData(this.params.get('id'))
+      let productID = this.params.get('id');
       //// Check if user Auth == true
       this.authData = authData;
       this.authData.fireAuth.onAuthStateChanged((user) => {
         if (user) {
           this.isAuth = true
           this.email = user.email
+          // save product id in history.save.list
+          let database = this.authData.database.ref('historySearch/' + user.uid);
+          database.on('value', function(snapshot) {
+            //console.log(snapshot.val());
+            if(snapshot.val() === null){
+              database.child(productID).set({
+                nbr: 1,
+                time: new Date().getTime()
+              }).then(() => {
+                //console.log('user historySearch Creat & product added')
+              });
+            }
+            else {
+              //console.log('user historySearch database.ref() exist.')
+              if(snapshot.val()[productID]){
+                //console.log('product already exist in user history')
+              }
+              else {
+                //console.log('product NOT exist in user history')
+                database.child(productID).set({
+                  nbr: 1,
+                  time: new Date().getTime()
+                }).then(() => {
+                  //console.log('user historySearch Creat & product added')
+                });
+              }
+            }
+          });
         } else {
           this.isAuth = false
         }

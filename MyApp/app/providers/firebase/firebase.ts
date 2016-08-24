@@ -18,10 +18,12 @@ import * as firebase            from 'firebase';
 export class FirebaseService {
 
     fireAuth:     any;
+    database:     any;
     userProfile:  any;
 
     constructor(public nav: NavController) {
       this.fireAuth     = firebase.auth();
+      this.database     = firebase.database();
       this.userProfile  = firebase.database().ref('/userProfile');
     }
 
