@@ -4,6 +4,8 @@ import { NavController }    from 'ionic-angular';
 import { HeaderContent }    from '../../components/header-content/header-content';
 import { Routes }           from '../../providers/routes/routes';
 import { FirebaseService }  from '../../providers/firebase/firebase';
+import { Store }            from '../../providers/store/store';
+
 /*
   Generated class for the HistoryPage page.
 
@@ -14,8 +16,18 @@ import { FirebaseService }  from '../../providers/firebase/firebase';
   templateUrl: 'build/pages/history/history.html',
   directives: [HeaderContent],
   providers: [
-    FirebaseService
-  ]
+    FirebaseService,
+    Store
+  ],
+  styles: [`
+      .img_thumb {
+        background-size: contain;
+        background-position: center center;
+        height: 80px;
+        width: 80px;
+        border-radius: 80px;
+      }
+    `]
 })
 export class HistoryPage {
 
@@ -27,14 +39,16 @@ export class HistoryPage {
         return [
           [NavController],
           [Routes],
-          [FirebaseService]
+          [FirebaseService],
+          [Store]
         ];
   }
 
   constructor(
     private nav       : NavController,
     private routes    : Routes,
-    public authData   : FirebaseService
+    public authData   : FirebaseService,
+    private _st       : Store
   ) {
     //// Check if user Auth == true
     let self = this;
@@ -69,16 +83,25 @@ export class HistoryPage {
   }
 
   searchDataProduct(arrayData){
+    let _st = this._st;
+    console.log(_st)
     let historySearch = this.historySearch
     arrayData.map((data)=>{
       var p2 = new Promise(function(resolve, reject) {
-        resolve(data)
+        _st.getProductData(data)
+          .subscribe(
+            (data) => {
+              if(data.status === 1){
+                console.log(data.product)
+                historySearch.push(data.product)
+              }
+          });
         return
       });
       p2.then(function(id) {
-        historySearch.push(id)
+        //historySearch.push(id)
         console.log('valeur ->',id)
-        console.log(historySearch)
+        //console.log(historySearch)
         return
       })
     })

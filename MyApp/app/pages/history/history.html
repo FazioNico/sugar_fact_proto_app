@@ -14,7 +14,14 @@
   <ion-list>
 
     <ion-item *ngFor="let productData of historySearch">
-      <h2>{{ productData }}</h2>
+      
+      <ion-thumbnail item-left>
+        <div class="img_thumb" [style.background-image]="'url(' + productData.image_thumb_url + ')'"></div>
+      </ion-thumbnail>
+      <h2>{{ productData.product_name }}</h2>
+      <p *ngIf="productData.brands != productData.product_name">{{ productData.brands }}</p>
+      <ion-icon clear item-right secondary ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon>
+
     </ion-item>
 
   </ion-list>
