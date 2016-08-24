@@ -2,7 +2,7 @@
 // @Date:   23-07-2016
 // @Email:  contact@nicolasfazio.ch
 // @Last modified by:   webmaster-fazio
-// @Last modified time: 19-08-2016
+// @Last modified time: 24-08-2016
 
 // http://ionicframework.com/docs/v2/theming/
 
@@ -21,6 +21,8 @@
 
 @import "../pages/user/user.scss";
 @import "../pages/about/about.scss";
+@import "../pages/history/history.scss";
+
 body {
   background: #03A9F4;
 }

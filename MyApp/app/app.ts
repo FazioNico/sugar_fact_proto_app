@@ -112,6 +112,11 @@ export class MyApp {
           this.nav.setRoot(this.routes.getPage(this.routes.USER))
         }
         break;
+      case 'HistoryPage':
+        if(navPage.name != event.page){
+          this.nav.setRoot(this.routes.getPage(this.routes.USER))
+        }
+        break;
       case 'ScanPage':
         this.goScan();
         break;
