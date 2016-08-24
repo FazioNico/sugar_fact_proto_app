@@ -23,10 +23,7 @@ export class AboutPage {
 
   isAuth:boolean = false;
   aboutSegment: any;
-  slideOptions = {
-    initialSlide: 0,
-    loop: false
-  };
+
   /** Not normally mandatory but create bugs if ommited. **/
   static get parameters() {
         return [
@@ -39,7 +36,7 @@ export class AboutPage {
     private nav       : NavController,
     private routes    : Routes
   ) {
-    this.aboutSegment = "work";
+    this.aboutSegment = "history";
   }
 
 }
