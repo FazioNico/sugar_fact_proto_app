@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component }        from '@angular/core';
+import { NavController }    from 'ionic-angular';
 
+import { HeaderContent }    from '../../components/header-content/header-content';
+import { Routes }           from '../../providers/routes/routes';
 /*
   Generated class for the HistoryPage page.
 
@@ -9,11 +11,27 @@ import { NavController } from 'ionic-angular';
 */
 @Component({
   templateUrl: 'build/pages/history/history.html',
+  directives: [HeaderContent]
 })
 export class HistoryPage {
 
-  constructor(private nav: NavController) {
-
+  /** Not normally mandatory but create bugs if ommited. **/
+  static get parameters() {
+        return [
+          [NavController],
+          [Routes]
+        ];
   }
 
+  constructor(
+    private nav: NavController,
+    private routes    : Routes
+  ) {
+  }
+
+
+  /** Events Methode **/
+  onClickBack(){
+    this.nav.pop()
+  }
 }
