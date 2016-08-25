@@ -8,6 +8,10 @@ import { Store }            from '../../providers/store/store';
 
 import { Observable }   from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
+
+import * as _                   from 'lodash';
+
 /*
   Generated class for the HistoryPage page.
 
@@ -35,6 +39,7 @@ export class HistoryPage {
 
   isAuth:boolean = false;
   historySearch:any[] = [];
+  pID: string;
 
   /** Not normally mandatory but create bugs if ommited. **/
   static get parameters() {
@@ -69,7 +74,7 @@ export class HistoryPage {
     let self = this;
     let historySearch = [];
     let database = this.authData.database.ref('historySearch/' + user.uid);
-    database.on('value', function(snapshot) {
+    database.once('value', function(snapshot) {
       //console.log(snapshot.val());
       if(snapshot.val() === null){
         // no historySearch
@@ -88,6 +93,7 @@ export class HistoryPage {
     });
   }
 
+
   searchDataProduct(arrayData){
     let _st = this._st;
     let historySearch = this.historySearch
@@ -96,22 +102,21 @@ export class HistoryPage {
           return 1;
         if (a.time < b.time)
           return -1;
-        // a doit être égale à b
         return 0;
     });
+
     for (var i = 0; i < arrayDataSorted.length; i++) {
       let code = arrayDataSorted[i][0];
-      console.log(arrayDataSorted[i][0])
       _st.getProductData(code)
-        .subscribe(
-          (data) => {
-            if(data.status === 1){
-              console.log(data.product)
-              historySearch.push(data.product)
-            }
-        });
+      .toPromise()
+      .then((data) => {
+        console.log(data.product.id)
+        let productOrder = _.find(arrayDataSorted, function(o) { return o[0] == data.product.id; });
+        data.product._order = productOrder[1];
+        historySearch.push(data.product)
+      })
+    };
 
-    }
     /*
     arrayData.map((data)=>{
       var p2 = new Promise(function(resolve, reject) {
