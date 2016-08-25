@@ -3,7 +3,7 @@
 @Date:   17-08-2016
 @Email:  contact@nicolasfazio.ch
 @Last modified by:   webmaster-fazio
-@Last modified time: 24-08-2016
+@Last modified time: 26-08-2016
 -->
 
 <!--
@@ -17,6 +17,11 @@
     <header-content title="A propos"></header-content>
     <div padding>
       <ion-segment [(ngModel)]="aboutSegment" secondary>
+        <ion-segment-button value="history">
+          <span primary>
+            Histoire
+          </span>
+        </ion-segment-button>
         <ion-segment-button value="work">
           <span primary>
             Fonctionnement
@@ -25,11 +30,6 @@
         <ion-segment-button value="source">
           <span primary>
             Source
-          </span>
-        </ion-segment-button>
-        <ion-segment-button value="history">
-          <span primary>
-            Histoire
           </span>
         </ion-segment-button>
       </ion-segment>
