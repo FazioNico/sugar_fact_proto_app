@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <header-content title="Produits consultés" (onBack)="onClickBack()" backEnabled={{true}}></header-content>
+    <header-content title="Produits consultés (max 20)" (onBack)="onClickBack()" backEnabled={{true}}></header-content>
 </ion-header>
 
 
@@ -13,7 +13,7 @@
 
   <ion-list>
 
-    <ion-item *ngFor="let productData of historySearch">
+    <ion-item *ngFor="let productData of historySearch | sortDesc:'_order'">
 
       <ion-thumbnail item-left>
         <div class="img_thumb" [style.background-image]="'url(' + productData.image_thumb_url + ')'"></div>

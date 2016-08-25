@@ -6,18 +6,18 @@ import { Injectable, Pipe } from '@angular/core';
   Angular 2 Pipes.
 */
 @Pipe({
-  name: 'sortAsc',
+  name: 'sortDesc',
   pure: false
 })
 @Injectable()
-export class SortAsc {
+export class SortDesc {
   /*
     Takes an array and sort in alphabetically order
    */
   transform(value: Array<any>, property:string="name") {
     return value.sort((a, b)=>{
-        if(a[property] < b[property]) return -1;
-        if(a[property] > b[property]) return 1;
+        if(b[property] < a[property]) return -1;
+        if(b[property] > a[property]) return 1;
         return 0;
     })
   }

@@ -1,16 +1,26 @@
-import { Component }        from '@angular/core';
-import { NavController }    from 'ionic-angular';
+import {
+  Component,
+  ViewChild
+}                           from '@angular/core';
+import {
+  NavController,
+  Content
+}                           from 'ionic-angular';
+
+import * as _               from 'lodash';
+import { Observable }       from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 
 import { HeaderContent }    from '../../components/header-content/header-content';
+
 import { Routes }           from '../../providers/routes/routes';
 import { FirebaseService }  from '../../providers/firebase/firebase';
 import { Store }            from '../../providers/store/store';
 
-import { Observable }   from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
+import { SortDesc }         from '../../pipes/SortDesc';
 
-import * as _                   from 'lodash';
+
 
 /*
   Generated class for the HistoryPage page.
@@ -33,7 +43,8 @@ import * as _                   from 'lodash';
         width: 80px;
         border-radius: 80px;
       }
-    `]
+    `],
+  pipes:[SortDesc]
 })
 export class HistoryPage {
 
@@ -50,6 +61,8 @@ export class HistoryPage {
           [Store]
         ];
   }
+
+  @ViewChild(Content)       content       : Content;
 
   constructor(
     private nav       : NavController,
@@ -106,6 +119,9 @@ export class HistoryPage {
     });
 
     for (var i = 0; i < arrayDataSorted.length; i++) {
+      if(i > 19){
+        return
+      }
       let code = arrayDataSorted[i][0];
       _st.getProductData(code)
       .toPromise()
@@ -145,4 +161,26 @@ export class HistoryPage {
   onClickBack(){
     this.nav.pop()
   }
+
+  onPageScroll(event) {
+      //console.log(event);
+      let ionHeader = this.content.getElementRef().nativeElement.previousElementSibling
+      if(event.target.scrollTop >= 5){
+          ionHeader.classList.add('scroll')
+      }
+      else {
+        if (ionHeader.classList.contains('scroll') == true ){
+          ionHeader.classList.remove('scroll')
+        }
+      }
+  }
+  /*** Ionic ViewEvent ***/
+  ngAfterViewInit() {
+    this.content.addScrollListener(
+      (event) =>  {
+        this.onPageScroll(event);
+      }
+    )
+  }
+  
 }
