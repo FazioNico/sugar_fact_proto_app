@@ -13,11 +13,12 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <header-content title="Produits consultés (max 20)" (onBack)="onClickBack()" backEnabled={{true}}></header-content>
+    <header-content title="Produits consultés" (onBack)="onClickBack()" backEnabled={{true}}></header-content>
 </ion-header>
 
 
 <ion-content>
+  <ion-item-divider >Affichage max: 20 produits</ion-item-divider>
   <div *ngIf="historySearch.length <= 0" padding>
     <p>
       Tu retrouvera ici les 20 derniers produits consulté,
