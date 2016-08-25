@@ -1,3 +1,11 @@
+/**
+* @Author: Nicolas Fazio <webmaster-fazio>
+* @Date:   24-08-2016
+* @Email:  contact@nicolasfazio.ch
+* @Last modified by:   webmaster-fazio
+* @Last modified time: 26-08-2016
+*/
+
 import {
   Component,
   ViewChild
@@ -85,10 +93,10 @@ export class HistoryPage {
   }
 
   loadDataHistory(user){
-    let self = this;
     let historySearch = [];
-    let database = this.authData.database.ref('historySearch/' + user.uid);
-    database.once('value', function(snapshot) {
+    this.authData
+    .database.ref('historySearch/' + user.uid)
+    .once('value', (snapshot) => {
       //console.log(snapshot.val());
       if(snapshot.val() === null){
         // no historySearch
@@ -101,17 +109,14 @@ export class HistoryPage {
           }
         }
         //console.log('user historySearch database.ref() exist.')
-        console.log('base order history ->', historySearch)
-        self.searchDataProduct(historySearch)
+        this.searchDataProduct(historySearch)
       }
     });
   }
 
 
   searchDataProduct(arrayData){
-    let _st = this._st;
-    let historySearch = this.historySearch
-    let arrayDataSorted = arrayData.sort(function (a, b) {
+    let arrayDataSorted = arrayData.sort((a,b) => {
         if (a.time > b.time)
           return 1;
         if (a.time < b.time)
@@ -119,42 +124,16 @@ export class HistoryPage {
         return 0;
     });
 
-    for (var i = 0; i < arrayDataSorted.length; i++) {
-      if(i > 19){
-        return
-      }
-      let code = arrayDataSorted[i][0];
-      _st.getProductData(code)
+    arrayDataSorted.map((k)=>{
+      let code = k[0];
+      this._st.getProductData(code)
       .toPromise()
       .then((data) => {
-        console.log(data.product.id)
-        let productOrder = _.find(arrayDataSorted, function(o) { return o[0] == data.product.id; });
+        let productOrder = _.find(arrayDataSorted, (o) => { return o[0] == data.product.id; });
         data.product._order = productOrder[1];
-        historySearch.push(data.product)
-      })
-    };
-
-    /*
-    arrayData.map((data)=>{
-      var p2 = new Promise(function(resolve, reject) {
-        _st.getProductData(data)
-          .subscribe(
-            (data) => {
-              if(data.status === 1){
-                console.log(data.product)
-                historySearch.push(data.product)
-              }
-          });
-        return
-      });
-      p2.then(function(id) {
-        //historySearch.push(id)
-        console.log('valeur ->',id)
-        //console.log(historySearch)
-        return
+        this.historySearch.push(data.product)
       })
     })
-    */
 
   }
   private hideLoading(){

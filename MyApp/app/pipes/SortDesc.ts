@@ -1,3 +1,11 @@
+/**
+* @Author: Nicolas Fazio <webmaster-fazio>
+* @Date:   24-08-2016
+* @Email:  contact@nicolasfazio.ch
+* @Last modified by:   webmaster-fazio
+* @Last modified time: 26-08-2016
+*/
+
 import { Injectable, Pipe } from '@angular/core';
 
 /*

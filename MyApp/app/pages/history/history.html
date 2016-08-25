@@ -1,4 +1,12 @@
 <!--
+@Author: Nicolas Fazio <webmaster-fazio>
+@Date:   24-08-2016
+@Email:  contact@nicolasfazio.ch
+@Last modified by:   webmaster-fazio
+@Last modified time: 26-08-2016
+-->
+
+<!--
   Generated template for the HistoryPage page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
@@ -10,7 +18,16 @@
 
 
 <ion-content>
-
+  <div *ngIf="historySearch.length <= 0" padding>
+    <p>
+      Tu retrouvera ici les 20 derniers produits consulté,
+      <br>
+      mais n'y a actuelement pas de produits à afficher.
+    </p>
+    <p>
+      Connect toi en allant sur "Mon compte" dans le menu de droite et consulte quelques poduits pour remplire cette liste
+    </p>
+  </div>
   <ion-list>
 
     <ion-item *ngFor="let productData of historySearch | sortDesc:'_order'" (click)="onGoProduct($event,productData.id)">
@@ -19,8 +36,7 @@
         <div class="img_thumb" [style.background-image]="'url(' + productData.image_thumb_url + ')'"></div>
       </ion-thumbnail>
       <h2>{{ productData.product_name }}</h2>
-      <p *ngIf="productData.brands != productData.product_name">{{ productData.brands }}
-      {{productData._order}}</p>
+      <p *ngIf="productData.brands != productData.product_name">{{ productData.brands }}</p>
       <ion-icon clear item-right secondary ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle"></ion-icon>
 
     </ion-item>
