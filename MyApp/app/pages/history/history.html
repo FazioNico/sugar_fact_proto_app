@@ -13,7 +13,7 @@
 
   <ion-list>
 
-    <ion-item *ngFor="let productData of historySearch | sortDesc:'_order'">
+    <ion-item *ngFor="let productData of historySearch | sortDesc:'_order'" (click)="onGoProduct($event,productData.id)">
 
       <ion-thumbnail item-left>
         <div class="img_thumb" [style.background-image]="'url(' + productData.image_thumb_url + ')'"></div>

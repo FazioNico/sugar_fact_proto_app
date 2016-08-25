@@ -4,6 +4,7 @@ import {
 }                           from '@angular/core';
 import {
   NavController,
+  Loading,
   Content
 }                           from 'ionic-angular';
 
@@ -50,7 +51,7 @@ export class HistoryPage {
 
   isAuth:boolean = false;
   historySearch:any[] = [];
-  pID: string;
+  loading:Loading;
 
   /** Not normally mandatory but create bugs if ommited. **/
   static get parameters() {
@@ -156,6 +157,9 @@ export class HistoryPage {
     */
 
   }
+  private hideLoading(){
+    this.loading.dismiss();
+  }
 
   /** Events Methode **/
   onClickBack(){
@@ -174,6 +178,22 @@ export class HistoryPage {
         }
       }
   }
+
+  onGoProduct(event,id){
+
+    this.loading = Loading.create({
+      content: "Chargement...",
+      dismissOnPageChange: true,
+    });
+    this.nav.present(this.loading);
+    setTimeout(()=>{
+      this.nav.push(
+        this.routes.getPage(this.routes.PRODUCT),
+        { id: id }
+      );
+    },800)
+
+  }
   /*** Ionic ViewEvent ***/
   ngAfterViewInit() {
     this.content.addScrollListener(
@@ -182,5 +202,5 @@ export class HistoryPage {
       }
     )
   }
-  
+
 }
